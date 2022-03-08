@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Easy Team Up</string>
+    <string name="login">Log In</string>
+    <string name="create_account">Don\'t have an account? Register</string>
+    <string name="register">Register</string>
+
+</resources>
