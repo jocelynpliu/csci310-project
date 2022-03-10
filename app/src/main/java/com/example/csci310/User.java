@@ -1,3 +1,5 @@
+package com.example.csci310;
+
 public class User {
 
     private String email;

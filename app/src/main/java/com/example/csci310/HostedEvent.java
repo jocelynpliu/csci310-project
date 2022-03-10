@@ -1,3 +1,5 @@
+package com.example.csci310;
+
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -7,42 +9,42 @@ public class HostedEvent extends Event {
     private List<String> attendees;
 
     public void addAttendee(String userID) {
-        // implement
+        // IMPLEMENT
     }
 
     public void changeName(String newName) {
-        // implement
+        // IMPLEMENT
     }
 
     public void changeStartTime(LocalDateTime newTime) {
-        // implement
+        // IMPLEMENT
     }
 
     public void changeEndTime(LocalDateTime newTime) {
-        // implement
+        // IMPLEMENT
     }
 
     public void changeLocation(String newLoc) {
-        // implement
+        // IMPLEMENT
     }
 
     public void changeDescription(String newDesc) {
-        // implement
+        // IMPLEMENT
     }
 
     public void changeTime(LocalDateTime newTime) {
-        // implement
+        // IMPLEMENT
     }
 
     public void startTimer(LocalDateTime end) {
-        // implement
+        // IMPLEMENT
     }
 
     public void makePublic() {
-        // implement
+        // IMPLEMENT
     }
 
     public void makePrivate(List<String> invitees) {
-        // implement
+        // IMPLEMENT
     }
 }

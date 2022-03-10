@@ -1,3 +1,5 @@
+package com.example.csci310;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,6 +19,6 @@ public class Event {
     }
 
     public void uninviteUser(String username) {
-        // implement
+        // IMPLEMENT
     }
 }

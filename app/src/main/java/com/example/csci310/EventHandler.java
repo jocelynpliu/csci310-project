@@ -1,3 +1,5 @@
+package com.example.csci310;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -7,32 +9,32 @@ public class EventHandler {
     private Map<String, List<HostedEvent>> hostedEvents;
 
     public void createEvent(String hostID, String location, String description, LocalDateTime start, LocalDateTime end, boolean isPrivate, List<String> invitees) {
-        // implement
+        // IMPLEMENT
     }
 
     public void createEvent(String hostID, String location, String description, LocalDateTime voteEnd, boolean isPrivate, List<String> invitees) {
-        // implement
+        // IMPLEMENT
     }
 
     public void deleteEvent(String eventID) {
-        // implement
+        // IMPLEMENT
     }
 
     public void joinEvent(String username, String eventID) {
-        // implement
+        // IMPLEMENT
     }
 
     public void leaveEvent(String eventID) {
-        // implement
+        // IMPLEMENT
     }
 
     public List<HostedEvent> retrieveHostedEvents(String username) {
-        // implement
+        // IMPLEMENT
         return hostedEvents.get(0); // just so it compiles
     }
 
     public List<Event> retrieveEvents(String username) {
-        // implement
+        // IMPLEMENT
         return events.get(0); // just so it compiles
     }
 }
