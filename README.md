@@ -1,5 +1,4 @@
-# CSCI 310 Project 
-## Easy Team Up
+# CSCI 310 Project - Easy Team Up
 
 ## 3 main features
 
