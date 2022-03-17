@@ -4,4 +4,13 @@
     <string name="create_account">Don\'t have an account? Register</string>
     <string name="register">Register</string>
 
+
+    <string-array name="testEvents">
+        <item>Event1</item>
+        <item> Event2</item>
+        <item> Event3</item>
+        <item>Event 4</item>
+        <item>Event 5</item>
+    </string-array>
+
 </resources>
