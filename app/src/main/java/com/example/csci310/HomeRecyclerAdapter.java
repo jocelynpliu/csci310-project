@@ -37,6 +37,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
 
         data1  = s1;
         context = ct;
+
     }
 
     @NonNull
