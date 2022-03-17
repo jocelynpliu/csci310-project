@@ -10,7 +10,7 @@ public class User {
 
     public void updateAvatar(String newAvatar) {
         // implement
-        
+
     }
 
     public void updatePassword(String newPassword) {
