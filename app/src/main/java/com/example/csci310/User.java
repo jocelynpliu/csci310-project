@@ -14,6 +14,7 @@ public class User {
 
     public void updatePassword(String newPassword) {
         // implement
+
     }
 }
 
