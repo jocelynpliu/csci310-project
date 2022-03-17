@@ -4,43 +4,87 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Home">
+    tools:context=".Home"
+
+    >
 
     <Button
         android:id="@+id/inboxButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="31dp"
-        android:text="Inbox"
-        app:iconTint="#D54040"
+
+
+        android:layout_marginStart="10dp"
+
+
+        android:paddingStart="2dp"
+        android:paddingEnd="2dp"
+        app:icon="@drawable/ic_mail"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/myEventsButton"
+        app:layout_constraintEnd_toStartOf="@+id/myEventsButton"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/myEventsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="52dp"
-        android:text="My Events"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="64dp"
+        android:paddingStart="2dp"
+        android:paddingEnd="2dp"
+        app:icon="@drawable/ic_events"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/hostedEventsButton"
+        app:layout_constraintStart_toEndOf="@+id/inboxButton" />
 
     <Button
         android:id="@+id/hostedEventsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:text="Hosted"
-        app:layout_constraintBaseline_toBaselineOf="@+id/myEventsButton"
+        android:layout_marginBottom="64dp"
+        android:paddingStart="2dp"
+        android:paddingEnd="2dp"
+        app:icon="@drawable/ic_host"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/userProfileButton"
         app:layout_constraintStart_toEndOf="@+id/myEventsButton" />
 
     <Button
         android:id="@+id/homeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Home"
+        android:layout_marginBottom="16dp"
+        android:paddingStart="2dp"
+        android:paddingEnd="2dp"
+        app:icon="@drawable/ic_home"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myEventsButton" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/userProfileButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginEnd="8dp"
+        android:paddingStart="2dp"
+        android:paddingEnd="2dp"
+        app:icon="@drawable/ic_profile"
+
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/hostedEventsButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/hostedEventsButton" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
