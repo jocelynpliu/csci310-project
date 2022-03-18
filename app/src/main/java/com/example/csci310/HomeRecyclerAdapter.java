@@ -1,6 +1,7 @@
 package com.example.csci310;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,47 +20,14 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
     String data1[];
     Context context;
 
-    private OnItemClickListener mListener;
-
-    public interface OnItemClickListener {
-        public void onItemClick(int position);
-    }
-
-    public void setOnItemClickListener(OnItemClickListener listener){
-        mListener = listener;
-    }
-
-    //view holder object goes into adapter object in Home.java
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView myTextView;
-
-        public MyViewHolder(View view, final OnItemClickListener listener) {
-            super(view);
-            // Define click listener for the ViewHolder's View
-            myTextView = (TextView) view.findViewById(R.id.homeEvent);
-
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onItemClick(position);
-                        }
-                    }
-                }
-            });
-        }
-    }
+    private final RecyclerViewInterface recyclerViewInterface;
 
 
-
-
-
-// adapter made to only take in one string of array, may need to edit later
-    public HomeRecyclerAdapter(Context ct, String[] s1) {
-        data1  = s1;
+    // adapter made to only take in one string of array, may need to edit later
+    public HomeRecyclerAdapter(Context ct, String[] s1, RecyclerViewInterface recyclerViewInterface) {
+        data1 = s1;
         context = ct;
+        this.recyclerViewInterface = recyclerViewInterface;
     }
 
     //utilizes home_row.xml object, make a bunch and fills them with passed in data
@@ -69,9 +37,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.home_row, parent, false);
 
-        MyViewHolder evh = new MyViewHolder(view, mListener);
-
-        return evh;
+        return new HomeRecyclerAdapter.MyViewHolder(view, recyclerViewInterface);
     }
 
     //these two functions just necessary for adaptor to work, small edits for passed
@@ -86,4 +52,37 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
     public int getItemCount() {
         return data1.length;
     }
+
+
+    //view holder object goes into adapter object in Home.java
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView myTextView;
+
+        public MyViewHolder(@NonNull View view, RecyclerViewInterface recyclerViewInterface) {
+            super(view);
+            // Define click listener for the ViewHolder's View
+            myTextView = (TextView) view.findViewById(R.id.homeEvent);
+
+            Log.d("setting clicklisteners", "  fuuu");
+
+            view.setOnClickListener( new View.OnClickListener(){
+                @Override
+                public void onClick(View view){
+                    if(recyclerViewInterface != null){
+                        int position = getAdapterPosition();
+
+                        Log.d(String.valueOf(position), "  DONE!!!");
+
+                        if(position != RecyclerView.NO_POSITION){
+                            recyclerViewInterface.onItemClick(position);
+                        }
+                    }
+
+
+                }
+            });
+
+        }
+    }
 }
+

@@ -4,13 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 
-public class Home extends AppCompatActivity {
+public class Home extends AppCompatActivity implements RecyclerViewInterface {
     private Button homeButton;
     String s1[];
 
@@ -40,19 +41,18 @@ public class Home extends AppCompatActivity {
         homeRecyclerView.setHasFixedSize(true);
 
         //specific array of data goes into this adapter
-        HomeRecyclerAdapter myAdapter = new HomeRecyclerAdapter (this, s1);
-
+        HomeRecyclerAdapter myAdapter = new HomeRecyclerAdapter (this, s1, this);
 
         homeRecyclerView.setAdapter(myAdapter);
         homeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        myAdapter.setOnItemClickListener(new HomeRecyclerAdapter.OnItemClickListener() {
 
-            @Override
-            public void onItemClick(int position) {
-                Log.d(String.valueOf(position), "Clicked!!");
-            }
-        });
+    }
 
+    @Override
+    public void onItemClick(int position) {
+        Log.d(String.valueOf(position), "Clicked!!");
+        Intent intent = new Intent(this, CreateAccountActivity.class);
+        startActivity(intent);
     }
 }
