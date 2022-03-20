@@ -14,6 +14,10 @@ import android.widget.Button;
 
 public class Home extends AppCompatActivity implements RecyclerViewInterface {
     private Button homeButton;
+    private Button inboxButton;
+    private Button myEventsButton;
+    private Button myHostButton;
+
     String s1[];
 
     RecyclerView homeRecyclerView;
@@ -26,6 +30,7 @@ public class Home extends AppCompatActivity implements RecyclerViewInterface {
         Log.d("----------start", " Home.java");
 
         //gray out the button to make it look selected and cool
+        setTitle("Public Events");
         homeButton = (Button) findViewById(R.id.homeButton);
         homeButton.setAlpha(.5f);
 
@@ -35,6 +40,7 @@ public class Home extends AppCompatActivity implements RecyclerViewInterface {
                 "event 5", "event 6", "event 7", "event 8", "event 9",
         "event 10", "event 11"};
 
+        //display list stuff ---------------------------------------------
         //recycler and adapter needed to display a dynamic list on the screen
        homeRecyclerView = findViewById(R.id.homeRecyclerView);
        homeRecyclerView.setNestedScrollingEnabled(false);
@@ -48,11 +54,48 @@ public class Home extends AppCompatActivity implements RecyclerViewInterface {
         homeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
+        //-----------------------------------------------------------------
+        //go to inbox
+        inboxButton = (Button) findViewById(R.id.inboxButton);
+        inboxButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(Home.this, Inbox.class);
+                startActivity(intent);
+            }
+        });
+
+        //go to My Events
+        myEventsButton = (Button) findViewById(R.id.myEventsButton);
+        myEventsButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(Home.this, MyEvents.class);
+                startActivity(intent);
+            }
+        });
+
+
+        //go to My Hosted Events
+        myHostButton= (Button) findViewById(R.id.hostedEventsButton);
+        myHostButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(Home.this, MyHostedEvents.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
+    //this is listens to clicks on each row, (each public event displayed)
+    // should open specific event info after click
+    // position is index of the event in the list, could pass in more info maybe?
     @Override
     public void onItemClick(int position) {
-        Log.d(String.valueOf(position), "Clicked!!");
+        Log.d("---INDEX: " +  String.valueOf(position), "Clicked!!");
+
         Intent intent = new Intent(this, CreateAccountActivity.class);
         startActivity(intent);
     }

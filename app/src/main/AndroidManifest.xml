@@ -16,6 +16,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Csci310">
         <activity
+            android:name=".MyHostedEvents"
+            android:exported="false" />
+        <activity
+            android:name=".MyEvents"
+            android:exported="false" />
+        <activity
+            android:name=".Event"
+            android:exported="false" />
+        <activity
+            android:name=".Inbox"
+            android:exported="false"
+            android:label="@string/title_activity_inbox"
+            android:theme="@style/Theme.Csci310" />
+        <activity
             android:name=".Home"
             android:exported="false" />
         <activity
@@ -27,7 +41,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CreateAccountActivity"></activity>
+        <activity android:name=".CreateAccountActivity" />
     </application>
 
 </manifest>
