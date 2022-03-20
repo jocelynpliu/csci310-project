@@ -63,9 +63,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
             // Define click listener for the ViewHolder's View
             myTextView = (TextView) view.findViewById(R.id.homeEvent);
 
-            Log.d("setting clicklisteners", "  fuuu");
-
-            view.setOnClickListener( new View.OnClickListener(){
+            myTextView.setOnClickListener( new View.OnClickListener(){
                 @Override
                 public void onClick(View view){
                     if(recyclerViewInterface != null){
@@ -78,9 +76,9 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
                         }
                     }
 
-
                 }
             });
+
 
         }
     }
