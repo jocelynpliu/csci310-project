@@ -15,6 +15,9 @@ import android.widget.Toolbar;
 
 public class MyEvents extends AppCompatActivity implements RecyclerViewInterface {
     private Button myEventsButton;
+    private Button myHostedEventsButton;
+    private Button myHomeButton;
+    private Button inboxButton;
     String s1[];
 
     RecyclerView myEventsRecyclerView;
@@ -42,10 +45,44 @@ public class MyEvents extends AppCompatActivity implements RecyclerViewInterface
         myEventsRecyclerView.setHasFixedSize(true);
 
         //specific array of data goes into this adapter
-        InboxRecyclerAdapter myAdapter = new InboxRecyclerAdapter(this, s1, this);
+        MyEventsRecyclerAdapter myAdapter = new MyEventsRecyclerAdapter(this, s1, this);
 
         myEventsRecyclerView.setAdapter(myAdapter);
         myEventsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+
+        // button stuff---------------------------
+        //go to inbox
+        inboxButton = (Button) findViewById(R.id.inboxButton);
+        inboxButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(MyEvents.this, Inbox.class);
+                startActivity(intent);
+            }
+        });
+
+        //go to My hosted Events
+        myHostedEventsButton = (Button) findViewById(R.id.hostedEventsButton);
+        myEventsButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(MyEvents.this, MyHostedEvents.class);
+                startActivity(intent);
+            }
+        });
+
+
+        //go to Home
+        myHomeButton= (Button) findViewById(R.id.homeButton);
+        myHomeButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(MyEvents.this, Home.class);
+                startActivity(intent);
+            }
+        });
 
 
     }

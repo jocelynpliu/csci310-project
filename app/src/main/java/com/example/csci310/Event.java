@@ -1,6 +1,8 @@
 package com.example.csci310;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +22,10 @@ public class Event  extends AppCompatActivity {
     private List<String> invitees;
 
     private Button myEventsButton;
+    private Button inboxButton;
+    private Button myHostedEventsButton;
+    private Button myHomeButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +34,49 @@ public class Event  extends AppCompatActivity {
 
         setTitle("A single event ");
 
-        myEventsButton = (Button) findViewById(R.id.myEventsButton);
-        myEventsButton.setAlpha(.5f);
+
+        //button stuff---------------------------------------
+        //go to inbox
+        inboxButton = (Button) findViewById(R.id.inboxButton);
+        inboxButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(Event.this, Inbox.class);
+                startActivity(intent);
+            }
+        });
+
+        //go to My hosted Events
+        myHostedEventsButton = (Button) findViewById(R.id.hostedEventsButton);
+        myHostedEventsButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(Event.this, MyHostedEvents.class);
+                startActivity(intent);
+            }
+        });
+
+
+        //go to Home
+        myHomeButton= (Button) findViewById(R.id.homeButton);
+        myHomeButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(Event.this, Home.class);
+                startActivity(intent);
+            }
+        });
+
+        //go to myEvents
+        myEventsButton= (Button) findViewById(R.id.myEventsButton);
+        myEventsButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(Event.this, MyEvents.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 

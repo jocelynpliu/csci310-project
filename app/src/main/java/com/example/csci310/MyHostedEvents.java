@@ -15,6 +15,10 @@ import android.widget.Toolbar;
 
 public class MyHostedEvents extends AppCompatActivity implements RecyclerViewInterface {
     private Button myHostedEventsButton;
+    private Button inboxButton;
+    private Button myEventsButton;
+    private Button myHomeButton;
+
     String s1[];
 
     RecyclerView myHostedEventsRecyclerView;
@@ -25,7 +29,7 @@ public class MyHostedEvents extends AppCompatActivity implements RecyclerViewInt
         setContentView(R.layout.activity_my_hosted_events);
 
         //gray out the button to make it look selected and cool
-        setTitle("My Hosting Events");
+        setTitle("My Hosted Events");
         myHostedEventsButton = (Button) findViewById(R.id.hostedEventsButton);
         myHostedEventsButton.setAlpha(.5f);
 
@@ -43,11 +47,43 @@ public class MyHostedEvents extends AppCompatActivity implements RecyclerViewInt
         myHostedEventsRecyclerView.setHasFixedSize(true);
 
         //specific array of data goes into this adapter
-        InboxRecyclerAdapter myAdapter = new InboxRecyclerAdapter(this, s1, this);
+        MyHostedEventsRecyclerAdapter myAdapter = new MyHostedEventsRecyclerAdapter(this, s1, this);
 
         myHostedEventsRecyclerView.setAdapter(myAdapter);
         myHostedEventsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+
+
+        //go to inbox
+        inboxButton = (Button) findViewById(R.id.inboxButton);
+        inboxButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(MyHostedEvents.this, Inbox.class);
+                startActivity(intent);
+            }
+        });
+
+        //go to My Events
+        myEventsButton = (Button) findViewById(R.id.myEventsButton);
+        myEventsButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(MyHostedEvents.this, MyEvents.class);
+                startActivity(intent);
+            }
+        });
+
+
+        //go to Home
+        myHomeButton= (Button) findViewById(R.id.homeButton);
+        myHomeButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(MyHostedEvents.this, Home.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

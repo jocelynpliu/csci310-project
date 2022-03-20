@@ -15,6 +15,10 @@ import android.widget.Toolbar;
 
 public class Inbox extends AppCompatActivity implements RecyclerViewInterface {
     private Button inboxButton;
+    private Button myHomeButton;
+    private Button myEventsButton;
+    private Button myHostedEventsButton;
+
     String s1[];
 
     RecyclerView inboxRecyclerView;
@@ -50,7 +54,37 @@ public class Inbox extends AppCompatActivity implements RecyclerViewInterface {
         inboxRecyclerView.setAdapter(myAdapter);
         inboxRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        //button stuff --------------------------------------------------------
+        //go to my hosted events
+        myHostedEventsButton = (Button) findViewById(R.id.hostedEventsButton);
+        myHostedEventsButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(Inbox.this, MyHostedEvents.class);
+                startActivity(intent);
+            }
+        });
 
+        //go to My Events
+        myEventsButton = (Button) findViewById(R.id.myEventsButton);
+        myEventsButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(Inbox.this, MyEvents.class);
+                startActivity(intent);
+            }
+        });
+
+
+        //go to Home
+        myHomeButton= (Button) findViewById(R.id.homeButton);
+        myHomeButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(Inbox.this, Home.class);
+                startActivity(intent);
+            }
+        });
     }
 
     //this is listens to clicks on each row, (each notification received displayed)
