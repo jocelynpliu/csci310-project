@@ -9,10 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -42,8 +40,8 @@ public class CreateAccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 handler = new UserHandler();
-                EditText email = (EditText) findViewById(R.id.email);
-                EditText username = (EditText) findViewById(R.id.username);
+                EditText email = (EditText) findViewById(R.id.eventName);
+                EditText username = (EditText) findViewById(R.id.eventLocation);
                 EditText password = (EditText) findViewById(R.id.password);
                 if (isEmpty(email) || isEmpty(username) || (isEmpty(password))) {
                     // write code to ALERT user fields cannot be empty!

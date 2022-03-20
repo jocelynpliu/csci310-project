@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Csci310">
         <activity
+            android:name=".CreateEvent"
+            android:exported="false" />
+        <activity
             android:name=".MyHostedEvents"
             android:exported="false" />
         <activity
