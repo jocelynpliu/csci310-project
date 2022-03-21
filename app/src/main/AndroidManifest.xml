@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
+        android:name=".EasyTeamUp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -19,24 +20,24 @@
             android:name=".CreateEvent"
             android:exported="false" />
         <activity
-            android:name=".MyHostedEvents"
+            android:name=".HostedEventsActivity"
             android:exported="false" />
         <activity
-            android:name=".MyEvents"
+            android:name=".EventsActivity"
             android:exported="false" />
         <activity
             android:name=".Event"
             android:exported="false" />
         <activity
-            android:name=".Inbox"
+            android:name=".InboxActivity"
             android:exported="false"
             android:label="@string/title_activity_inbox"
             android:theme="@style/Theme.Csci310" />
         <activity
-            android:name=".Home"
+            android:name=".HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,7 +45,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CreateAccountActivity" />
+        <activity android:name=".RegistrationActivity" />
     </application>
 
 </manifest>

@@ -9,11 +9,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.Toolbar;
 
-public class MyHostedEvents extends AppCompatActivity implements RecyclerViewInterface {
+public class HostedEventsActivity extends AppCompatActivity implements RecyclerViewInterface {
     private Button myHostedEventsButton;
     private Button inboxButton;
     private Button myEventsButton;
@@ -47,7 +45,7 @@ public class MyHostedEvents extends AppCompatActivity implements RecyclerViewInt
         myHostedEventsRecyclerView.setHasFixedSize(true);
 
         //specific array of data goes into this adapter
-        MyHostedEventsRecyclerAdapter myAdapter = new MyHostedEventsRecyclerAdapter(this, s1, this);
+        HostedEventsRecyclerAdapter myAdapter = new HostedEventsRecyclerAdapter(this, s1, this);
 
         myHostedEventsRecyclerView.setAdapter(myAdapter);
         myHostedEventsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -59,7 +57,7 @@ public class MyHostedEvents extends AppCompatActivity implements RecyclerViewInt
         inboxButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(MyHostedEvents.this, Inbox.class);
+                Intent intent = new Intent(HostedEventsActivity.this, InboxActivity.class);
                 startActivity(intent);
             }
         });
@@ -69,7 +67,7 @@ public class MyHostedEvents extends AppCompatActivity implements RecyclerViewInt
         myEventsButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(MyHostedEvents.this, MyEvents.class);
+                Intent intent = new Intent(HostedEventsActivity.this, EventsActivity.class);
                 startActivity(intent);
             }
         });
@@ -80,7 +78,7 @@ public class MyHostedEvents extends AppCompatActivity implements RecyclerViewInt
         myHomeButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(MyHostedEvents.this, Home.class);
+                Intent intent = new Intent(HostedEventsActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         });

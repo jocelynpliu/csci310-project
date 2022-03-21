@@ -5,8 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class MyEventsRecyclerAdapter extends RecyclerView.Adapter<MyEventsRecyclerAdapter.MyViewHolder> {
+public class EventsRecyclerAdapter extends RecyclerView.Adapter<EventsRecyclerAdapter.MyViewHolder> {
 
     private ArrayList<Event> notificationList;
     String data1[];
@@ -24,7 +22,7 @@ public class MyEventsRecyclerAdapter extends RecyclerView.Adapter<MyEventsRecycl
 
 
     // adapter made to only take in one string of array, may need to edit later
-    public MyEventsRecyclerAdapter(Context ct, String[] s1, RecyclerViewInterface recyclerViewInterface) {
+    public EventsRecyclerAdapter(Context ct, String[] s1, RecyclerViewInterface recyclerViewInterface) {
         data1 = s1;
         context = ct;
         this.recyclerViewInterface = recyclerViewInterface;
@@ -37,13 +35,13 @@ public class MyEventsRecyclerAdapter extends RecyclerView.Adapter<MyEventsRecycl
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.home_row, parent, false);
 
-        return new MyEventsRecyclerAdapter.MyViewHolder(view, recyclerViewInterface);
+        return new EventsRecyclerAdapter.MyViewHolder(view, recyclerViewInterface);
     }
 
     //these two functions just necessary for adaptor to work, small edits for passed
     //in data type later maybe
     @Override
-    public void onBindViewHolder(@NonNull MyEventsRecyclerAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull EventsRecyclerAdapter.MyViewHolder holder, int position) {
         holder.myTextView.setText(data1[position]);
 
     }

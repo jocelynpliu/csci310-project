@@ -41,7 +41,7 @@ public class Event  extends AppCompatActivity {
         inboxButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(Event.this, Inbox.class);
+                Intent intent = new Intent(Event.this, InboxActivity.class);
                 startActivity(intent);
             }
         });
@@ -51,7 +51,7 @@ public class Event  extends AppCompatActivity {
         myHostedEventsButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(Event.this, MyHostedEvents.class);
+                Intent intent = new Intent(Event.this, HostedEventsActivity.class);
                 startActivity(intent);
             }
         });
@@ -62,7 +62,7 @@ public class Event  extends AppCompatActivity {
         myHomeButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(Event.this, Home.class);
+                Intent intent = new Intent(Event.this, HomeActivity.class);
                 startActivity(intent);
             }
         });
@@ -72,7 +72,7 @@ public class Event  extends AppCompatActivity {
         myEventsButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(Event.this, MyEvents.class);
+                Intent intent = new Intent(Event.this, EventsActivity.class);
                 startActivity(intent);
             }
         });

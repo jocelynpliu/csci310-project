@@ -9,10 +9,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 
-public class Home extends AppCompatActivity implements RecyclerViewInterface {
+public class HomeActivity extends AppCompatActivity implements RecyclerViewInterface {
     private Button homeButton;
     private Button inboxButton;
     private Button myEventsButton;
@@ -60,7 +59,7 @@ public class Home extends AppCompatActivity implements RecyclerViewInterface {
         inboxButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(Home.this, Inbox.class);
+                Intent intent = new Intent(HomeActivity.this, InboxActivity.class);
                 startActivity(intent);
             }
         });
@@ -70,7 +69,7 @@ public class Home extends AppCompatActivity implements RecyclerViewInterface {
         myEventsButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(Home.this, MyEvents.class);
+                Intent intent = new Intent(HomeActivity.this, EventsActivity.class);
                 startActivity(intent);
             }
         });
@@ -81,7 +80,7 @@ public class Home extends AppCompatActivity implements RecyclerViewInterface {
         myHostButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(Home.this, MyHostedEvents.class);
+                Intent intent = new Intent(HomeActivity.this, HostedEventsActivity.class);
                 startActivity(intent);
             }
         });
@@ -96,7 +95,7 @@ public class Home extends AppCompatActivity implements RecyclerViewInterface {
     public void onItemClick(int position) {
         Log.d("---INDEX: " +  String.valueOf(position), "Clicked!!");
 
-        Intent intent = new Intent(this, CreateAccountActivity.class);
+        Intent intent = new Intent(this, RegistrationActivity.class);
         startActivity(intent);
     }
 }
