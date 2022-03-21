@@ -2,6 +2,8 @@ package csci310.team53.easyteamup;
 
 import android.app.Application;
 
+import csci310.team53.easyteamup.handlers.EventHandler;
+import csci310.team53.easyteamup.handlers.MessageHandler;
 import csci310.team53.easyteamup.handlers.UserHandler;
 import io.realm.Realm;
 import io.realm.mongodb.App;
@@ -17,6 +19,8 @@ public class EasyTeamUp extends Application {
 
     private App realm;
     private UserHandler userHandler;
+    private EventHandler eventHandler;
+    private MessageHandler messageHandler;
 
     /**
      * Initializes all necessary handlers and database management.
@@ -32,6 +36,8 @@ public class EasyTeamUp extends Application {
 
         // Initialize handlers
         userHandler = new UserHandler(this);
+        eventHandler = new EventHandler();
+        messageHandler = new MessageHandler();
     }
 
     /**
@@ -48,5 +54,21 @@ public class EasyTeamUp extends Application {
      */
     public UserHandler getUserHandler() {
         return userHandler;
+    }
+
+    /**
+     * Getter for event handler instance.
+     * @return event handler
+     */
+    public EventHandler getEventHandler() {
+        return eventHandler;
+    }
+
+    /**
+     * Getter for message handler instance.
+     * @return message handler
+     */
+    public MessageHandler getMessageHandler() {
+        return messageHandler;
     }
 }
