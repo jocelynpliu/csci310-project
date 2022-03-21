@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.csci310">
+    package="csci310.team53.easyteamup">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -17,27 +17,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Csci310">
         <activity
-            android:name=".CreateEvent"
+            android:name=".activities.CreateEventActivity"
             android:exported="false" />
         <activity
-            android:name=".HostedEventsActivity"
+            android:name=".activities.HostedEventsActivity"
             android:exported="false" />
         <activity
-            android:name=".EventsActivity"
+            android:name=".activities.EventsActivity"
             android:exported="false" />
         <activity
-            android:name=".Event"
-            android:exported="false" />
-        <activity
-            android:name=".InboxActivity"
+            android:name=".activities.InboxActivity"
             android:exported="false"
             android:label="@string/title_activity_inbox"
             android:theme="@style/Theme.Csci310" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".activities.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".activities.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,7 +42,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegistrationActivity" />
+        <activity android:name=".activities.RegistrationActivity" />
     </application>
 
 </manifest>
