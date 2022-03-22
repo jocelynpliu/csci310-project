@@ -1,5 +1,7 @@
 package csci310.team53.easyteamup.handlers;
 
+import android.util.Log;
+
 import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -30,8 +32,21 @@ public class UserHandler {
         this.userRef = new AtomicReference<User>();
     }
 
-    public boolean register(String username, String password) {
-        return true;
+    public void register(String username, String password, Callable<Void> success, Callable<Void> fail) {
+        App realm = app.getRealm();
+        realm.getEmailPassword().registerUserAsync(username, password, result -> {
+            try {
+                if (result.isSuccess()) {
+                    userRef.set(realm.currentUser());
+                    success.call();
+                } else {
+                    Log.v("Registration Error", result.getError().getErrorMessage());
+                    fail.call();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     /**

@@ -1,5 +1,6 @@
 package csci310.team53.easyteamup.activities;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
@@ -11,9 +12,10 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
-import csci310.team53.easyteamup.R;
+import java.util.concurrent.Callable;
 
-import csci310.team53.easyteamup.handlers.UserHandler;
+import csci310.team53.easyteamup.EasyTeamUp;
+import csci310.team53.easyteamup.R;
 
 /**
  * Registration form to create new account.
@@ -25,7 +27,8 @@ public class RegistrationActivity extends AppCompatActivity {
     private Button uploadButton;
     private Button registerButton;
     private ImageView previewImage;
-    private UserHandler handler;
+    private EditText usernameInput;
+    private EditText passwordInput;
 
     // sets the display image to user's uploaded image
     private final ActivityResultLauncher<String> activityLauncher = registerForActivityResult(new ActivityResultContracts.GetContent(),
@@ -44,40 +47,47 @@ public class RegistrationActivity extends AppCompatActivity {
         uploadButton = (Button) findViewById(R.id.upload_button);
         registerButton = (Button) findViewById(R.id.register_button);
         previewImage = (ImageView) findViewById(R.id.preview_image);
+        usernameInput = (EditText) findViewById(R.id.username);
+        passwordInput = (EditText) findViewById(R.id.password);
 
         uploadButton.setOnClickListener(view -> uploadPicture());
 
         registerButton.setOnClickListener(view -> {
-            /**
-            handler = new UserHandler();
-            EditText email = (EditText) findViewById(R.id.eventName);
-            EditText username = (EditText) findViewById(R.id.eventLocation);
-            EditText password = (EditText) findViewById(R.id.password);
-            if (isEmpty(email) || isEmpty(username) || (isEmpty(password))) {
-                // write code to ALERT user fields cannot be empty!
+            String username = usernameInput.getText().toString();
+            String password = passwordInput.getText().toString();
+            if (username.isEmpty() || password.isEmpty()) {
+                // TODO: Display error message saying "must fill in all fields" or something.
+                return;
             }
-            else {
-                // registration diverted to UserHandler
-                boolean registered = handler.register(username.getText().toString(), password.getText().toString());
-                if (registered) {
-                    // console messages
-                    String TAG = "REGISTER";
-                    Log.v(TAG, "registered!");
-
-                    // after a successful registration, redirect user to login
-                    Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                }
+            if (username.length() < 6 || password.length() < 6) {
+                // TODO: Display error message saying "must be at least 6 characters" or something.
+                return;
             }
-             **/
+            register(username, password);
         });
     }
 
     /**
      * Registers a new account with a username and password pair.
+     *
+     * @param username The input string username.
+     * @param password The inout string password.
      */
-    private void registerUser() {
-
+    private void register(String username, String password) {
+        EasyTeamUp app = (EasyTeamUp) this.getApplication();
+        Callable<Void> fail = () -> {
+            //TODO: Provide some error message that registration failed.
+            return null;
+        };
+        Callable<Void> success = () -> {
+            Callable<Void> successLogin = () -> {
+                openHomeActivity();
+                return null;
+            };
+            app.getUserHandler().login(username, password, successLogin, fail);
+            return null;
+        };
+        app.getUserHandler().register(username, password, success, fail);
     }
 
     /**
@@ -88,11 +98,10 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     /**
-     * Checks if the EditText is empty (has no text).
-     * @param etText the EditText object to check.
-     * @return true if empty, otherwise false.
+     * Opens activity to main app screen.
      */
-    private boolean isEmpty(EditText etText) {
-        return etText.getText().toString().trim().length() == 0;
+    private void openHomeActivity(){
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
     }
 }
