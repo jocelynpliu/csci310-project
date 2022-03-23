@@ -23,6 +23,8 @@ public class EventsActivity extends AppCompatActivity implements RecyclerViewInt
     private Button myHomeButton;
     private Button inboxButton;
     String s1[];
+    String s2[];
+    String s3[];
 
 
 
@@ -44,6 +46,11 @@ public class EventsActivity extends AppCompatActivity implements RecyclerViewInt
                 "attend. event  5", "attend. event 6", "attend. event  7", "attend. event  8", "attend. event  9",
                 "attend. event  10", "attend. event  11"};
 
+        s2 = new String []{"host1", "host2", "host3", "host4", "host5", "host6", "host7"
+                ,"host8", "host9", "host10", "host11"};
+
+        s3 = new String []{"date1", "date2", "date3", "date4", "date5", "date6", "date7"
+                , "date8", "date9", "date10", "date11"};
 
 
 
@@ -55,7 +62,7 @@ public class EventsActivity extends AppCompatActivity implements RecyclerViewInt
         myEventsRecyclerView.setHasFixedSize(true);
 
         //specific array of data goes into this adapter
-        EventsRecyclerAdapter myAdapter = new EventsRecyclerAdapter(this, s1, this);
+        EventsRecyclerAdapter myAdapter = new EventsRecyclerAdapter(this, s1, s2, s3, this);
 
         myEventsRecyclerView.setAdapter(myAdapter);
         myEventsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
