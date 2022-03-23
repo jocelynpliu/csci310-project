@@ -24,6 +24,8 @@ public class InboxActivity extends AppCompatActivity implements RecyclerViewInte
     private Button myHostedEventsButton;
 
     String s1[];
+    String s2[];
+    String s3[];
 
     RecyclerView inboxRecyclerView;
 
@@ -46,6 +48,12 @@ public class InboxActivity extends AppCompatActivity implements RecyclerViewInte
                 "noti  5", "noti  6", "noti  7", "noti  8", "noti  9",
                 "noti  10", "noti  11"};
 
+        s2 = new String []{"host1", "host2", "host3", "host4", "host5", "host6", "host7"
+                ,"host8", "host9", "host10", "host11"};
+
+        s3 = new String []{"date1", "date2", "date3", "date4", "date5", "date6", "date7"
+                , "date8", "date9", "date10", "date11"};
+
         //recycler and adapter needed to display a dynamic list on the screen
         inboxRecyclerView = findViewById(R.id.inboxRecyclerView);
         inboxRecyclerView.setNestedScrollingEnabled(false);
@@ -53,7 +61,7 @@ public class InboxActivity extends AppCompatActivity implements RecyclerViewInte
         inboxRecyclerView.setHasFixedSize(true);
 
         //specific array of data goes into this adapter
-        InboxRecyclerAdapter myAdapter = new InboxRecyclerAdapter(this, s1, this);
+        InboxRecyclerAdapter myAdapter = new InboxRecyclerAdapter(this, s1, s2, s3, this);
 
         inboxRecyclerView.setAdapter(myAdapter);
         inboxRecyclerView.setLayoutManager(new LinearLayoutManager(this));

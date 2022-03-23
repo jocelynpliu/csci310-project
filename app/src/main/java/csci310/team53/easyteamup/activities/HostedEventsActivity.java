@@ -23,6 +23,8 @@ public class HostedEventsActivity extends AppCompatActivity implements RecyclerV
     private Button myHomeButton;
 
     String s1[];
+    String s2[];
+    String s3[];
 
     RecyclerView myHostedEventsRecyclerView;
 
@@ -43,6 +45,13 @@ public class HostedEventsActivity extends AppCompatActivity implements RecyclerV
                 "host event  8", "host event  9",
                 "host event  10", "host event  11"};
 
+        s2 = new String []{"host1", "host2", "host3", "host4", "host5", "host6", "host7"
+                ,"host8", "host9", "host10", "host11"};
+
+        s3 = new String []{"date1", "date2", "date3", "date4", "date5", "date6", "date7"
+                , "date8", "date9", "date10", "date11"};
+
+
         //recycler and adapter needed to display a dynamic list on the screen
         myHostedEventsRecyclerView = findViewById(R.id.myHostedEventsRecyclerView);
         myHostedEventsRecyclerView.setNestedScrollingEnabled(false);
@@ -50,7 +59,7 @@ public class HostedEventsActivity extends AppCompatActivity implements RecyclerV
         myHostedEventsRecyclerView.setHasFixedSize(true);
 
         //specific array of data goes into this adapter
-        HostedEventsRecyclerAdapter myAdapter = new HostedEventsRecyclerAdapter(this, s1, this);
+        HostedEventsRecyclerAdapter myAdapter = new HostedEventsRecyclerAdapter(this, s1, s2, s3, this);
 
         myHostedEventsRecyclerView.setAdapter(myAdapter);
         myHostedEventsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
