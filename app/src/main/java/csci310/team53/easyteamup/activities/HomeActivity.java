@@ -15,6 +15,7 @@ import csci310.team53.easyteamup.R;
 
 import csci310.team53.easyteamup.activities.adapters.HomeRecyclerAdapter;
 import csci310.team53.easyteamup.activities.adapters.RecyclerViewInterface;
+import csci310.team53.easyteamup.data.Event;
 
 public class HomeActivity extends AppCompatActivity implements RecyclerViewInterface {
     private Button homeButton;
@@ -23,6 +24,9 @@ public class HomeActivity extends AppCompatActivity implements RecyclerViewInter
     private Button myHostButton;
 
     String s1[];
+    String s2[];
+    String s3[];
+
 
     RecyclerView homeRecyclerView;
 
@@ -44,6 +48,12 @@ public class HomeActivity extends AppCompatActivity implements RecyclerViewInter
                 "event 5", "event 6", "event 7", "event 8", "event 9",
         "event 10", "event 11"};
 
+        s2 = new String []{"host1", "host2", "host3", "host4", "host5", "host6", "host7"
+        ,"host8", "host9", "host10", "host11"};
+
+        s3 = new String []{"date1", "date2", "date3", "date4", "date5", "date6", "date7"
+        , "date8", "date9", "date10", "date11"};
+
         //display list stuff ---------------------------------------------
         //recycler and adapter needed to display a dynamic list on the screen
        homeRecyclerView = findViewById(R.id.homeRecyclerView);
@@ -52,7 +62,7 @@ public class HomeActivity extends AppCompatActivity implements RecyclerViewInter
         homeRecyclerView.setHasFixedSize(true);
 
         //specific array of data goes into this adapter
-        HomeRecyclerAdapter myAdapter = new HomeRecyclerAdapter (this, s1, this);
+        HomeRecyclerAdapter myAdapter = new HomeRecyclerAdapter (this, s1, s2, s3, this);
 
         homeRecyclerView.setAdapter(myAdapter);
         homeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -98,9 +108,11 @@ public class HomeActivity extends AppCompatActivity implements RecyclerViewInter
     // position is index of the event in the list, could pass in more info maybe?
     @Override
     public void onItemClick(int position) {
+
+
         Log.d("---INDEX: " +  String.valueOf(position), "Clicked!!");
 
-        Intent intent = new Intent(this, RegistrationActivity.class);
+        Intent intent = new Intent(HomeActivity.this, Event.class);
         startActivity(intent);
     }
 }

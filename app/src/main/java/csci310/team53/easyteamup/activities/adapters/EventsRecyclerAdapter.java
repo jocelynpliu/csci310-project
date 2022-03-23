@@ -63,7 +63,7 @@ public class EventsRecyclerAdapter extends RecyclerView.Adapter<EventsRecyclerAd
         public MyViewHolder(@NonNull View view, RecyclerViewInterface recyclerViewInterface) {
             super(view);
             // Define click listener for the ViewHolder's View
-            myTextView = (TextView) view.findViewById(R.id.homeEvent);
+            myTextView = (TextView) view.findViewById(R.id.homeView);
 
             myTextView.setOnClickListener( new View.OnClickListener(){
                 @Override

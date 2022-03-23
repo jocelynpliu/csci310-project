@@ -24,6 +24,8 @@ public class EventsActivity extends AppCompatActivity implements RecyclerViewInt
     private Button inboxButton;
     String s1[];
 
+
+
     RecyclerView myEventsRecyclerView;
 
     @Override
@@ -41,6 +43,10 @@ public class EventsActivity extends AppCompatActivity implements RecyclerViewInt
         s1 = new String[]{"attend. event 1", " attend. event 2", "attend. event  3", "attend. event  4",
                 "attend. event  5", "attend. event 6", "attend. event  7", "attend. event  8", "attend. event  9",
                 "attend. event  10", "attend. event  11"};
+
+
+
+
 
         //recycler and adapter needed to display a dynamic list on the screen
         myEventsRecyclerView = findViewById(R.id.myEventsRecyclerView);

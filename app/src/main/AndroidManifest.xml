@@ -42,6 +42,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".EasyTeamUp"
+             />
+
+        <activity android:name=".data.Event"></activity>
+
         <activity android:name=".activities.RegistrationActivity" />
     </application>
 
