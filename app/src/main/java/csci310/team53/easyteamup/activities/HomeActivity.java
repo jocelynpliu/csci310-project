@@ -21,6 +21,7 @@ public class HomeActivity extends AppCompatActivity implements RecyclerViewInter
     private Button inboxButton;
     private Button myEventsButton;
     private Button myHostButton;
+    private Button createEventButton;
 
     String s1[];
 
@@ -86,6 +87,18 @@ public class HomeActivity extends AppCompatActivity implements RecyclerViewInter
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(HomeActivity.this, HostedEventsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        /**
+         * create Event
+         */
+        createEventButton = (Button) findViewById(R.id.createEventButton);
+        createEventButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, CreateEventActivity.class);
                 startActivity(intent);
             }
         });

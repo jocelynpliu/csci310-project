@@ -1,9 +1,11 @@
 <resources>
+    <!-- login and registration strings-->
     <string name="app_name">Easy Team Up</string>
     <string name="login">Log In</string>
     <string name="create_account">Don\'t have an account? Register</string>
     <string name="register">Register</string>
     <string name="title_activity_inbox">Inbox</string>
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -13,5 +15,8 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
+    <!-- create event strings -->
+    <string name="date_form">Enter event date</string>
+    <string name="pick_time">Enter event time</string>
 
 </resources>
