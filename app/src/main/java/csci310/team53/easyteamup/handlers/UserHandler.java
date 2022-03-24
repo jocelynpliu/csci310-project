@@ -32,6 +32,14 @@ public class UserHandler {
         this.userRef = new AtomicReference<User>();
     }
 
+    /**
+     * Attempt to register the user to the database.
+     *
+     * @param username username of the user.
+     * @param password password of the user.
+     * @param success a callback function to be run in the event of a success.
+     * @param fail a callback function to be run in the event of a failure.
+     */
     public void register(String username, String password, Callable<Void> success, Callable<Void> fail) {
         App realm = app.getRealm();
         realm.getEmailPassword().registerUserAsync(username, password, result -> {

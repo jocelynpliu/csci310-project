@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 
 import csci310.team53.easyteamup.EasyTeamUp;
@@ -15,9 +14,6 @@ import csci310.team53.easyteamup.R;
 
 import csci310.team53.easyteamup.activities.adapters.HomeRecyclerAdapter;
 import csci310.team53.easyteamup.activities.adapters.RecyclerViewInterface;
-import csci310.team53.easyteamup.data.Event;
-import io.realm.Realm;
-import io.realm.mongodb.mongo.iterable.MongoCursor;
 
 /**
  * The main home screen, displaying public events and various navigation buttons.
@@ -27,18 +23,13 @@ import io.realm.mongodb.mongo.iterable.MongoCursor;
 public class HomeActivity extends AppCompatActivity implements RecyclerViewInterface {
 
     private EasyTeamUp app;
+    private RecyclerView homeRecyclerView;
 
     private Button homeButton;
     private Button inboxButton;
     private Button myEventsButton;
     private Button myHostButton;
     private Button createEventButton;
-
-    String s1[];
-    String s2[];
-    String s3[];
-
-    RecyclerView homeRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
