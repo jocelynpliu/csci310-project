@@ -12,10 +12,13 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.bson.types.ObjectId;
+
 import java.util.concurrent.Callable;
 
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
+import csci310.team53.easyteamup.data.User;
 
 /**
  * Registration form to create new account.
@@ -81,7 +84,14 @@ public class RegistrationActivity extends AppCompatActivity {
         };
         Callable<Void> success = () -> {
             Callable<Void> successLogin = () -> {
-                openHomeActivity();
+                io.realm.mongodb.User userData = app.getRealm().currentUser();
+                app.initializeDatabase(userData);
+                User user = new User(new ObjectId(userData.getId()), username, password);
+                app.getDatabase().users.insertOne(user).getAsync(task -> {
+                    if (task.isSuccess()) {
+                        openHomeActivity();
+                    }
+                });
                 return null;
             };
             app.getUserHandler().login(username, password, successLogin, fail);

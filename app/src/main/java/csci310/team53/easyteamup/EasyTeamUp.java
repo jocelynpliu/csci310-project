@@ -64,7 +64,9 @@ public class EasyTeamUp extends Application {
      * @param user Authenticated user from loginActivity.
      */
     public void initializeDatabase(User user) {
-        databaseHandler = new DatabaseHandler(user);
+        if (databaseHandler == null) {
+            databaseHandler = new DatabaseHandler(user);
+        }
     }
 
     /**

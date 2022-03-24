@@ -5,13 +5,13 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 import android.util.Log;
 
-import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 
 import csci310.team53.easyteamup.data.Event;
+import csci310.team53.easyteamup.data.Message;
 import io.realm.mongodb.AppConfiguration;
-import io.realm.mongodb.User;
+import csci310.team53.easyteamup.data.User;
 import io.realm.mongodb.mongo.MongoClient;
 import io.realm.mongodb.mongo.MongoCollection;
 import io.realm.mongodb.mongo.MongoDatabase;
@@ -19,10 +19,10 @@ import io.realm.mongodb.mongo.MongoDatabase;
 public class DatabaseHandler {
 
     public MongoCollection<Event> events;
-    public MongoCollection<Document> users;
-    public MongoCollection<Document> messages;
+    public MongoCollection<User> users;
+    public MongoCollection<Message> messages;
 
-    public DatabaseHandler(User user) {
+    public DatabaseHandler(io.realm.mongodb.User user) {
         MongoClient mongoClient = user.getMongoClient("mongodb-atlas");
         MongoDatabase database = mongoClient.getDatabase("EasyTeamUp");
 
@@ -30,8 +30,8 @@ public class DatabaseHandler {
                 fromProviders(PojoCodecProvider.builder().automatic(true).build()));
 
         events = database.getCollection("events", Event.class).withCodecRegistry(pojoCodecRegistry);
-        users = database.getCollection("users");
-        messages = database.getCollection("messages");
+        users = database.getCollection("users", User.class).withCodecRegistry(pojoCodecRegistry);
+        messages = database.getCollection("messages", Message.class).withCodecRegistry(pojoCodecRegistry);
         Log.v("Database", "Successfully setup MongoDB Atlas database!");
     }
 }
