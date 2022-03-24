@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +16,7 @@ import csci310.team53.easyteamup.activities.adapters.HomeRecyclerAdapter;
 import csci310.team53.easyteamup.activities.adapters.RecyclerViewInterface;
 
 public class HomeActivity extends AppCompatActivity implements RecyclerViewInterface {
+
     private Button homeButton;
     private Button inboxButton;
     private Button myEventsButton;
@@ -26,7 +26,6 @@ public class HomeActivity extends AppCompatActivity implements RecyclerViewInter
     String s1[];
     String s2[];
     String s3[];
-
 
     RecyclerView homeRecyclerView;
 

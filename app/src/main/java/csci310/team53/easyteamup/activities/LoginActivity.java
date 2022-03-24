@@ -14,6 +14,7 @@ import csci310.team53.easyteamup.R;
 import java.util.concurrent.Callable;
 
 import csci310.team53.easyteamup.EasyTeamUp;
+import io.realm.mongodb.App;
 
 /**
  * Initial activity screen, allows user to login or begin registration.
@@ -56,6 +57,8 @@ public class LoginActivity extends AppCompatActivity {
     private void login(String username, String password) {
         Callable<Void> success = () -> {
             Log.v("User", "Logged in successfully");
+            EasyTeamUp app = ((EasyTeamUp) this.getApplication());
+            app.initializeDatabase(app.getUserHandler().getUser());
             openHomeActivity();
             return null;
         };

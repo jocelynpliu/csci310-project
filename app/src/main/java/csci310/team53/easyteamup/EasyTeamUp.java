@@ -2,14 +2,14 @@ package csci310.team53.easyteamup;
 
 import android.app.Application;
 
+import csci310.team53.easyteamup.handlers.DatabaseHandler;
 import csci310.team53.easyteamup.handlers.EventHandler;
 import csci310.team53.easyteamup.handlers.MessageHandler;
 import csci310.team53.easyteamup.handlers.UserHandler;
 import io.realm.Realm;
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
-import io.realm.mongodb.mongo.MongoClient;
-import io.realm.mongodb.mongo.MongoDatabase;
+import io.realm.mongodb.User;
 
 /**
  * The main application class for EasyTeamUp.
@@ -23,6 +23,7 @@ public class EasyTeamUp extends Application {
     private UserHandler userHandler;
     private EventHandler eventHandler;
     private MessageHandler messageHandler;
+    private DatabaseHandler databaseHandler;
 
     /**
      * Initializes all necessary handlers and database management.
@@ -38,7 +39,7 @@ public class EasyTeamUp extends Application {
 
         // Initialize handlers
         userHandler = new UserHandler(this);
-        eventHandler = new EventHandler();
+        eventHandler = new EventHandler(this);
         messageHandler = new MessageHandler();
     }
 
@@ -48,6 +49,22 @@ public class EasyTeamUp extends Application {
      */
     public App getRealm() {
         return realm;
+    }
+
+    /**
+     * Getter for database handler instance.
+     * @return database handler (or NULL if user is not logged in)
+     */
+    public DatabaseHandler getDatabase() {
+        return databaseHandler;
+    }
+
+    /**
+     * Sets up the database with authenticated user.
+     * @param user Authenticated user from loginActivity.
+     */
+    public void initializeDatabase(User user) {
+        databaseHandler = new DatabaseHandler(user);
     }
 
     /**
