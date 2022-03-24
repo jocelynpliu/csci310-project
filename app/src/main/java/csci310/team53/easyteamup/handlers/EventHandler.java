@@ -109,10 +109,19 @@ public class EventHandler {
      *
      * @return an async task that you must run .getAsync() on.
      */
-    public RealmResultTask<MongoCursor<Event>> retrieveEvents() {
-        // TODO: Implement
+    public RealmResultTask<MongoCursor<Event>> retrievePublicEvents() {
         Document queryFilter = new Document().append("private", false);
         return app.getDatabase().events.find(queryFilter).iterator();
+    }
+
+    /**
+     * Retrieves all events that this user is attending with from database.
+     *
+     * @return an async task that you must run .getAsync() on.
+     */
+    public RealmResultTask<MongoCursor<Event>> retrieveAttendingEvents() {
+        // TODO: Implement
+        return null;
     }
 
     /**
