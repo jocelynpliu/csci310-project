@@ -8,6 +8,8 @@ import csci310.team53.easyteamup.handlers.UserHandler;
 import io.realm.Realm;
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
+import io.realm.mongodb.mongo.MongoClient;
+import io.realm.mongodb.mongo.MongoDatabase;
 
 /**
  * The main application class for EasyTeamUp.

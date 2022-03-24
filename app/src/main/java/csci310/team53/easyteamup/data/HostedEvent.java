@@ -3,8 +3,6 @@ package csci310.team53.easyteamup.data;
 import java.time.LocalDateTime;
 import java.util.*;
 
-import csci310.team53.easyteamup.data.Event;
-
 public class HostedEvent extends Event {
     private List<LocalDateTime> votableTimeslots;
     private Timer endVoteTimer;

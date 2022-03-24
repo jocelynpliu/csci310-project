@@ -12,10 +12,9 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import csci310.team53.easyteamup.R;
+import csci310.team53.easyteamup.data.Event;
 
 import java.util.ArrayList;
-
-import csci310.team53.easyteamup.data.Event;
 
 public class HostedEventsRecyclerAdapter extends RecyclerView.Adapter<HostedEventsRecyclerAdapter.MyViewHolder> {
 

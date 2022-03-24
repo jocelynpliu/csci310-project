@@ -26,6 +26,9 @@
             android:name=".activities.EventsActivity"
             android:exported="false" />
         <activity
+            android:name=".activities.EventDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.InboxActivity"
             android:exported="false"
             android:label="@string/title_activity_inbox"
@@ -46,8 +49,6 @@
         <activity
             android:name=".EasyTeamUp"
              />
-
-        <activity android:name=".data.Event"></activity>
 
         <activity android:name=".activities.RegistrationActivity" />
     </application>

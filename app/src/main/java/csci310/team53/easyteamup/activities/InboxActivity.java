@@ -15,7 +15,6 @@ import csci310.team53.easyteamup.R;
 
 import csci310.team53.easyteamup.activities.adapters.InboxRecyclerAdapter;
 import csci310.team53.easyteamup.activities.adapters.RecyclerViewInterface;
-import csci310.team53.easyteamup.data.Event;
 
 public class InboxActivity extends AppCompatActivity implements RecyclerViewInterface {
     private Button inboxButton;
@@ -106,7 +105,7 @@ public class InboxActivity extends AppCompatActivity implements RecyclerViewInte
     public void onItemClick(int position) {
         Log.d("---INDEX: " +  String.valueOf(position), "Clicked!!");
 
-        Intent intent = new Intent(this, Event.class);
+        Intent intent = new Intent(this, EventDetailsActivity.class);
         startActivity(intent);
     }
 }

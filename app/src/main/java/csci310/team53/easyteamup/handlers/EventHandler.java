@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
-import csci310.team53.easyteamup.data.HostedEvent;
 import csci310.team53.easyteamup.data.Event;
+import csci310.team53.easyteamup.data.HostedEvent;
 
 public class EventHandler {
 

@@ -15,7 +15,6 @@ import csci310.team53.easyteamup.R;
 
 import csci310.team53.easyteamup.activities.adapters.HomeRecyclerAdapter;
 import csci310.team53.easyteamup.activities.adapters.RecyclerViewInterface;
-import csci310.team53.easyteamup.data.Event;
 
 public class HomeActivity extends AppCompatActivity implements RecyclerViewInterface {
     private Button homeButton;
@@ -125,7 +124,7 @@ public class HomeActivity extends AppCompatActivity implements RecyclerViewInter
 
         Log.d("---INDEX: " +  String.valueOf(position), "Clicked!!");
 
-        Intent intent = new Intent(HomeActivity.this, Event.class);
+        Intent intent = new Intent(HomeActivity.this, EventDetailsActivity.class);
         startActivity(intent);
     }
 }
