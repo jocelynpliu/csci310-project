@@ -48,7 +48,7 @@ public class InboxActivity extends AppCompatActivity implements RecyclerViewInte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inbox);
         app = (EasyTeamUp) this.getApplication();
-        Log.d("----------start", " Home.java");
+        Log.d("----------start", " InboxActivity.java");
 
         //gray out the button to make it look selected and cool
         setTitle("Inbox");
@@ -100,7 +100,7 @@ public class InboxActivity extends AppCompatActivity implements RecyclerViewInte
     @Override
     public void onItemClick(int position) {
         Log.d("---INDEX: " +  String.valueOf(position), "Clicked!!");
-        Intent intent = new Intent(this, EventDetailsActivity.class);
+        Intent intent = new Intent(this, InviteDetailsActivity.class);
         startActivity(intent);
     }
 }

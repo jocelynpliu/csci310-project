@@ -4,24 +4,26 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/jsnak/Desktop/cs310/Group Project/310Project/app/src/main/res/drawable/ic_add.xml" value="0.1" />
-        <entry key="..\:/Users/jsnak/Desktop/cs310/Group Project/310Project/app/src/main/res/layout/activity_create_event.xml" value="0.1" />
+        <entry key="..\:/Users/jsnak/Desktop/cs310/Group Project/310Project/app/src/main/res/layout/activity_create_event.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/jsnak/Desktop/cs310/Group Project/310Project/app/src/main/res/layout/activity_createacct.xml" value="0.1" />
-        <entry key="..\:/Users/jsnak/Desktop/cs310/Group Project/310Project/app/src/main/res/layout/activity_event.xml" value="0.12386018237082067" />
+        <entry key="..\:/Users/jsnak/Desktop/cs310/Group Project/310Project/app/src/main/res/layout/activity_createevent.xml" value="0.26856884057971014" />
+        <entry key="..\:/Users/jsnak/Desktop/cs310/Group Project/310Project/app/src/main/res/layout/activity_event.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/jsnak/Desktop/cs310/Group Project/310Project/app/src/main/res/layout/activity_home.xml" value="0.3" />
         <entry key="..\:/Users/jsnak/Desktop/cs310/Group Project/310Project/app/src/main/res/layout/activity_inbox.xml" value="0.12386018237082067" />
+        <entry key="..\:/Users/jsnak/Desktop/cs310/Group Project/310Project/app/src/main/res/layout/activity_invite.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/jsnak/Desktop/cs310/Group Project/310Project/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/jsnak/Desktop/cs310/Group Project/310Project/app/src/main/res/layout/activity_my_events.xml" value="0.12386018237082067" />
         <entry key="..\:/Users/jsnak/Desktop/cs310/Group Project/310Project/app/src/main/res/layout/activity_my_hosted_events.xml" value="0.12386018237082067" />
         <entry key="..\:/Users/jsnak/Desktop/cs310/Group Project/310Project/app/src/main/res/layout/fragment_user_info.xml" value="0.12386018237082067" />
-        <entry key="..\:/Users/jsnak/Desktop/cs310/Group Project/310Project/app/src/main/res/layout/home_row.xml" value="0.2" />
+        <entry key="..\:/Users/jsnak/Desktop/cs310/Group Project/310Project/app/src/main/res/layout/home_row.xml" value="0.5" />
+        <entry key="..\:/Users/jsnak/Desktop/cs310/Group Project/310Project/app/src/main/res/layout/invite.xml" value="0.5546875" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.144" />
         <entry key="app/src/main/res/layout/activity_createacct.xml" value="0.28249969482421877" />
-        <entry key="app/src/main/res/layout/activity_createevent.xml" value="0.36445922851562496" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.39243927001953127" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="Android API 29 Platform" project-jdk-type="Android SDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

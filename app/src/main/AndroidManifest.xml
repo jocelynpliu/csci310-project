@@ -30,6 +30,9 @@
             android:name=".activities.EventDetailsActivity"
             android:exported="false" />
         <activity
+            android:name=".activities.InviteDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.InboxActivity"
             android:exported="false"
             android:label="@string/title_activity_inbox"
