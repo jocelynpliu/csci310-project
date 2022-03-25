@@ -40,7 +40,7 @@ public class EasyTeamUp extends Application {
         // Initialize handlers
         userHandler = new UserHandler(this);
         eventHandler = new EventHandler(this);
-        messageHandler = new MessageHandler();
+        messageHandler = new MessageHandler(this);
     }
 
     /**

@@ -2,6 +2,9 @@ package csci310.team53.easyteamup.data;
 
 import org.bson.types.ObjectId;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Represents a User in the MongoDB Atlas database.
  * Serializable POJO.
@@ -13,6 +16,7 @@ public class User {
     private ObjectId id;
     private String username;
     private String password;
+    private List<ObjectId> messages;
     //private BufferedImage avatar;
 
     /**
@@ -31,6 +35,7 @@ public class User {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.messages = new ArrayList<>();
     }
 
     /**
@@ -44,6 +49,7 @@ public class User {
         this.id = new ObjectId();
         this.username = username;
         this.password = password;
+        this.messages = new ArrayList<>();
     }
 
     public ObjectId getId() {
@@ -69,5 +75,9 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public List<ObjectId> getMessages() { return messages; }
+
+    public void setMessages(List<ObjectId> messages) { this.messages = messages; }
 }
 
