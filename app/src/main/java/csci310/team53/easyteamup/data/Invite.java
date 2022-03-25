@@ -1,6 +1,6 @@
 package csci310.team53.easyteamup.data;
 
-public class Invite {
+public class Invite extends Message{
 
     private String eventID;
 

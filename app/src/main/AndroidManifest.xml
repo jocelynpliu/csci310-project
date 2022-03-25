@@ -18,7 +18,8 @@
         android:theme="@style/Theme.Csci310">
         <activity
             android:name=".activities.CreateEventActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".activities.HostedEventsActivity"
             android:exported="false" />
