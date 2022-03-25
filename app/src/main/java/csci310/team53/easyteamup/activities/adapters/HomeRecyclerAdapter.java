@@ -46,7 +46,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
     public HomeRecyclerAdapter(EasyTeamUp app, Context ct, MongoCursor<Event> events, RecyclerViewInterface recyclerViewInterface) {
         this.app = app;
         this.events = new ArrayList<Event>();
-        for (; events.hasNext(); ) {
+        while (events.hasNext()) {
             this.events.add(events.next());
         }
         context = ct;
@@ -65,8 +65,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
     }
 
     /**
-     * these two functions just necessary for adaptor to work, small edits for passed
-     * in data type later maybe.
+     * This is where the actual event data is displayed on the screen!
      */
     @Override
     public void onBindViewHolder(@NonNull HomeRecyclerAdapter.MyViewHolder holder, int position) {
@@ -80,7 +79,6 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
                 holder.myTextView3.setText("10:30 AM");
             }
         });
-
     }
 
     @Override
@@ -89,7 +87,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
     }
 
     /**
-     * View holder object goes into adapter object in Home.java
+     * View holder object goes into adapter object in HomeActivity.java
      *
      * @author Justin Nakama
      */

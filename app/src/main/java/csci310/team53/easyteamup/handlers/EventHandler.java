@@ -73,7 +73,7 @@ public class EventHandler {
      * @return an async task that you must run .getAsync() on.
      */
     public RealmResultTask<DeleteResult> deleteEvent(String eventID) {
-        return app.getDatabase().events.deleteOne(new Document("_id", eventID));
+        return app.getDatabase().events.deleteOne(new Document("_id", new ObjectId(eventID)));
     }
 
     /**
@@ -131,6 +131,6 @@ public class EventHandler {
      * @return an async task that you must run .getAsync() on.
      */
     public RealmResultTask<MongoCursor<Event>> retrieveEvent(String eventID) {
-        return app.getDatabase().events.find(new Document("_id", eventID)).iterator();
+        return app.getDatabase().events.find(new Document("_id", new ObjectId(eventID))).iterator();
     }
 }
