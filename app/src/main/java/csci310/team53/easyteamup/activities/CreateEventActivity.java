@@ -1,97 +1,108 @@
 package csci310.team53.easyteamup.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 
-import android.content.Intent;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 
-import org.bson.types.ObjectId;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
-import java.util.ArrayList;
-
-import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
-import csci310.team53.easyteamup.data.Event;
-import csci310.team53.easyteamup.layout.DatePickerFragment;
-import csci310.team53.easyteamup.layout.TimePickerFragment;
 
 /**
- * Activity that allows users to enter in details to create an event.
  *
- * @author Jocelyn Liu, Thomas Peters
+ *
+ * @author Jocelyn Liu
  */
-public class CreateEventActivity extends AppCompatActivity {
 
-    private EasyTeamUp app;
-    private Button createEventButton;
+public class CreateEventActivity extends AppCompatActivity {
+    private Button createEvent;
+    EditText dateText;
+    EditText startTimeText;
+    EditText endTimeText;
+    DatePickerDialog.OnDateSetListener date;
+    TimePickerDialog.OnTimeSetListener sTime;
+    TimePickerDialog.OnTimeSetListener eTime;
+    Calendar calendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createevent);
 
-        this.app = (EasyTeamUp) this.getApplication();
-        createEventButton = (Button) findViewById(R.id.createEventButton);
-        createEventButton.setOnClickListener(v -> createEvent());
+        dateText = findViewById(R.id.dateText);
+        startTimeText = findViewById(R.id.startTimeText);
+        endTimeText = findViewById(R.id.endTimeText);
+        calendar = Calendar.getInstance();
+
+        date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, day);
+                String format = "MM/dd/yy";
+                SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US);
+                dateText.setText(sdf.format(calendar.getTime()));
+            }
+        };
+
+        sTime = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                calendar.set(Calendar.MINUTE, minute);
+                String format = "hh:mm a";
+                SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US);
+                startTimeText.setText(sdf.format(calendar.getTime()));
+
+            }
+
+        };
+
+        eTime = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                calendar.set(Calendar.MINUTE, minute);
+                String format = "hh:mm a";
+                SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US);
+                endTimeText.setText(sdf.format(calendar.getTime()));
+            }
+        };
     }
 
-    /**
-     * Grabs data from form fields and creates a new Event object in database.
-     */
-    private void createEvent() {
-        final EditText name = (EditText) findViewById(R.id.eventName);
-        final EditText location = (EditText) findViewById(R.id.eventLocation);
-        final EditText description = (EditText) findViewById(R.id.description);
-        final CheckBox isPrivate = (CheckBox) findViewById(R.id.checkBox);
-
-        createEventButton.setOnClickListener(v -> {
-            // Create new event
-            final Event event = new Event();
-            event.setId(new ObjectId());
-            event.setName(name.getText().toString());
-            event.setLocation(location.getText().toString());
-            event.setDescription(description.getText().toString());
-            event.setHost(app.getRealm().currentUser().getId());
-            event.setPrivate(isPrivate.isChecked());
-            event.setInvitees(new ArrayList<String>());
-            // TODO: Set event date
-            // TODO: Set event start time
-            // TODO Set event end time
-
-            // Add event to database
-            app.getEventHandler().createEvent(event).getAsync(task -> {
-                if (task.isSuccess()) {
-                    Intent intent = new Intent(this, HomeActivity.class);
-                    startActivity(intent);
-                } else {
-                    Log.v("Event", task.getError().getErrorMessage());
-                }
-            });
-        });
+    public void datePickerClick(View view) {
+        new DatePickerDialog(CreateEventActivity.this, date, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
-    /**
-     * Displays a TimePicker dialog screen when a button is pressed.
-     * @param v the current view
-     */
-    public void showTimePickerDialog(View v) {
-        DialogFragment newFragment = new TimePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "timePicker");
-        Log.v("dialog: ", String.valueOf(newFragment.getDialog()));
+    public void sTimePickerClick(View view) {
+        new TimePickerDialog(CreateEventActivity.this, sTime, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show();
     }
 
-    /**
-     * Displays a DatePicker dialog screen when a button is pressed.
-     * @param v the current view
-     */
-    public void showDatePickerDialog(View v) {
-        DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "datePicker");
+    public void eTimePickerClick(View view) {
+        new TimePickerDialog(CreateEventActivity.this, eTime, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show();
     }
+
+//    public void showTimePickerDialog(View v) {
+//        DialogFragment newFragment = new TimePickerFragment();
+//        newFragment.show(getSupportFragmentManager(), "timePicker");
+//
+//
+//
+//        Log.v("dialog: ", String.valueOf(newFragment.getDialog()));
+//    }
+//
+//    public void showDatePickerDialog(View v) {
+//        DialogFragment newFragment = new DatePickerFragment();
+//        newFragment.show(getSupportFragmentManager(), "datePicker");
+//    }
 }
