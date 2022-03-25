@@ -101,7 +101,7 @@ public class EventHandler {
      */
     public RealmResultTask<MongoCursor<Event>> retrieveHostedEvents() {
         String id = app.getRealm().currentUser().getId();
-        return app.getDatabase().events.find(new Document("host", id)).iterator();
+        return app.getDatabase().events.find(new Document("host", id)).sort(new Document("_id", -1)).iterator();
     }
 
     /**
@@ -111,7 +111,7 @@ public class EventHandler {
      */
     public RealmResultTask<MongoCursor<Event>> retrievePublicEvents() {
         Document queryFilter = new Document().append("private", false);
-        return app.getDatabase().events.find(queryFilter).iterator();
+        return app.getDatabase().events.find(queryFilter).sort(new Document("_id", -1)).iterator();
     }
 
     /**
