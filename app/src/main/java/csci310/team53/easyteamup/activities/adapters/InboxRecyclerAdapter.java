@@ -22,6 +22,7 @@ import io.realm.mongodb.RealmResultTask;
 import io.realm.mongodb.mongo.iterable.MongoCursor;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class InboxRecyclerAdapter extends RecyclerView.Adapter<InboxRecyclerAdapter.MyViewHolder> {
@@ -41,12 +42,16 @@ public class InboxRecyclerAdapter extends RecyclerView.Adapter<InboxRecyclerAdap
      */
     public InboxRecyclerAdapter(EasyTeamUp app, Context ct, MongoCursor<Message> messages, RecyclerViewInterface recyclerViewInterface) {
         this.app = app;
-        this.messages = new ArrayList<Message>();
+        this.messages = Collections.synchronizedList(new ArrayList<Message>());
         while (messages.hasNext()) {
             this.messages.add(messages.next());
         }
         context = ct;
         this.recyclerViewInterface = recyclerViewInterface;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
     }
 
     /**

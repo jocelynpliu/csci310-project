@@ -77,21 +77,28 @@ public class EventHandler {
     }
 
     /**
-     * Add user to the list of invitees in an event.
+     * Add user to the list of attendees in an event.
      *
      * @param eventID the ID of the event to add this user to.
+     * @return an async task that you must run .getAsync() on.
      */
-    public void joinEvent(String eventID) {
-        // TODO: Implement
+    public RealmResultTask<Event> attendEvent(String eventID) {
+        User user = app.getRealm().currentUser();
+        Document findQuery = new Document("_id", new ObjectId(eventID));
+        Document updateQuery = new Document("$push", new Document("attendees", user.getId()));
+        return app.getDatabase().events.findOneAndUpdate(findQuery, updateQuery);
     }
 
     /**
-     * Remove user from the list of invitees in an event.
+     * Remove user from the list of attendees in an event.
      *
      * @param eventID the ID of the event to add this user to.
      */
-    public void leaveEvent(String eventID) {
-        // TODO: Implement
+    public RealmResultTask<Event> denyEvent(String eventID) {
+        User user = app.getRealm().currentUser();
+        Document findQuery = new Document("_id", new ObjectId(eventID));
+        Document updateQuery = new Document("$pull", new Document("attendees", user.getId()));
+        return app.getDatabase().events.findOneAndUpdate(findQuery, updateQuery);
     }
 
     /**

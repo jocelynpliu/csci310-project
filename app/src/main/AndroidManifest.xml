@@ -30,7 +30,7 @@
             android:name=".activities.EventDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.InviteDetailsActivity"
+            android:name=".activities.InviteActivity"
             android:exported="false" />
         <activity
             android:name=".activities.InboxActivity"
@@ -41,7 +41,7 @@
             android:name=".activities.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".handlers.MessageHandler"
+            android:name=".activities.InviteResultActivity"
             android:exported="false" />
         <activity
             android:name=".activities.LoginActivity"

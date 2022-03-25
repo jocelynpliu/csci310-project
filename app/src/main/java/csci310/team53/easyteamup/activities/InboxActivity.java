@@ -8,26 +8,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
 
-import csci310.team53.easyteamup.activities.adapters.HostedEventsRecyclerAdapter;
 import csci310.team53.easyteamup.activities.adapters.InboxRecyclerAdapter;
 import csci310.team53.easyteamup.activities.adapters.RecyclerViewInterface;
 import csci310.team53.easyteamup.data.Message;
-import csci310.team53.easyteamup.handlers.MessageHandler;
-import io.realm.mongodb.RealmResultTask;
-import io.realm.mongodb.mongo.iterable.MongoCursor;
-
 
 /**
  * The inbox screen, displaying event invites and notifications.
@@ -38,6 +29,7 @@ public class InboxActivity extends AppCompatActivity implements RecyclerViewInte
 
     private EasyTeamUp app;
     private RecyclerView inboxRecyclerView;
+    private InboxRecyclerAdapter myAdapter;
 
     private Button inboxButton;
     private Button myHomeButton;
@@ -66,7 +58,7 @@ public class InboxActivity extends AppCompatActivity implements RecyclerViewInte
         app.getDatabase().users.find(userQuery).iterator().getAsync(task -> {
             Document query = new Document("_id", new Document("$in", task.get().next().getMessages()));
             app.getDatabase().messages.find(query).iterator().getAsync(task2 -> {
-                InboxRecyclerAdapter myAdapter = new InboxRecyclerAdapter(app, this, task2.get(), this);
+                myAdapter = new InboxRecyclerAdapter(app, this, task2.get(), this);
                 inboxRecyclerView.setAdapter(myAdapter);
                 inboxRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             });
@@ -86,7 +78,6 @@ public class InboxActivity extends AppCompatActivity implements RecyclerViewInte
             startActivity(intent);
         });
 
-
         //go to Home
         myHomeButton= (Button) findViewById(R.id.homeButton);
         myHomeButton.setOnClickListener(v -> {
@@ -95,13 +86,23 @@ public class InboxActivity extends AppCompatActivity implements RecyclerViewInte
         });
     }
 
-    //this is listens to clicks on each row, (each notification received displayed)
-    // should open specific event info about notification after click
-    // position is index of the notification in the list
+    /**
+     * Listens to clicks on each row, (each notification received displayed)
+     * should open specific event info about notification after click
+     * position is index of the notification in the list
+     */
     @Override
     public void onItemClick(int position) {
         Log.d("---INDEX: " +  String.valueOf(position), "Clicked!!");
-        Intent intent = new Intent(this, InviteDetailsActivity.class);
-        startActivity(intent);
+        Message msg = myAdapter.getMessages().get(position);
+        if (msg.getEvent() != null) {
+            Intent intent = new Intent(this, InviteActivity.class);
+            intent.putExtra("content", msg.getContent());
+            intent.putExtra("senderID", msg.getSender());
+            intent.putExtra("eventID", msg.getEvent());
+            startActivity(intent);
+        } else {
+            // TODO: Maybe have a message details activity for non-invite notifications?
+        }
     }
 }

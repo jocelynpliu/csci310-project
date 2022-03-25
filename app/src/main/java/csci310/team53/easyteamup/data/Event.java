@@ -3,6 +3,7 @@ package csci310.team53.easyteamup.data;
 import org.bson.types.ObjectId;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,6 +24,7 @@ public class Event {
     private String start;
     private String end;
     private List<ObjectId> invitees;
+    private List<ObjectId> attendees;
 
     /**
      * Blank constructor to be utilized by MongoDB POJO.
@@ -54,6 +56,7 @@ public class Event {
         this.start = start;
         this.end = end;
         this.invitees = invitees;
+        this.attendees = new ArrayList<>();
     }
 
     /**
@@ -144,4 +147,12 @@ public class Event {
     public List<ObjectId> getInvitees() { return invitees; }
 
     public void setInvitees(List<ObjectId> invitees) { this.invitees = invitees; }
+
+    public List<ObjectId> getAttendees() {
+        return attendees;
+    }
+
+    public void setAttendees(List<ObjectId> attendees) {
+        this.attendees = attendees;
+    }
 }

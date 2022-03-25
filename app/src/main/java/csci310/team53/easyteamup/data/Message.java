@@ -16,6 +16,7 @@ public class Message {
     private String sender;
     private List<String> receivers;
     private String content;
+    private String event;
 
     /**
      * Empty constructor to be used by MongoDB POJO.
@@ -35,6 +36,23 @@ public class Message {
         this.sender = sender;
         this.receivers = receivers;
         this.content = content;
+    }
+
+    /**
+     * Constructor for Message object.
+     *
+     * @param id the ObjectID to be used by MongoDB.
+     * @param sender User ID of the user that sent this message.
+     * @param receivers List of user IDs that have received this message.
+     * @param content The content body of the message.
+     * @param event The event ID for this invite notification.
+     */
+    public Message(ObjectId id, String sender, List<String> receivers, String content, String event) {
+        this.id = id;
+        this.sender = sender;
+        this.receivers = receivers;
+        this.content = content;
+        this.event = event;
     }
 
     /**
@@ -81,5 +99,13 @@ public class Message {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getEvent() {
+        return event;
+    }
+
+    public void setEvent(String event) {
+        this.event = event;
     }
 }
