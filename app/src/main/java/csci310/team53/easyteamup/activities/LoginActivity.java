@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.bson.Document;
+import org.bson.types.ObjectId;
+
 import csci310.team53.easyteamup.R;
 
 import java.util.ArrayList;
@@ -18,6 +21,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import csci310.team53.easyteamup.EasyTeamUp;
+import csci310.team53.easyteamup.data.User;
 import io.realm.mongodb.App;
 
 /**

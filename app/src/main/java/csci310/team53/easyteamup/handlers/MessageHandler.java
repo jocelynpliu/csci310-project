@@ -10,6 +10,7 @@ import java.util.List;
 
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.data.Message;
+import csci310.team53.easyteamup.data.User;
 import io.realm.mongodb.RealmResultTask;
 import io.realm.mongodb.mongo.iterable.MongoCursor;
 

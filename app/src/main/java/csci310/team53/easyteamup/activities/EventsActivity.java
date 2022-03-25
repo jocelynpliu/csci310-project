@@ -17,15 +17,15 @@ import csci310.team53.easyteamup.activities.adapters.EventsRecyclerAdapter;
 import csci310.team53.easyteamup.activities.adapters.RecyclerViewInterface;
 
 public class EventsActivity extends AppCompatActivity implements RecyclerViewInterface {
+
     private Button myEventsButton;
     private Button myHostedEventsButton;
     private Button myHomeButton;
     private Button inboxButton;
+
     String s1[];
     String s2[];
     String s3[];
-
-
 
     RecyclerView myEventsRecyclerView;
 
@@ -51,24 +51,16 @@ public class EventsActivity extends AppCompatActivity implements RecyclerViewInt
         s3 = new String []{"date1", "date2", "date3", "date4", "date5", "date6", "date7"
                 , "date8", "date9", "date10", "date11"};
 
-
-
-
         //recycler and adapter needed to display a dynamic list on the screen
         myEventsRecyclerView = findViewById(R.id.myEventsRecyclerView);
         myEventsRecyclerView.setNestedScrollingEnabled(false);
-
         myEventsRecyclerView.setHasFixedSize(true);
 
         //specific array of data goes into this adapter
         EventsRecyclerAdapter myAdapter = new EventsRecyclerAdapter(this, s1, s2, s3, this);
-
         myEventsRecyclerView.setAdapter(myAdapter);
         myEventsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-
-
-        // button stuff---------------------------
         //go to inbox
         inboxButton = (Button) findViewById(R.id.inboxButton);
         inboxButton.setOnClickListener(new View.OnClickListener(){
@@ -81,26 +73,17 @@ public class EventsActivity extends AppCompatActivity implements RecyclerViewInt
 
         //go to My hosted Events
         myHostedEventsButton = (Button) findViewById(R.id.hostedEventsButton);
-        myEventsButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(EventsActivity.this, HostedEventsActivity.class);
-                startActivity(intent);
-            }
+        myEventsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(EventsActivity.this, HostedEventsActivity.class);
+            startActivity(intent);
         });
-
 
         //go to Home
         myHomeButton= (Button) findViewById(R.id.homeButton);
-        myHomeButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(EventsActivity.this, HomeActivity.class);
-                startActivity(intent);
-            }
+        myHomeButton.setOnClickListener(v -> {
+            Intent intent = new Intent(EventsActivity.this, HomeActivity.class);
+            startActivity(intent);
         });
-
-
     }
 
     //this is listens to clicks on each row, (each notification received displayed)
@@ -109,7 +92,6 @@ public class EventsActivity extends AppCompatActivity implements RecyclerViewInt
     @Override
     public void onItemClick(int position) {
         Log.d("---INDEX: " +  String.valueOf(position), "Clicked!!");
-
         Intent intent = new Intent(this, EventDetailsActivity.class);
         startActivity(intent);
     }
