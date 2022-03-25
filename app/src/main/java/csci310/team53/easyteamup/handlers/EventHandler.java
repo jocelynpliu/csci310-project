@@ -44,7 +44,7 @@ public class EventHandler {
      * @param invitees List of user IDs of invited guests.
      * @return an async task that you must run .getAsync() on.
      */
-    public RealmResultTask<InsertOneResult> createEvent(String name, String location, String description, String date, String start, String end, boolean isPrivate, List<String> invitees) {
+    public RealmResultTask<InsertOneResult> createEvent(String name, String location, String description, String date, String start, String end, boolean isPrivate, List<ObjectId> invitees) {
         ObjectId id = new ObjectId();
         User host = app.getRealm().currentUser();
         Event event = new Event(id, name, location, description, host.getId(), isPrivate, date, start, end, invitees);

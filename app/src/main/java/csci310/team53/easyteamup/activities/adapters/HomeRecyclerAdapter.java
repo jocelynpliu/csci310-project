@@ -75,8 +75,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
                 User user = task.get();
                 holder.myTextView1.setText(e.getName());
                 holder.myTextView2.setText(user.getUsername());
-                // Time and Date not working yet, so just using a placeholder here!!
-                holder.myTextView3.setText("10:30 AM");
+                holder.myTextView3.setText(e.getStart());
             }
         });
     }
