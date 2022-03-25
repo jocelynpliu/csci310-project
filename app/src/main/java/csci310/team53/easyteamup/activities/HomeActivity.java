@@ -49,7 +49,7 @@ public class HomeActivity extends AppCompatActivity implements RecyclerViewInter
         // Retrieve public events from database and display from adapter.
         app.getEventHandler().retrievePublicEvents().getAsync(task -> {
             if (task.isSuccess()) {
-                HomeRecyclerAdapter myAdapter = new HomeRecyclerAdapter (this, task.get(), this);
+                HomeRecyclerAdapter myAdapter = new HomeRecyclerAdapter (app, this, task.get(), this);
                 homeRecyclerView.setAdapter(myAdapter);
                 homeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             }
