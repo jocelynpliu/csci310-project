@@ -19,9 +19,10 @@ public class Event {
     private String description;
     private String host;
     private boolean isPrivate;
-    private LocalDateTime start;
-    private LocalDateTime end;
-    private List<String> invitees;
+    private String date;
+    private String start;
+    private String end;
+    private List<ObjectId> invitees;
 
     /**
      * Blank constructor to be utilized by MongoDB POJO.
@@ -36,18 +37,20 @@ public class Event {
      * @param location the location of the event.
      * @param description the description of the event.
      * @param host the user ID of the host.
-     * @param isPrivate whether or not this event is private,
+     * @param isPrivate whether or not this event is private.
+     * @param date the day of the event.
      * @param start the start time of the event.
      * @param end the end time of the event.
-     * @param invitees the list of invitees (list of user IDs)
+     * @param invitees the list of invitees (list of user IDs).
      */
-    public Event(ObjectId id, String name, String location, String description, String host, boolean isPrivate, LocalDateTime start, LocalDateTime end, List<String> invitees) {
+    public Event(ObjectId id, String name, String location, String description, String host, boolean isPrivate, String date, String start, String end, List<ObjectId> invitees) {
         this.id = id;
         this.name = name;
         this.location = location;
         this.description = description;
         this.host = host;
         this.isPrivate = isPrivate;
+        this.date = date;
         this.start = start;
         this.end = end;
         this.invitees = invitees;
@@ -99,15 +102,31 @@ public class Event {
         this.isPrivate = isPrivate;
     }
 
-    public LocalDateTime getStart() { return start; }
+    public String getDate() {
+        return date;
+    }
 
-    public void setStart(LocalDateTime start) { this.start = start; }
+    public void setDate(String date) {
+        this.date = date;
+    }
 
-    public LocalDateTime getEnd() { return end; }
+    public String getStart() {
+        return start;
+    }
 
-    public void setEnd(LocalDateTime end) { this.end = end; }
+    public void setStart(String start) {
+        this.start = start;
+    }
 
-    public List<String> getInvitees() { return invitees; }
+    public String getEnd() {
+        return end;
+    }
 
-    public void setInvitees(List<String> invitees) { this.invitees = invitees; }
+    public void setEnd(String end) {
+        this.end = end;
+    }
+
+    public List<ObjectId> getInvitees() { return invitees; }
+
+    public void setInvitees(List<ObjectId> invitees) { this.invitees = invitees; }
 }
