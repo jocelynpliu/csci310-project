@@ -5,6 +5,7 @@ import android.util.Log;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import csci310.team53.easyteamup.EasyTeamUp;
@@ -56,16 +57,17 @@ public class MessageHandler {
     }
 
     /**
-     * Retrieves all messages sent to the current user.
-     *
-     * @return an async task that you must run .getAsync() on.
+     * Removes all messages from the current user's inbox.
+     * Will keep the messages themselves in the database, just disassociate them from this user.
      */
-    public RealmResultTask<MongoCursor<Message>> retrieveMessages() {
-        // TODO:IMPLEMENT
-        return null;
-    }
-
     public void clearInbox() {
-        // TODO:IMPLEMENT
+        String userID = app.getRealm().currentUser().getId();
+        Document findQuery = new Document("_id", new ObjectId(userID));
+        Document updateQuery = new Document("$set", new Document("messages", new ArrayList<ObjectId>()));
+        app.getDatabase().users.findOneAndUpdate(findQuery, updateQuery).getAsync(task -> {
+            if (!task.isSuccess()) {
+                Log.v("Message", "ERROR: " + task.getError().getErrorMessage());
+            }
+        });
     }
 }
