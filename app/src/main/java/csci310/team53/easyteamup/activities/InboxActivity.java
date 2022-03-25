@@ -24,6 +24,7 @@ import csci310.team53.easyteamup.activities.adapters.HostedEventsRecyclerAdapter
 import csci310.team53.easyteamup.activities.adapters.InboxRecyclerAdapter;
 import csci310.team53.easyteamup.activities.adapters.RecyclerViewInterface;
 import csci310.team53.easyteamup.data.Message;
+import csci310.team53.easyteamup.handlers.MessageHandler;
 import io.realm.mongodb.RealmResultTask;
 import io.realm.mongodb.mongo.iterable.MongoCursor;
 

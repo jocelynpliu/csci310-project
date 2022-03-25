@@ -1,6 +1,14 @@
 package csci310.team53.easyteamup.handlers;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -9,17 +17,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import csci310.team53.easyteamup.EasyTeamUp;
+import csci310.team53.easyteamup.R;
+import csci310.team53.easyteamup.activities.EventsActivity;
+import csci310.team53.easyteamup.activities.HomeActivity;
+import csci310.team53.easyteamup.activities.HostedEventsActivity;
+import csci310.team53.easyteamup.activities.InboxActivity;
 import csci310.team53.easyteamup.data.Message;
-import csci310.team53.easyteamup.data.User;
-import io.realm.mongodb.RealmResultTask;
-import io.realm.mongodb.mongo.iterable.MongoCursor;
 
 /**
  * Handles CRUD for Event objects in Database.
  *
  * @author Thomas Peters
  */
-public class MessageHandler {
+public class MessageHandler extends AppCompatActivity {
+
+    private Button myEventsButton;
+    private Button myHostedEventsButton;
+    private Button myHomeButton;
+    private Button inboxButton;
 
     private final EasyTeamUp app;
 
@@ -31,6 +46,73 @@ public class MessageHandler {
     public MessageHandler(EasyTeamUp app) {
         this.app = app;
     }
+
+    public MessageHandler(){
+        app = null;
+    }
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_confirm);
+
+        Intent incomingIntent = getIntent();
+
+        String extra = getIntent().getStringExtra("attending");
+        Log.d("here", "test!!!!!!");
+
+        Log.d("in messagehandler ", "user decided: " + extra);
+
+
+//        final LayoutInflater factory = getLayoutInflater();
+//
+//        final View textEntryView = factory.inflate(R.layout.activity_confirm, null);
+
+
+//        go to inbox
+        inboxButton = (Button) findViewById(R.id.inboxButton);
+        inboxButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(MessageHandler.this, InboxActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //go to My hosted Events
+        myHostedEventsButton = (Button) findViewById(R.id.hostedEventsButton);
+        myHostedEventsButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(MessageHandler.this, HostedEventsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // Navigate to My Events
+        myEventsButton = (Button) findViewById(R.id.myEventsButton);
+        myEventsButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(MessageHandler.this, EventsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //go to Home
+        myHomeButton= (Button) findViewById(R.id.homeButton);
+        myHomeButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(MessageHandler.this, HomeActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+
 
     /**
      * Creates a new message and adds it to the receivers' profile.

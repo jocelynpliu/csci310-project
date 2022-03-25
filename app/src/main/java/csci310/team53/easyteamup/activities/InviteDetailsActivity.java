@@ -2,9 +2,11 @@ package csci310.team53.easyteamup.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 
 import csci310.team53.easyteamup.R;
+import csci310.team53.easyteamup.handlers.MessageHandler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -59,17 +61,19 @@ public class InviteDetailsActivity extends AppCompatActivity{
 
         // when you accept or deny, will pass extra info, return back to InboxActitity class to notify hosts
         myAcceptButton= (Button) findViewById(R.id.acceptButton);
-        myEventsButton.setOnClickListener(v -> {
-            Intent intent = new Intent(InviteDetailsActivity.this, InboxActivity.class);
-            intent.putExtra("attending", "1");
+        myAcceptButton.setOnClickListener(v -> {
+            Intent intent = new Intent(InviteDetailsActivity.this, MessageHandler.class);
+            intent.putExtra("attending", "yes");
+            Log.d("here", "test");
             startActivity(intent);
         });
 
 
         myDenyButton= (Button) findViewById(R.id.denyButton);
         myDenyButton.setOnClickListener(v -> {
-            Intent intent = new Intent(InviteDetailsActivity.this, InboxActivity.class);
-            intent.putExtra("attending", "0");
+            Intent intent = new Intent(InviteDetailsActivity.this, MessageHandler.class);
+            intent.putExtra("attending", "no");
+            Log.d("here", "test");
             startActivity(intent);
         });
 
