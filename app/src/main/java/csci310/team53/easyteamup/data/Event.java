@@ -56,6 +56,21 @@ public class Event {
         this.invitees = invitees;
     }
 
+    /**
+     * Checks if this event's variables are all filled out.
+     * @return true if complete, otherwise false.
+     */
+    public boolean isValid() {
+        if (name == null || name.isEmpty()) return false;
+        if (location == null || location.isEmpty()) return false;
+        if (description == null || description.isEmpty()) return false;
+        if (host == null || host.isEmpty()) return false;
+        if (date == null || date.isEmpty()) return false;
+        if (start == null || start.isEmpty()) return false;
+        if (end == null || end.isEmpty()) return false;
+        return true;
+    }
+
     /** Getters and Setters */
 
     public ObjectId getId() { return id; }

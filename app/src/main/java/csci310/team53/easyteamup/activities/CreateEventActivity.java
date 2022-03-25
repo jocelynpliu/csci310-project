@@ -120,6 +120,13 @@ public class CreateEventActivity extends AppCompatActivity {
             event.setStart(startTimeText.getText().toString());
             event.setEnd(endTimeText.getText().toString());
 
+            // Check if all event fields are filled out
+            if (!event.isValid()) {
+                // TODO: Provide some user feedback with an error message
+                // For example: "You must fill out all form fields to create an event!"
+                return;
+            }
+
             // Add event to database
             app.getEventHandler().createEvent(event).getAsync(task -> {
                 if (task.isSuccess()) {
