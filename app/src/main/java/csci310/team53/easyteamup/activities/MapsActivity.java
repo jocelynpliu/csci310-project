@@ -106,6 +106,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.animateCamera( CameraUpdateFactory.zoomTo( 11.0f ) );
     }
 
+    //credit: https://stackoverflow.com/questions/24352192/android-google-maps-add-marker-by-address
+
     public LatLng getLocationFromAddress(Context context, String strAddress)
     {
         Geocoder coder= new Geocoder(context);
