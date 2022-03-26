@@ -2,11 +2,13 @@ package csci310.team53.easyteamup.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Arrays;
+
+import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
 
 /**
@@ -15,6 +17,8 @@ import csci310.team53.easyteamup.R;
  * @author Thomas Peters
  */
 public class InviteResultActivity extends AppCompatActivity {
+
+    private EasyTeamUp app;
 
     private Button myEventsButton;
     private Button myHostedEventsButton;
@@ -25,11 +29,19 @@ public class InviteResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm);
+        app = (EasyTeamUp) this.getApplication();
 
         // Get data from previous intent
         Intent prevIntent = getIntent();
         boolean isAttending = prevIntent.getBooleanExtra("isAttending", false);
-        Log.d("TEST", "Is Attending: " + isAttending);
+        String hostID = prevIntent.getStringExtra("hostID");
+
+        // Notify host
+        if (isAttending) {
+            app.getMessageHandler().sendMessage(Arrays.asList(hostID), "Someone joined your event!");
+        } else {
+            app.getMessageHandler().sendMessage(Arrays.asList(hostID), "Someone denied an invite to your event!");
+        }
 
         // final LayoutInflater factory = getLayoutInflater();
         // final View textEntryView = factory.inflate(R.layout.activity_confirm, null);

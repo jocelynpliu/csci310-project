@@ -71,6 +71,7 @@ public class InviteActivity extends AppCompatActivity {
                 if (task.isSuccess()) {
                     Intent intent = new Intent(InviteActivity.this, InviteResultActivity.class);
                     intent.putExtra("isAttending", true);
+                    intent.putExtra("hostID", task.get().getHost());
                     startActivity(intent);
                 }
             });
@@ -83,6 +84,7 @@ public class InviteActivity extends AppCompatActivity {
                 if (task.isSuccess()) {
                     Intent intent = new Intent(InviteActivity.this, InviteResultActivity.class);
                     intent.putExtra("isAttending", false);
+                    intent.putExtra("hostID", task.get().getHost());
                     startActivity(intent);
                 }
             });
