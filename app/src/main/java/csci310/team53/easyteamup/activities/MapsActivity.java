@@ -3,7 +3,9 @@ package csci310.team53.easyteamup.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -23,6 +25,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
 
+    private Button myHostedEventsButton;
+    private Button inboxButton;
+    private Button myEventsButton;
+    private Button myHomeButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +43,38 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
+
+
+
+        //go to inbox
+        inboxButton = (Button) findViewById(R.id.inboxButton);
+        inboxButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MapsActivity.this, InboxActivity.class);
+            startActivity(intent);
+        });
+
+        //go to My Events
+        myEventsButton = (Button) findViewById(R.id.myEventsButton);
+        myEventsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MapsActivity.this, EventsActivity.class);
+            startActivity(intent);
+        });
+
+        //go to Hosted events
+        myHostedEventsButton= (Button) findViewById(R.id.hostedEventsButton);
+        myHostedEventsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MapsActivity.this, HostedEventsActivity.class);
+            startActivity(intent);
+        });
+
+        //go to Home
+        myHomeButton= (Button) findViewById(R.id.homeButton);
+        myHomeButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MapsActivity.this, HomeActivity.class);
+            startActivity(intent);
+        });
     }
 
     /**

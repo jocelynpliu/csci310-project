@@ -1,9 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:map="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activities.MapsActivity" />
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+
+
+
+
+
+<Button
+    android:id="@+id/inboxButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+
+
+    android:layout_marginStart="16dp"
+    android:layout_marginBottom="4dp"
+    android:paddingStart="2dp"
+    android:paddingEnd="2dp"
+    app:icon="@drawable/ic_mail"
+    app:iconGravity="textStart"
+    app:iconPadding="0dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
+
+<Button
+    android:id="@+id/myEventsButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginBottom="4dp"
+    android:paddingStart="2dp"
+    android:paddingEnd="2dp"
+    app:icon="@drawable/ic_events"
+    app:iconGravity="textStart"
+    app:iconPadding="0dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/inboxButton" />
+
+<Button
+    android:id="@+id/hostedEventsButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="4dp"
+    android:paddingStart="2dp"
+    android:paddingEnd="2dp"
+    app:icon="@drawable/ic_host"
+    app:iconGravity="textStart"
+    app:iconPadding="0dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
+
+<Button
+    android:id="@+id/homeButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginBottom="4dp"
+    android:paddingStart="2dp"
+    android:paddingEnd="2dp"
+    app:icon="@drawable/ic_home"
+    app:iconGravity="textStart"
+    app:iconPadding="0dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/myEventsButton" />
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activities.MapsActivity" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
