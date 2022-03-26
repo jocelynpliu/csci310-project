@@ -34,6 +34,7 @@ public class CreateEventActivity extends AppCompatActivity {
 
     private EasyTeamUp app;
     private Button createEventButton;
+    private Button inviteButton;
 
     private EditText dateText;
     private EditText startTimeText;
@@ -47,6 +48,9 @@ public class CreateEventActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createevent);
+
+        inviteButton = (Button) findViewById(R.id.inviteButton);
+        inviteButton.setOnClickListener(v ->  openMenu());
 
         this.app = (EasyTeamUp) this.getApplication();
         createEventButton = (Button) findViewById(R.id.createEventButton);
@@ -95,6 +99,11 @@ public class CreateEventActivity extends AppCompatActivity {
 
     public void eTimePickerClick(View view) {
         new TimePickerDialog(CreateEventActivity.this, eTime, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show();
+    }
+
+    public void openMenu() {
+        Intent intent = new Intent(this, MenuActivity.class);
+        startActivity(intent);
     }
 
     /**
