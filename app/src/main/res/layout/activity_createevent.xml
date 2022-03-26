@@ -2,27 +2,26 @@
 
 <!-- @author Jocelyn Liu-->
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:layout_editor_absoluteX="1dp"
-    tools:layout_editor_absoluteY="70dp">
+    android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="?android:attr/actionBarSize">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="124dp"
+            android:layout_marginTop="92dp"
             android:text="Create an Event"
-
             android:textSize="34sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +42,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <EditText
-            android:id="@+id/eventLocation"
+            android:id="@+id/eventAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="25dp"
@@ -56,6 +55,21 @@
             app:layout_constraintHorizontal_bias="0.159"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/eventName" />
+
+        <EditText
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="135dp"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Event description"
+            android:inputType="textMultiLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.98"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/eventAddress" />
 
 
         <EditText
@@ -71,7 +85,7 @@
             android:inputType="date"
             android:minHeight="48dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/eventLocation" />
+            app:layout_constraintTop_toBottomOf="@+id/description" />
 
         <Button
             android:id="@+id/date"
@@ -85,7 +99,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.489"
             app:layout_constraintStart_toEndOf="@+id/dateText"
-            app:layout_constraintTop_toBottomOf="@+id/eventLocation" />
+            app:layout_constraintTop_toBottomOf="@+id/description" />
 
         <EditText
             android:id="@+id/startTimeText"
@@ -96,7 +110,7 @@
             android:layout_marginTop="20dp"
             android:onClick="sTimePickerClick"
             android:ems="8"
-            android:hint="Start time"
+            android:hint="Available starting at..."
             android:inputType="date"
             android:minHeight="48dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -125,7 +139,7 @@
             android:layout_marginTop="20dp"
             android:onClick="eTimePickerClick"
             android:ems="8"
-            android:hint="End time"
+            android:hint="Available until..."
             android:inputType="date"
             android:minHeight="48dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -145,22 +159,35 @@
             app:layout_constraintStart_toEndOf="@+id/endTimeText"
             app:layout_constraintTop_toBottomOf="@+id/startTimeText" />
 
+
         <EditText
-            android:id="@+id/description"
-            android:layout_width="match_parent"
-            android:layout_height="135dp"
+            android:id="@+id/votingTimeText"
+            android:layout_width="286dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="25dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
-            android:ems="10"
-            android:gravity="start|top"
-            android:hint="Event description"
-            android:inputType="textMultiLine"
-            app:layout_constraintBottom_toTopOf="@+id/checkBox"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            android:ems="8"
+            android:hint="Time slots voting expires at..."
+            android:inputType="date"
+            android:minHeight="48dp"
+            android:onClick="vTimePickerClick"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/endTimeText"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/endTimeText" />
+
+        <Button
+            android:id="@+id/votingTime"
+            android:layout_width="52dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:onClick="vTimePickerClick"
+            app:icon="@drawable/ic_clock"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.479"
+            app:layout_constraintStart_toEndOf="@+id/votingTimeText"
+            app:layout_constraintTop_toBottomOf="@+id/endTimeText" />
 
         <Button
             android:id="@+id/inviteButton"
@@ -172,13 +199,14 @@
             app:layout_constraintBottom_toTopOf="@+id/checkBox"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/description"
+            app:layout_constraintTop_toBottomOf="@+id/votingTimeText"
             app:layout_constraintVertical_bias="1.0" />
 
         <CheckBox
             android:id="@+id/checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:text="Make event private"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -189,14 +217,15 @@
             android:id="@+id/createEventButton"
             android:layout_width="250dp"
             android:layout_height="60dp"
+            android:layout_marginTop="16dp"
             android:text="Create Event"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/checkBox"
             app:layout_constraintVertical_bias="0.0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

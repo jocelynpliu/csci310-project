@@ -39,9 +39,11 @@ public class CreateEventActivity extends AppCompatActivity {
     private EditText dateText;
     private EditText startTimeText;
     private EditText endTimeText;
+    private EditText votingTimeText;
     private DatePickerDialog.OnDateSetListener date;
     private TimePickerDialog.OnTimeSetListener sTime;
     private TimePickerDialog.OnTimeSetListener eTime;
+    private TimePickerDialog.OnTimeSetListener vTime;
     private Calendar calendar;
 
     @Override
@@ -60,6 +62,7 @@ public class CreateEventActivity extends AppCompatActivity {
         dateText = findViewById(R.id.dateText);
         startTimeText = findViewById(R.id.startTimeText);
         endTimeText = findViewById(R.id.endTimeText);
+        endTimeText = findViewById(R.id.votingTimeText);
         calendar = Calendar.getInstance();
 
         date = (view, year, month, day) -> {
@@ -87,6 +90,14 @@ public class CreateEventActivity extends AppCompatActivity {
             SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US);
             endTimeText.setText(sdf.format(calendar.getTime()));
         };
+
+        vTime = (view, hourOfDay, minute) -> {
+            calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            calendar.set(Calendar.MINUTE, minute);
+            String format = "hh:mm a";
+            SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US);
+            endTimeText.setText(sdf.format(calendar.getTime()));
+        };
     }
 
     public void datePickerClick(View view) {
@@ -101,6 +112,10 @@ public class CreateEventActivity extends AppCompatActivity {
         new TimePickerDialog(CreateEventActivity.this, eTime, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show();
     }
 
+    public void vTimePickerClick(View view) {
+        new TimePickerDialog(CreateEventActivity.this, vTime, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show();
+    }
+
     public void openMenu() {
         Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
@@ -111,7 +126,7 @@ public class CreateEventActivity extends AppCompatActivity {
      */
     private void createEvent() {
         final EditText name = (EditText) findViewById(R.id.eventName);
-        final EditText location = (EditText) findViewById(R.id.eventLocation);
+        final EditText location = (EditText) findViewById(R.id.eventAddress);
         final EditText description = (EditText) findViewById(R.id.description);
         final CheckBox isPrivate = (CheckBox) findViewById(R.id.checkBox);
 
