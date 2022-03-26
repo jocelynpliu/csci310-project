@@ -8,7 +8,6 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import csci310.team53.easyteamup.R;
-import csci310.team53.easyteamup.handlers.MessageHandler;
 
 /**
  * Displays information after accepting or denying an invitation.

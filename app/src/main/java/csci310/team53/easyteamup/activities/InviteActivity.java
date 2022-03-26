@@ -6,7 +6,6 @@ import android.widget.Button;
 
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
-import csci310.team53.easyteamup.handlers.MessageHandler;
 
 import androidx.appcompat.app.AppCompatActivity;
 

@@ -1,9 +1,12 @@
 package csci310.team53.easyteamup.handlers;
 
+import android.util.Log;
+
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 import csci310.team53.easyteamup.EasyTeamUp;
@@ -127,8 +130,9 @@ public class EventHandler {
      * @return an async task that you must run .getAsync() on.
      */
     public RealmResultTask<MongoCursor<Event>> retrieveAttendingEvents() {
-        // TODO: Implement
-        return null;
+        User user = app.getRealm().currentUser();
+        Document queryFilter = new Document("attendees", user.getId());
+        return app.getDatabase().events.find(queryFilter).iterator();
     }
 
     /**
