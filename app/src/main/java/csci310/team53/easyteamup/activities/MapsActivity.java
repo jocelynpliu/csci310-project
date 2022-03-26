@@ -103,6 +103,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng address = getLocationFromAddress(this, "3911 Figueroa St, Los Angeles, CA 90037") ;
         mMap.addMarker(new MarkerOptions().position(address).title("Marker "));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(address));
+        mMap.animateCamera( CameraUpdateFactory.zoomTo( 11.0f ) );
     }
 
     public LatLng getLocationFromAddress(Context context, String strAddress)
