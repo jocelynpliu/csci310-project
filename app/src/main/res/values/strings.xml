@@ -18,5 +18,6 @@
     <!-- create event strings -->
     <string name="date_form">Enter event date</string>
     <string name="pick_time">Enter event time</string>
+    <string name="title_activity_maps">MapsActivity</string>
 
 </resources>

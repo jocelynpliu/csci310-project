@@ -44,6 +44,9 @@
             android:name=".activities.InviteResultActivity"
             android:exported="false" />
         <activity
+            android:name=".activities.MapsActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.LoginActivity"
             android:exported="true">
             <intent-filter>
@@ -58,6 +61,14 @@
              />
 
         <activity android:name=".activities.RegistrationActivity" />
+
+        <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}" />
+
     </application>
 
 </manifest>

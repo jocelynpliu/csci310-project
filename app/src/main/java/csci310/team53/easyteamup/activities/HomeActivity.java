@@ -30,6 +30,7 @@ public class HomeActivity extends AppCompatActivity implements RecyclerViewInter
     private Button myEventsButton;
     private Button myHostButton;
     private Button createEventButton;
+    private Button mapButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +81,13 @@ public class HomeActivity extends AppCompatActivity implements RecyclerViewInter
         createEventButton = (Button) findViewById(R.id.createEventButton);
         createEventButton.setOnClickListener(view -> {
             Intent intent = new Intent(HomeActivity.this, CreateEventActivity.class);
+            startActivity(intent);
+        });
+
+        // Navigates to create event activity.
+        mapButton = (Button) findViewById(R.id.mapButton);
+        mapButton.setOnClickListener(view -> {
+            Intent intent = new Intent(HomeActivity.this, MapsActivity.class);
             startActivity(intent);
         });
     }

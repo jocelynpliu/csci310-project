@@ -105,5 +105,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/mapButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:icon="@drawable/ic_map"
+        app:iconGravity="textStart"
+        app:layout_constraintEnd_toStartOf="@+id/userProfileButton"
+        app:layout_constraintStart_toEndOf="@+id/createEventButton"
+        tools:layout_editor_absoluteY="0dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
