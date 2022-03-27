@@ -2,12 +2,15 @@ package csci310.team53.easyteamup.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.provider.CalendarContract;
+import android.util.Log;
 import android.widget.Button;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -15,20 +18,35 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 //import android.support.v4.app.Fragment;
 
+import org.bson.Document;
+import org.bson.types.ObjectId;
+
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
+import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
 
+import csci310.team53.easyteamup.activities.adapters.HomeRecyclerAdapter;
+import csci310.team53.easyteamup.data.Event;
+import csci310.team53.easyteamup.data.User;
 import csci310.team53.easyteamup.databinding.ActivityMapsBinding;
+import io.realm.RealmResults;
+import io.realm.mongodb.RealmResultTask;
+import io.realm.mongodb.mongo.iterable.MongoCursor;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
+
+    private EasyTeamUp app;
 
     private Button myHostedEventsButton;
     private Button inboxButton;
@@ -39,7 +57,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-
+        Log.d("inside", "mapsactitivy------------------------------------");
 
 //        binding = ActivityMapsBinding.inflate(getLayoutInflater());
 
@@ -50,6 +68,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
 
+        List<Event> events = new ArrayList<Event>();
+        app = (EasyTeamUp) this.getApplication();
+
+
+
+        // Retrieve public events from database and display from adapter.
+        app.getEventHandler().retrievePublicEvents().getAsync(task -> {
+            if (task.isSuccess()) {
+             while(task.get().hasNext()){
+                 events.add((task.get().next()));
+             }
+            }
+        });
+
+        for(Event a: events){
+            Log.d("!!!loc", a.getLocation());
+        }
 
 
 
@@ -80,6 +115,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Intent intent = new Intent(MapsActivity.this, HomeActivity.class);
             startActivity(intent);
         });
+
+
+
     }
 
     /**
@@ -95,19 +133,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-//        LatLng sydney = new LatLng(-34, 151);
-//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
         LatLng address = getLocationFromAddress(this, "3911 Figueroa St, Los Angeles, CA 90037") ;
         mMap.addMarker(new MarkerOptions().position(address).title("Marker "));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(address));
         mMap.animateCamera( CameraUpdateFactory.zoomTo( 11.0f ) );
+
+        LatLng address2 = getLocationFromAddress(this, "1 World Way, Los Angeles, CA 90045") ;
+        mMap.addMarker(new MarkerOptions().position(address2).title("Marker 2 "));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(address2));
+        mMap.animateCamera( CameraUpdateFactory.zoomTo( 11.0f ) );
+
+
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                Intent intent1 = new Intent( MapsActivity.this, EventDetailsActivity.class);
+                String title = marker.getTitle();
+                intent1.putExtra("eventTitle", title);
+                startActivity(intent1);
+            }
+        });
     }
 
     //credit: https://stackoverflow.com/questions/24352192/android-google-maps-add-marker-by-address
-
     public LatLng getLocationFromAddress(Context context, String strAddress)
     {
         Geocoder coder= new Geocoder(context);
