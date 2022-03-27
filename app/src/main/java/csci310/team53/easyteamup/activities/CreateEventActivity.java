@@ -1,12 +1,14 @@
 package csci310.team53.easyteamup.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import java.text.SimpleDateFormat;
@@ -17,6 +19,8 @@ import csci310.team53.easyteamup.R;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.CheckBox;
+import android.widget.Switch;
+import android.widget.ToggleButton;
 
 import org.bson.types.ObjectId;
 
@@ -98,6 +102,19 @@ public class CreateEventActivity extends AppCompatActivity {
             SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US);
             endTimeText.setText(sdf.format(calendar.getTime()));
         };
+
+        // toggle button for showing voting layout
+        Switch toggle = (Switch) findViewById(R.id.votingSwitch);
+        ConstraintLayout voting = (ConstraintLayout) findViewById(R.id.votingLayout);
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    voting.setVisibility(View.VISIBLE);
+                } else {
+                    voting.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
     public void datePickerClick(View view) {

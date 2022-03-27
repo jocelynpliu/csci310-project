@@ -24,7 +24,7 @@ public class MenuActivity extends AppCompatActivity {
 
     // TODO: connect this to the backend
     ListView listView;
-    String[] name = {"Kelly", "Andre", "Thomas", "Jocelyn", "Justin", "Joy", "Steve", "Noa"};
+    String[] name = {"Kelly", "Andre", "Thomas", "Ashley", "Lauren", "Jocelyn", "Justin", "Joy", "Steve", "Noa", "Mina", "Katie", "Fotina", "Chris", "Luke"};
 
     ArrayAdapter<String> arrayAdapter;
 
