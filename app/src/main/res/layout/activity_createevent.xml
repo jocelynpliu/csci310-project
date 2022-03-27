@@ -19,10 +19,11 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="236dp"
+            android:layout_marginTop="92dp"
             android:text="Create an Event"
             android:textSize="34sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -115,6 +116,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dateText" />
 
+        <Button
+            android:id="@+id/sTime"
+            android:layout_width="52dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:onClick="sTimePickerClick"
+            app:icon="@drawable/ic_clock"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.51"
+            app:layout_constraintStart_toEndOf="@+id/startTimeText"
+            app:layout_constraintTop_toBottomOf="@+id/dateText" />
+
         <EditText
             android:id="@+id/endTimeText"
             android:layout_width="286dp"
@@ -144,19 +159,7 @@
             app:layout_constraintStart_toEndOf="@+id/endTimeText"
             app:layout_constraintTop_toBottomOf="@+id/startTimeText" />
 
-        <Button
-            android:id="@+id/sTime"
-            android:layout_width="52dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="16dp"
-            android:onClick="sTimePickerClick"
-            app:icon="@drawable/ic_clock"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.51"
-            app:layout_constraintStart_toEndOf="@+id/startTimeText"
-            app:layout_constraintTop_toBottomOf="@+id/dateText" />
+
 
         <Switch
             android:id="@+id/votingSwitch"
@@ -175,7 +178,6 @@
             android:layout_gravity="center"
             android:padding="8dp"
             android:layout_marginTop="16dp"
-            android:background="#5C3F51B5"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -189,7 +191,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:ems="8"
-                android:hint="Time slots voting expires at..."
+                android:hint="Allow voting until"
                 android:inputType="date"
                 android:minHeight="48dp"
                 android:onClick="vTimePickerClick"
@@ -228,7 +230,7 @@
             android:id="@+id/inviteButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@android:drawable/ic_menu_add"
+            android:drawableLeft="@drawable/ic_profile"
             android:text="Invite people"
             android:layout_marginTop="16dp"
             app:layout_constraintBottom_toTopOf="@+id/checkBox"

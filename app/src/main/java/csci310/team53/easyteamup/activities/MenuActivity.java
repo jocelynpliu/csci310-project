@@ -16,7 +16,7 @@ import csci310.team53.easyteamup.R;
 
 
 /**
- * Search menu, allows user to search for users to invite to event.
+ * Search menu launched from CreateEventActivity, allows user to search for users to invite to event.
  *
  * @author Jocelyn Liu
  */
