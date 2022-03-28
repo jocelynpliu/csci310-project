@@ -3,6 +3,8 @@ package csci310.team53.easyteamup.activities;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,8 +36,17 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         listView = findViewById(R.id.userListView);
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, name);
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, name);
         listView.setAdapter(arrayAdapter);
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        listView.setItemsCanFocus(false);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                view.setSelected(true);
+            }
+        });
     }
 
     @Override
@@ -57,6 +68,8 @@ public class MenuActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+
 
         return super.onCreateOptionsMenu(menu);
     }

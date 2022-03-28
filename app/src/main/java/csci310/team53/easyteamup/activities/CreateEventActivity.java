@@ -132,6 +132,8 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
 
     }
 
+    // Date and Time Picker code
+
     public void setTimePicker(View view, int hourOfDay, int minute, EditText text) {
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
         calendar.set(Calendar.MINUTE, minute);
@@ -176,7 +178,7 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
     }
 
     /**
-     * adds time slot
+     * Adds time slot
      */
     @Override
     public void addSlot(String start, String end) {
