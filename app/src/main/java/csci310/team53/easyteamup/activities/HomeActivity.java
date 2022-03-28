@@ -13,6 +13,7 @@ import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
 import csci310.team53.easyteamup.activities.adapters.EventsRecyclerAdapter;
 import csci310.team53.easyteamup.activities.adapters.RecyclerViewInterface;
+import csci310.team53.easyteamup.data.Event;
 
 /**
  * The main home screen, displaying public events and various navigation buttons.
@@ -23,6 +24,7 @@ public class HomeActivity extends AppCompatActivity implements RecyclerViewInter
 
     private EasyTeamUp app;
     private RecyclerView homeRecyclerView;
+    private EventsRecyclerAdapter myAdapter;
 
     private Button homeButton;
     private Button inboxButton;
@@ -49,7 +51,7 @@ public class HomeActivity extends AppCompatActivity implements RecyclerViewInter
         // Retrieve public events from database and display from adapter.
         app.getEventHandler().retrievePublicEvents().getAsync(task -> {
             if (task.isSuccess()) {
-                EventsRecyclerAdapter myAdapter = new EventsRecyclerAdapter(app, this, task.get(), this);
+                myAdapter = new EventsRecyclerAdapter(app, this, task.get(), this);
                 homeRecyclerView.setAdapter(myAdapter);
                 homeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             }
@@ -97,7 +99,10 @@ public class HomeActivity extends AppCompatActivity implements RecyclerViewInter
     @Override
     public void onItemClick(int position) {
         Log.d("---INDEX: " +  String.valueOf(position), "Clicked!!");
+        Event e = myAdapter.getEvents().get(position);
         Intent intent = new Intent(HomeActivity.this, EventDetailsActivity.class);
+        intent.putExtra("from", "home");
+        intent.putExtra("eventID", e.getId().toString());
         startActivity(intent);
     }
 }

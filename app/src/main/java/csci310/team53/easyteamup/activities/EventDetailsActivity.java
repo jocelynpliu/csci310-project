@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
 
 public class EventDetailsActivity extends AppCompatActivity {
@@ -22,6 +24,8 @@ public class EventDetailsActivity extends AppCompatActivity {
     private Button inboxButton;
     private Button myHostedEventsButton;
     private Button myHomeButton;
+
+    private Button myjoinButton;
 
     private EditText dateText;
     private EditText startTimeText;
@@ -36,17 +40,25 @@ public class EventDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        EasyTeamUp app = (EasyTeamUp) this.getApplication();
 
-        Intent incomingIntent = getIntent();
-        String cameFrom = incomingIntent.getStringExtra("from");
+
+
+        //if you came from hosted, cameFrom will not be null
+        String cameFrom = getIntent().getStringExtra("from");
+        Log.d("cameFrom ", cameFrom + "!!!!");
+
+        String eventID = getIntent().getStringExtra("eventID");
+        Log.d("eventId ", eventID + "!!!!");
 
         setContentView(R.layout.activity_event);
 
-        if(cameFrom != null) {
+
+            //for clarity's sake, cameFrom will only not be null if came from hosted events
             if (cameFrom.equals("hosted")) {
                 setContentView(R.layout.activity_myeventdetails);
             }
-        }
+
 
 
         setTitle("A single event ");
@@ -67,15 +79,22 @@ public class EventDetailsActivity extends AppCompatActivity {
         });
 
 
+        myjoinButton = (Button) findViewById(R.id.hostedEventsButton);
+        myHostedEventsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(EventDetailsActivity.this, HostedEventsActivity.class);
+            startActivity(intent);
+        });
+
+
         //go to Home
-        myHomeButton= (Button) findViewById(R.id.homeButton);
+        myHomeButton = (Button) findViewById(R.id.homeButton);
         myHomeButton.setOnClickListener(v -> {
             Intent intent = new Intent(EventDetailsActivity.this, HomeActivity.class);
             startActivity(intent);
         });
 
         //go to myEvents
-        myEventsButton= (Button) findViewById(R.id.myEventsButton);
+        myEventsButton = (Button) findViewById(R.id.myEventsButton);
         myEventsButton.setOnClickListener(v -> {
             Intent intent = new Intent(EventDetailsActivity.this, EventsActivity.class);
             startActivity(intent);
@@ -105,7 +124,32 @@ public class EventDetailsActivity extends AppCompatActivity {
             setTimePicker(view, hourOfDay, minute, endTimeText);
         };
 
+        Log.d("camefrom", "camefrom is " + cameFrom);
+//        Log.d("eventID!! ", eventID);
+
+        if (cameFrom.equals("home") ) {
+            myjoinButton = (Button) findViewById(R.id.joinEventButton);
+            myjoinButton.setOnClickListener(v -> {
+                // Add this user to list of attendees for specified event
+                app.getEventHandler().attendEvent(eventID).getAsync(task -> {
+
+                    if (task.isSuccess()) {
+
+                        Log.d("eventID!! ", eventID);
+
+
+                        Intent intent = new Intent(EventDetailsActivity.this, InviteResultActivity.class);
+                        intent.putExtra("isAttending", true);
+                        intent.putExtra("hostID", task.get().getHost().toString());
+                        startActivity(intent);
+                    }
+                });
+            });
+        }
     }
+
+
+
 
     private void setTimePicker(View view, int hourOfDay, int minute, EditText text) {
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
@@ -125,5 +169,7 @@ public class EventDetailsActivity extends AppCompatActivity {
 
     public void eTimePickerClick(View view) {
         new TimePickerDialog(EventDetailsActivity.this, eTime, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show();
+
     }
+
 }

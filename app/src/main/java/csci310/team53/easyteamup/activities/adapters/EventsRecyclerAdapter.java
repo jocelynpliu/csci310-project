@@ -15,11 +15,13 @@ import org.bson.Document;
 import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
 import csci310.team53.easyteamup.data.Event;
+import csci310.team53.easyteamup.data.Message;
 import csci310.team53.easyteamup.data.User;
 import io.realm.mongodb.mongo.iterable.MongoCursor;
 
@@ -31,7 +33,7 @@ import io.realm.mongodb.mongo.iterable.MongoCursor;
 public class EventsRecyclerAdapter extends RecyclerView.Adapter<EventsRecyclerAdapter.MyViewHolder> {
 
     private final EasyTeamUp app;
-    private final List<Event> events;
+    private List<Event> events;
     private final Context context;
     private final RecyclerViewInterface recyclerViewInterface;
 
@@ -45,13 +47,19 @@ public class EventsRecyclerAdapter extends RecyclerView.Adapter<EventsRecyclerAd
      */
     public EventsRecyclerAdapter(EasyTeamUp app, Context ct, MongoCursor<Event> events, RecyclerViewInterface recyclerViewInterface) {
         this.app = app;
-        this.events = new ArrayList<Event>();
+        this.events= Collections.synchronizedList(new ArrayList<Event>());
         while (events.hasNext()) {
             this.events.add(events.next());
         }
         context = ct;
         this.recyclerViewInterface = recyclerViewInterface;
     }
+
+    public List<Event> getEvents(){
+        return events;
+    }
+
+
 
     /**
      * utilizes home_row.xml object, make a bunch and fills them with passed in data
