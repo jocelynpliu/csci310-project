@@ -61,7 +61,7 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
     private TimePickerDialog.OnTimeSetListener eTime;
     private TimePickerDialog.OnTimeSetListener vTime;
 
-    // times lot layout
+    // time slot layout
     private LinearLayout timeSlotLayout;
     private Map<Pair<String, String>, Integer> timeSlots;
 
@@ -143,7 +143,7 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
 
     // Date and Time Picker code
 
-    public void setTimePicker(View view, int hourOfDay, int minute, EditText text) {
+    private void setTimePicker(View view, int hourOfDay, int minute, EditText text) {
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
         calendar.set(Calendar.MINUTE, minute);
         String format = "hh:mm a";
@@ -247,12 +247,12 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
             // Add event to database
             app.getEventHandler().createEvent(event).getAsync(task -> {
                 if (task.isSuccess()) {
-                    Intent intent = new Intent(this, HomeActivity.class);
-                    startActivity(intent);
+                    finish();
                 } else {
-                    Log.v("Event", task.getError().getErrorMessage());
+                    Log.v("Event", task.getError().getErrorMessage() + task.getError().getErrorType() + task.getError().getErrorCode());
                 }
             });
+
         });
     }
 
