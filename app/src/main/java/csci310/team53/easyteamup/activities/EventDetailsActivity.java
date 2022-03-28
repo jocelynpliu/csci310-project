@@ -70,6 +70,7 @@ public class EventDetailsActivity extends AppCompatActivity {
                 ((EditText) findViewById(R.id.dateText)).setText(event.getDate());
                 ((EditText) findViewById(R.id.startTimeText)).setText(event.getStart());
                 ((EditText) findViewById(R.id.endTimeText)).setText(event.getEnd());
+                ((CheckBox) findViewById(R.id.checkBox)).setChecked(event.isPrivate());
             } else {
                 Log.v("EVENTS", "ERROR: " + task.getError().getErrorMessage());
             }
