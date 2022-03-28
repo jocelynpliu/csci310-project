@@ -4,15 +4,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.bson.types.ObjectId;
 
 import java.util.Arrays;
+import java.util.List;
 
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
+import csci310.team53.easyteamup.data.Event;
 
 /**
  * Displays information after accepting or denying an invitation.
@@ -41,7 +44,22 @@ public class InviteResultActivity extends AppCompatActivity {
         String eventID = prevIntent.getStringExtra("eventID");
 
         // Notify host
-        if (isAttending) {
+
+        if(hostID.equals("NOTIFYattendees")){
+            app.getEventHandler().retrieveEvent(eventID).getAsync(task -> {
+                List<ObjectId> attendees;
+                if (task.isSuccess()) {
+                    Event event = task.get().next();
+                    attendees = event.getAttendees();
+                    app.getMessageHandler().sendMessage(attendees, "The host has edited an event!");
+                } else {
+                    Log.v("EVENTS", "ERROR: " + task.getError().getErrorMessage());
+                }
+            });
+
+
+        }
+        else if (isAttending) {
             app.getMessageHandler().sendMessage(Arrays.asList(new ObjectId(hostID)), "Someone joined your event!");
 //
         } else {

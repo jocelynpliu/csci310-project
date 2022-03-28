@@ -28,6 +28,7 @@ public class EventDetailsActivity extends AppCompatActivity {
 
     private Button myjoinButton;
     private Button myLeaveButton;
+    private Button myConfirmButton;
 
     private EditText dateText;
     private EditText startTimeText;
@@ -170,6 +171,26 @@ public class EventDetailsActivity extends AppCompatActivity {
                         Intent intent = new Intent(EventDetailsActivity.this, InviteResultActivity.class);
                         intent.putExtra("isAttending", false);
                         intent.putExtra("hostID", task.get().getHost().toString());
+                        intent.putExtra("eventID", task.get().getId().toString());
+                        startActivity(intent);
+                    }
+                });
+            });
+        }
+
+        if(cameFrom.equals("hosted")){
+            myConfirmButton = (Button) findViewById(R.id.confirmButton);
+            myLeaveButton.setOnClickListener(v -> {
+                // Add this user to list of attendees for specified event
+                app.getEventHandler().updateEvent(eventID, ).getAsync(task -> {
+
+                    if (task.isSuccess()) {
+
+                        Log.d("eventID!! ", eventID);
+
+                        Intent intent = new Intent(EventDetailsActivity.this, InviteResultActivity.class);
+                        intent.putExtra("isAttending", );
+                        intent.putExtra("hostID", "NOTIFYattendees");
                         intent.putExtra("eventID", task.get().getId().toString());
                         startActivity(intent);
                     }
