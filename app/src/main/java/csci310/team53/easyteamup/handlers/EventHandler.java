@@ -1,5 +1,6 @@
 package csci310.team53.easyteamup.handlers;
 
+import android.util.Log;
 import android.util.Pair;
 
 import org.bson.Document;
@@ -67,6 +68,47 @@ public class EventHandler {
 
     public void createEvent(String hostID, String location, String description, LocalDateTime voteEnd, boolean isPrivate, List<String> invitees) {
         // TODO: Implement
+    }
+
+    /**
+     * Updates the details of an event object in the database.
+     * Pass in null for anything you don't want to update
+     *
+     * @param eventID ID of the event object you are updating.
+     * @param name Event name to be updated
+     * @param desc Event description to be updated
+     * @param location Event location to be updated
+     * @param date Event date to be updated
+     * @param start Event start time to be updated
+     * @param end Event end time to be updated
+     * @param isPrivate Event private status to be updated
+     * @param invitees Event invite list to be updated
+     */
+    public void updateEvent(String eventID, String name, String desc, String location, String date, String start, String end, Boolean isPrivate, List<ObjectId> invitees) {
+        Document findQuery = new Document("_id", new ObjectId(eventID));
+        app.getDatabase().events.findOne(findQuery).getAsync(task -> {
+            if (task.isSuccess()) {
+                Document update = new Document("_id", task.get().getId());
+                if (name != null) { update.append("name", name); }
+                if (desc != null) { update.append("description", desc); }
+                if (location != null) { update.append("location", location); }
+                if (date != null) { update.append("date", date); }
+                if (start != null) { update.append("start", start); }
+                if (end != null) { update.append("end", end); }
+                if (isPrivate != null) { update.append("private", isPrivate); }
+                if (invitees != null) { update.append("invitees", invitees); }
+
+                app.getDatabase().events.updateOne(findQuery, new Document("$set", update)).getAsync(task2 -> {
+                    if (task2.isSuccess()) {
+                        Log.v("Event", "Successfully updated event!");
+                    } else {
+                        Log.v("Event", "ERROR: " + task2.getError().getErrorMessage());
+                    }
+                });
+            } else {
+                Log.v("Event", "ERROR: " + task.getError().getErrorMessage());
+            }
+        });
     }
 
     /**
