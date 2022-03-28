@@ -41,10 +41,7 @@ public class EventDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         EasyTeamUp app = (EasyTeamUp) this.getApplication();
-
-
 
         //if you came from hosted, cameFrom will not be null
         String cameFrom = getIntent().getStringExtra("from");
@@ -55,15 +52,12 @@ public class EventDetailsActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_event);
 
-
-
-            if (cameFrom.equals("hosted")) {
-                setContentView(R.layout.activity_myeventdetails);
-            }
-            else if(cameFrom.equals("attending")){
-                setContentView(R.layout.activity_attending_event);
-            }
-
+        if (cameFrom.equals("hosted")) {
+            setContentView(R.layout.activity_myeventdetails);
+        }
+        else if(cameFrom.equals("attending")){
+            setContentView(R.layout.activity_attending_event);
+        }
 
         app.getEventHandler().retrieveEvent(eventID).getAsync(task -> {
             if (task.isSuccess()) {
@@ -78,7 +72,6 @@ public class EventDetailsActivity extends AppCompatActivity {
                 Log.v("EVENTS", "ERROR: " + task.getError().getErrorMessage());
             }
         });
-
 
         setTitle("A single event ");
 
@@ -97,13 +90,11 @@ public class EventDetailsActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-
         myjoinButton = (Button) findViewById(R.id.hostedEventsButton);
         myHostedEventsButton.setOnClickListener(v -> {
             Intent intent = new Intent(EventDetailsActivity.this, HostedEventsActivity.class);
             startActivity(intent);
         });
-
 
         //go to Home
         myHomeButton = (Button) findViewById(R.id.homeButton);
@@ -144,7 +135,7 @@ public class EventDetailsActivity extends AppCompatActivity {
         };
 
         Log.d("camefrom", "camefrom is " + cameFrom);
-//        Log.d("eventID!! ", eventID);
+//      Log.d("eventID!! ", eventID);
 
         if (cameFrom.equals("home") ) {
             myjoinButton = (Button) findViewById(R.id.joinEventButton);
@@ -155,7 +146,6 @@ public class EventDetailsActivity extends AppCompatActivity {
                     if (task.isSuccess()) {
 
                         Log.d("eventID!! ", eventID);
-
 
                         Intent intent = new Intent(EventDetailsActivity.this, InviteResultActivity.class);
                         intent.putExtra("isAttending", true);
@@ -177,7 +167,6 @@ public class EventDetailsActivity extends AppCompatActivity {
 
                         Log.d("eventID!! ", eventID);
 
-
                         Intent intent = new Intent(EventDetailsActivity.this, InviteResultActivity.class);
                         intent.putExtra("isAttending", false);
                         intent.putExtra("hostID", task.get().getHost().toString());
@@ -187,14 +176,7 @@ public class EventDetailsActivity extends AppCompatActivity {
                 });
             });
         }
-
-
-
-
     }
-
-
-
 
     private void setTimePicker(View view, int hourOfDay, int minute, EditText text) {
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
@@ -216,5 +198,4 @@ public class EventDetailsActivity extends AppCompatActivity {
         new TimePickerDialog(EventDetailsActivity.this, eTime, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show();
 
     }
-
 }

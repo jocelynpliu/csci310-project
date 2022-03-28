@@ -91,6 +91,12 @@ public class HomeActivity extends AppCompatActivity implements RecyclerViewInter
             Intent intent = new Intent(HomeActivity.this, MapsActivity.class);
             startActivity(intent);
         });
+
+        // Signs out of app
+        Button signOut = (Button) findViewById(R.id.userProfileButton);
+        signOut.setOnClickListener(view -> {
+            app.getUserHandler().logout(HomeActivity.this);
+        });
     }
 
     //this is listens to clicks on each row, (each public event displayed)
