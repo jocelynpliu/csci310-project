@@ -35,7 +35,7 @@ import java.util.Map;
 
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
-import csci310.team53.easyteamup.TimeSlotDialog;
+import csci310.team53.easyteamup.activities.dialogs.TimeSlotDialog;
 import csci310.team53.easyteamup.data.Event;
 
 /**

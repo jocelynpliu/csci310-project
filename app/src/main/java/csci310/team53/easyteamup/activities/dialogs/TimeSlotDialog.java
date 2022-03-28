@@ -1,4 +1,4 @@
-package csci310.team53.easyteamup;
+package csci310.team53.easyteamup.activities.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -18,6 +18,8 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+
+import csci310.team53.easyteamup.R;
 
 public class TimeSlotDialog extends AppCompatDialogFragment {
 
