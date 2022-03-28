@@ -67,7 +67,7 @@ public class EventsActivity extends AppCompatActivity implements RecyclerViewInt
 
         //go to My hosted Events
         myHostedEventsButton = (Button) findViewById(R.id.hostedEventsButton);
-        myEventsButton.setOnClickListener(v -> {
+        myHostedEventsButton.setOnClickListener(v -> {
             Intent intent = new Intent(EventsActivity.this, HostedEventsActivity.class);
             startActivity(intent);
         });
