@@ -12,7 +12,6 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.bson.Document;
-import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,7 +20,6 @@ import java.util.List;
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
 import csci310.team53.easyteamup.data.Event;
-import csci310.team53.easyteamup.data.Message;
 import csci310.team53.easyteamup.data.User;
 import io.realm.mongodb.mongo.iterable.MongoCursor;
 
@@ -59,8 +57,6 @@ public class EventsRecyclerAdapter extends RecyclerView.Adapter<EventsRecyclerAd
         return events;
     }
 
-
-
     /**
      * utilizes home_row.xml object, make a bunch and fills them with passed in data
      */
@@ -68,7 +64,7 @@ public class EventsRecyclerAdapter extends RecyclerView.Adapter<EventsRecyclerAd
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.home_row, parent, false);
+        View view = inflater.inflate(R.layout.event_row, parent, false);
         return new EventsRecyclerAdapter.MyViewHolder(view, recyclerViewInterface);
     }
 
@@ -81,9 +77,9 @@ public class EventsRecyclerAdapter extends RecyclerView.Adapter<EventsRecyclerAd
         app.getDatabase().users.findOne(new Document("_id", e.getHost())).getAsync(task -> {
             if (task.isSuccess()) {
                 User user = task.get();
-                holder.myTextView1.setText(e.getName());
-                holder.myTextView2.setText(user.getUsername());
-                holder.myTextView3.setText(e.getStart());
+                holder.eventName.setText(e.getName());
+                holder.host.setText(user.getUsername());
+                holder.date.setText(e.getDate());
             }
         });
     }
@@ -101,18 +97,18 @@ public class EventsRecyclerAdapter extends RecyclerView.Adapter<EventsRecyclerAd
     protected static class MyViewHolder extends RecyclerView.ViewHolder {
 
         private final CardView myCardView;
-        private final TextView myTextView1;
-        private final TextView myTextView2;
-        private final TextView myTextView3;
+        private final TextView eventName;
+        private final TextView host;
+        private final TextView date;
 
         public MyViewHolder(@NonNull View view, RecyclerViewInterface recyclerViewInterface) {
             super(view);
             // Define click listener for the ViewHolder's View
             //myTextView = (TextView) view.findViewById(R.id.homeView);
             myCardView = (CardView) view.findViewById(R.id.cardView);
-            myTextView1 = (TextView) view.findViewById(R.id.homeView);
-            myTextView2 = (TextView) view.findViewById(R.id.hostView);
-            myTextView3 = (TextView) view.findViewById(R.id.dateView);
+            eventName = (TextView) view.findViewById(R.id.event_name);
+            host = (TextView) view.findViewById(R.id.host);
+            date = (TextView) view.findViewById(R.id.date);
 
             Log.d("----- SETTING ON CLICK ", myCardView+ "   -----------------------------------");
             myCardView.setOnClickListener(view1 -> {

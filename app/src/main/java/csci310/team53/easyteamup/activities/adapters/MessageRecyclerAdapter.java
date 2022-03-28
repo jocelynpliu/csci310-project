@@ -12,7 +12,6 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.bson.Document;
-import org.bson.types.ObjectId;
 
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
@@ -60,7 +59,7 @@ public class MessageRecyclerAdapter extends RecyclerView.Adapter<MessageRecycler
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.home_row, parent, false);
+        View view = inflater.inflate(R.layout.message_row, parent, false);
         return new MessageRecyclerAdapter.MyViewHolder(view, recyclerViewInterface);
     }
 
@@ -73,8 +72,8 @@ public class MessageRecyclerAdapter extends RecyclerView.Adapter<MessageRecycler
         app.getDatabase().users.findOne(new Document("_id", msg.getSender())).getAsync(task -> {
             if (task.isSuccess()) {
                 User sender = task.get();
-                holder.myTextView1.setText(sender.getUsername());
-                holder.myTextView2.setText(msg.getContent());
+                holder.author.setText(sender.getUsername());
+                holder.content.setText(msg.getContent());
             }
         });
     }
@@ -86,19 +85,18 @@ public class MessageRecyclerAdapter extends RecyclerView.Adapter<MessageRecycler
 
     /** view holder object goes into adapter object in InboxActivity.java */
     public static class MyViewHolder extends RecyclerView.ViewHolder {
+
         private final CardView myCardView;
-        private final TextView myTextView1;
-        private final TextView myTextView2;
-        private final TextView myTextView3;
+        private final TextView author;
+        private final TextView content;
+        private final TextView date;
 
         public MyViewHolder(@NonNull View view, RecyclerViewInterface recyclerViewInterface) {
             super(view);
-            // Define click listener for the ViewHolder's View
-            // myTextView = (TextView) view.findViewById(R.id.homeView);
             myCardView = (CardView) view.findViewById(R.id.cardView);
-            myTextView1 = (TextView) view.findViewById(R.id.homeView);
-            myTextView2 = (TextView) view.findViewById(R.id.hostView);
-            myTextView3 = (TextView) view.findViewById(R.id.dateView);
+            author = (TextView) view.findViewById(R.id.author);
+            content = (TextView) view.findViewById(R.id.content);
+            date = (TextView) view.findViewById(R.id.date);
 
             Log.d("----- SETTING ON CLICK ", myCardView+ "   -----------------------------------");
             myCardView.setOnClickListener(view1 -> {

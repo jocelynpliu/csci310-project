@@ -25,9 +25,13 @@
         <entry key="..\:/Users/jsnak/Desktop/cs310/Group Project/310Project/app/src/main/res/layout/invite.xml" value="0.5546875" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.144" />
         <entry key="app/src/main/res/layout/activity_createacct.xml" value="0.28249969482421877" />
-        <entry key="app/src/main/res/layout/activity_home.xml" value="0.20923913043478262" />
+        <entry key="app/src/main/res/layout/activity_home.xml" value="0.20037682574728274" />
         <entry key="app/src/main/res/layout/activity_invite.xml" value="0.22509057971014493" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.39243927001953127" />
+        <entry key="app/src/main/res/layout/event_card.xml" value="0.30134332629217625" />
+        <entry key="app/src/main/res/layout/event_row.xml" value="0.18968048095703127" />
+        <entry key="app/src/main/res/layout/home_row.xml" value="0.22509057971014493" />
+        <entry key="app/src/main/res/layout/message_row.xml" value="0.2876973912335824" />
       </map>
     </option>
   </component>
