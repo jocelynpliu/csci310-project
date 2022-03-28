@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -32,6 +33,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
@@ -64,7 +66,6 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
     // time slot layout
     private LinearLayout timeSlotLayout;
     private Map<Pair<String, String>, Integer> timeSlots;
-
     private Calendar calendar;
 
     // users
@@ -117,32 +118,23 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
         // toggle button for showing voting layout
         Switch toggle = (Switch) findViewById(R.id.votingSwitch);
         ConstraintLayout voting = (ConstraintLayout) findViewById(R.id.votingLayout);
-        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    voting.setVisibility(View.VISIBLE);
-                } else {
-                    voting.setVisibility(View.GONE);
-                }
+        toggle.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                voting.setVisibility(View.VISIBLE);
+            } else {
+                voting.setVisibility(View.GONE);
             }
         });
 
         // add time slots button
         addTimeSlotButton = (Button) findViewById(R.id.timeSlotButton);
-        addTimeSlotButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openDialog();
-            }
-        });
+        addTimeSlotButton.setOnClickListener(view -> openDialog());
 
         // getting the LinearLayout where all the time slots will be added to
         timeSlotLayout = (LinearLayout) findViewById(R.id.timeSlotLayout);
-
     }
 
     // Date and Time Picker code
-
     private void setTimePicker(View view, int hourOfDay, int minute, EditText text) {
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
         calendar.set(Calendar.MINUTE, minute);
@@ -190,7 +182,6 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
     /**
      * Opens dialog for adding time slots
      */
-
     public void openDialog() {
         TimeSlotDialog dialog = new TimeSlotDialog();
         dialog.show(getSupportFragmentManager(), "Add time slot");
@@ -221,6 +212,11 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
         final EditText locationBox = (EditText) findViewById(R.id.eventAddress);
         final EditText descriptionBox = (EditText) findViewById(R.id.description);
         final CheckBox isPrivateBox = (CheckBox) findViewById(R.id.checkBox);
+        final List<ObjectId> invitedUserIDs = new ArrayList<ObjectId>();
+        for (String id : invitedUsers) {
+            Log.v("ID", id);
+            //invitedUserIDs.add(new ObjectId(id));
+        }
 
         createEventButton.setOnClickListener(v -> {
             // Create new event
@@ -231,7 +227,7 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
             event.setDescription(descriptionBox.getText().toString());
             event.setHost(new ObjectId(app.getRealm().currentUser().getId()));
             event.setPrivate(isPrivateBox.isChecked());
-            event.setInvitees(new ArrayList<ObjectId>());
+            event.setInvitees(invitedUserIDs);
             event.setDate(dateText.getText().toString());
             event.setStart(startTimeText.getText().toString());
             event.setEnd(endTimeText.getText().toString());
@@ -239,8 +235,8 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
 
             // Check if all event fields are filled out
             if (!event.isValid()) {
-                // TODO: Provide some user feedback with an error message
-                // For example: "You must fill out all form fields to create an event!"
+                // Provide some user feedback with an error message
+                Toast.makeText(CreateEventActivity.this, "You must fill out all fields!", Toast.LENGTH_SHORT).show();
                 return;
             }
 

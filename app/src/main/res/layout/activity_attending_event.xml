@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- @author Jocelyn Liu-->
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/registerTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="?android:attr/actionBarSize"
+            android:enabled="false"
+            android:inputType="none"
+            android:text="View Attending Event"
+            android:textSize="34sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.505"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:inputType="none"
+            android:enabled="false"
+            android:id="@+id/eventName"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="Event name"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.159"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/registerTitleText" />
+
+        <EditText
+            android:inputType="none"
+            android:enabled="false"
+            android:id="@+id/eventAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="Event address"
+
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.159"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/eventName" />
+
+        <EditText
+            android:inputType="none"
+            android:enabled="false"
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="135dp"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Event description"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.98"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/eventAddress" />
+
+
+        <EditText
+            android:id="@+id/dateText"
+            android:layout_width="286dp"
+            android:layout_height="44dp"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:onClick="datePickerClick"
+            android:ems="8"
+            android:hint="Event date"
+            android:inputType="date"
+            android:minHeight="48dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/description" />
+
+        <Button
+            android:id="@+id/date"
+            android:layout_width="52dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:onClick="datePickerClick"
+            app:icon="@drawable/ic_date"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.489"
+            app:layout_constraintStart_toEndOf="@+id/dateText"
+            app:layout_constraintTop_toBottomOf="@+id/description" />
+
+        <EditText
+            android:id="@+id/startTimeText"
+            android:layout_width="286dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:ems="8"
+            android:hint="Start time"
+            android:inputType="date"
+            android:minHeight="48dp"
+            android:onClick="sTimePickerClick"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dateText" />
+
+        <Button
+            android:id="@+id/sTime"
+            android:layout_width="52dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:onClick="sTimePickerClick"
+            app:icon="@drawable/ic_clock"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.51"
+            app:layout_constraintStart_toEndOf="@+id/startTimeText"
+            app:layout_constraintTop_toBottomOf="@+id/dateText" />
+
+        <EditText
+            android:id="@+id/endTimeText"
+            android:layout_width="286dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:ems="8"
+            android:hint="End time"
+            android:inputType="date"
+            android:minHeight="48dp"
+            android:onClick="eTimePickerClick"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/startTimeText" />
+
+        <Button
+            android:id="@+id/eTime"
+            android:layout_width="52dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="12dp"
+            android:onClick="eTimePickerClick"
+            app:icon="@drawable/ic_clock"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.51"
+            app:layout_constraintStart_toEndOf="@+id/endTimeText"
+            app:layout_constraintTop_toBottomOf="@+id/startTimeText" />
+
+        <Button
+            android:id="@+id/leaveEventButton"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:text="Leave Event"
+            app:layout_constraintBottom_toTopOf="@+id/homeButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/endTimeText" />
+
+        <Button
+            android:id="@+id/inboxButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="4dp"
+            android:paddingStart="2dp"
+            android:paddingEnd="2dp"
+            app:icon="@drawable/ic_mail"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/myEventsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="4dp"
+            android:paddingStart="2dp"
+            android:paddingEnd="2dp"
+            app:icon="@drawable/ic_events"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/inboxButton" />
+
+        <Button
+            android:id="@+id/hostedEventsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="4dp"
+            android:paddingStart="2dp"
+            android:paddingEnd="2dp"
+            app:icon="@drawable/ic_host"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/homeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="4dp"
+            android:paddingStart="2dp"
+            android:paddingEnd="2dp"
+            app:icon="@drawable/ic_home"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/myEventsButton" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

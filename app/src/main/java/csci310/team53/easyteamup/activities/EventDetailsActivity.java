@@ -26,6 +26,7 @@ public class EventDetailsActivity extends AppCompatActivity {
     private Button myHomeButton;
 
     private Button myjoinButton;
+    private Button myLeaveButton;
 
     private EditText dateText;
     private EditText startTimeText;
@@ -54,9 +55,12 @@ public class EventDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_event);
 
 
-            //for clarity's sake, cameFrom will only not be null if came from hosted events
+
             if (cameFrom.equals("hosted")) {
                 setContentView(R.layout.activity_myeventdetails);
+            }
+            else if(cameFrom.equals("attending")){
+                setContentView(R.layout.activity_attending_event);
             }
 
 
@@ -146,6 +150,30 @@ public class EventDetailsActivity extends AppCompatActivity {
                 });
             });
         }
+
+        if (cameFrom.equals("attending") ) {
+            myLeaveButton = (Button) findViewById(R.id.leaveEventButton);
+            myLeaveButton.setOnClickListener(v -> {
+                // Add this user to list of attendees for specified event
+                app.getEventHandler().attendEvent(eventID).getAsync(task -> {
+
+                    if (task.isSuccess()) {
+
+                        Log.d("eventID!! ", eventID);
+
+
+                        Intent intent = new Intent(EventDetailsActivity.this, InviteResultActivity.class);
+                        intent.putExtra("isAttending", false);
+                        intent.putExtra("hostID", task.get().getHost().toString());
+                        startActivity(intent);
+                    }
+                });
+            });
+        }
+
+
+
+
     }
 
 

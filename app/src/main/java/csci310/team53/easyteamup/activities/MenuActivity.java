@@ -19,7 +19,6 @@ import java.util.ArrayList;
 
 import csci310.team53.easyteamup.R;
 
-
 /**
  * Search menu launched from CreateEventActivity, allows user to search for users to invite to event.
  *
@@ -27,28 +26,25 @@ import csci310.team53.easyteamup.R;
  */
 public class MenuActivity extends AppCompatActivity {
 
+    private ListView listView;
 
-    ListView listView;
+    private ArrayList<String> users;
+    private ArrayList<String> invitedUsers;
 
-    ArrayList<String> users;
-    ArrayList<String> invitedUsers;
+    private ArrayAdapter<String> arrayAdapter;
 
-    ArrayAdapter<String> arrayAdapter;
-
-    Button inviteButton;
+    private Button inviteButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         // TODO: connect this to the backend
         users = new ArrayList<String>();
-        users.add("Jocelyn");
-        users.add("Justin");
-        users.add("Lauren");
-        users.add("Luke");
-        users.add("Thomas");
-        users.add("Noa");
-        users.add("Viv");
+        users.add("tapeters");
+        users.add("wickedlemon");
+        users.add("jocelynliu");
+        users.add("supakid123");
+        users.add("lolzar");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
@@ -59,27 +55,16 @@ public class MenuActivity extends AppCompatActivity {
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         listView.setItemsCanFocus(false);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                view.setSelected(true);
-            }
-        });
+        listView.setOnItemClickListener((adapterView, view, i, l) -> view.setSelected(true));
 
         inviteButton = (Button) findViewById(R.id.menuInviteButton);
-        inviteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                menuInvite();
-
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra("users", invitedUsers);
-                setResult(Activity.RESULT_OK, resultIntent);
-                finish();
-            }
+        inviteButton.setOnClickListener(view -> {
+            menuInvite();
+            Intent resultIntent = new Intent();
+            resultIntent.putExtra("users", invitedUsers);
+            setResult(Activity.RESULT_OK, resultIntent);
+            finish();
         });
-
-
     }
 
     @Override

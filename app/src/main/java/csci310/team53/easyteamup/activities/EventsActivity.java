@@ -12,9 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
 import csci310.team53.easyteamup.activities.adapters.EventsRecyclerAdapter;
-import csci310.team53.easyteamup.activities.adapters.MessageRecyclerAdapter;
 import csci310.team53.easyteamup.activities.adapters.RecyclerViewInterface;
-import csci310.team53.easyteamup.data.Event;
 
 /**
  * The events screen, displaying events that the user has marked as attending.
@@ -25,8 +23,6 @@ public class EventsActivity extends AppCompatActivity implements RecyclerViewInt
 
     private EasyTeamUp app;
     private RecyclerView eventsRecyclerView;
-
-    private EventsRecyclerAdapter myAdapter;
 
     private Button myEventsButton;
     private Button myHostedEventsButton;
@@ -52,8 +48,7 @@ public class EventsActivity extends AppCompatActivity implements RecyclerViewInt
         // Retrieve events this user is attending from database and display from adapter.
         app.getEventHandler().retrieveAttendingEvents().getAsync(task -> {
             if (task.isSuccess()) {
-                Log.v("Events", "Has Next: " + task.get().hasNext());
-                 myAdapter = new EventsRecyclerAdapter(app, this, task.get(), this);
+                EventsRecyclerAdapter myAdapter = new EventsRecyclerAdapter(app, this, task.get(), this);
                 eventsRecyclerView.setAdapter(myAdapter);
                 eventsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             } else {
@@ -70,7 +65,7 @@ public class EventsActivity extends AppCompatActivity implements RecyclerViewInt
 
         //go to My hosted Events
         myHostedEventsButton = (Button) findViewById(R.id.hostedEventsButton);
-        myHostedEventsButton.setOnClickListener(v -> {
+        myEventsButton.setOnClickListener(v -> {
             Intent intent = new Intent(EventsActivity.this, HostedEventsActivity.class);
             startActivity(intent);
         });
@@ -88,15 +83,8 @@ public class EventsActivity extends AppCompatActivity implements RecyclerViewInt
     // position is index of the notification in the list
     @Override
     public void onItemClick(int position) {
-
         Log.d("---INDEX: " +  String.valueOf(position), "Clicked!!");
-        Event e = myAdapter.getEvents().get(position);
-
-        Log.d("click eventsactivity ", e.getName() + "!!!!!!!!!!");
-
-        Intent intent = new Intent(EventsActivity.this, EventDetailsActivity.class);
-        intent.putExtra("eventID", e.getId().toString());
-
+        Intent intent = new Intent(this, EventDetailsActivity.class);
         startActivity(intent);
     }
 }
