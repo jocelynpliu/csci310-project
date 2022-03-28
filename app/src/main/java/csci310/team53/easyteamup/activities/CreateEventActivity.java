@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Pair;
@@ -21,6 +22,7 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -217,6 +219,7 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
     /**
      * Grabs data from form fields and creates a new Event object in database.
      */
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void createEvent() {
         final EditText nameBox = (EditText) findViewById(R.id.eventName);
         final EditText locationBox = (EditText) findViewById(R.id.eventAddress);
