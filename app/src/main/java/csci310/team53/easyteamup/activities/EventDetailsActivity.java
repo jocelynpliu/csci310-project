@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -188,6 +189,7 @@ public class EventDetailsActivity extends AppCompatActivity {
                 EditText dateV= (EditText) findViewById(R.id.dateText);
                 EditText startV= (EditText) findViewById(R.id.startTimeText);
                 EditText endV = (EditText) findViewById(R.id.endTimeText);
+                CheckBox checkV = (CheckBox) findViewById(R.id.checkBox);
 
                 String titleN = titleV.getText().toString();
                 String locationN = locationV.getText().toString();
@@ -195,8 +197,9 @@ public class EventDetailsActivity extends AppCompatActivity {
                 String dateN = dateV.getText().toString();
                 String startN = startV.getText().toString();
                 String endN = endV.getText().toString();
+                boolean checkN = checkV.isChecked();
 
-                app.getEventHandler().updateEvent(eventID, titleN, locationN, descripN, dateN, startN, endN, null, null);
+                app.getEventHandler().updateEvent(eventID, titleN, locationN, descripN, dateN, startN, endN, checkN, null);
 
                 Intent intent = new Intent(EventDetailsActivity.this, InviteResultActivity.class);
                         intent.putExtra("isAttending", true);
