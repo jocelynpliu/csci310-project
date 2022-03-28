@@ -6,6 +6,7 @@ import android.widget.Button;
 
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
+import csci310.team53.easyteamup.data.Event;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,6 +34,13 @@ public class InviteActivity extends AppCompatActivity {
         String eventID = getIntent().getStringExtra("eventID");
         String senderID = getIntent().getStringExtra("senderID");
         String content = getIntent().getStringExtra("content");
+
+        app.getEventHandler().retrieveEvent(eventID).getAsync(task -> {
+            if (task.isSuccess()) {
+                Event event = task.get().next();
+                // TODO: Fill in activity view stuff here!!
+            }
+        });
 
         //button stuff---------------------------------------
         //go to inbox
