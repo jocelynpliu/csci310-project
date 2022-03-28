@@ -37,12 +37,15 @@ public class InviteResultActivity extends AppCompatActivity {
         Intent prevIntent = getIntent();
         boolean isAttending = prevIntent.getBooleanExtra("isAttending", false);
         String hostID = prevIntent.getStringExtra("hostID");
+        String eventID = prevIntent.getStringExtra("eventID");
 
         // Notify host
         if (isAttending) {
             app.getMessageHandler().sendMessage(Arrays.asList(new ObjectId(hostID)), "Someone joined your event!");
+            app.getEventHandler().attendEvent(eventID);
         } else {
             app.getMessageHandler().sendMessage(Arrays.asList(new ObjectId(hostID)), "Someone denied an invite to your event!");
+            app.getEventHandler().denyEvent(eventID);
         }
 
         // final LayoutInflater factory = getLayoutInflater();

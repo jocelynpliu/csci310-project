@@ -145,6 +145,7 @@ public class EventDetailsActivity extends AppCompatActivity {
                         Intent intent = new Intent(EventDetailsActivity.this, InviteResultActivity.class);
                         intent.putExtra("isAttending", true);
                         intent.putExtra("hostID", task.get().getHost().toString());
+                        intent.putExtra("eventID", task.get().getId().toString());
                         startActivity(intent);
                     }
                 });
@@ -165,6 +166,7 @@ public class EventDetailsActivity extends AppCompatActivity {
                         Intent intent = new Intent(EventDetailsActivity.this, InviteResultActivity.class);
                         intent.putExtra("isAttending", false);
                         intent.putExtra("hostID", task.get().getHost().toString());
+                        intent.putExtra("eventID", task.get().getId().toString());
                         startActivity(intent);
                     }
                 });
