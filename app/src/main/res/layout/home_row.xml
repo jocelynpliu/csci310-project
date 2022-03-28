@@ -43,7 +43,6 @@
 
                     android:layout_weight="1"
 
-                    android:text="Event: "
                     android:textSize="30sp" />
 
                 <TextView
@@ -53,7 +52,6 @@
                     android:layout_marginEnd="13dp"
                     android:layout_marginBottom="2dp"
                     android:layout_weight="1"
-                    android:text="host"
                     android:textSize="20sp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/homeView" />
 
@@ -62,7 +60,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="date"
                     android:textSize="20sp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/homeView" />
 
