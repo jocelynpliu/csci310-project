@@ -18,7 +18,20 @@ public class EventDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        Intent incomingIntent = getIntent();
+        String cameFrom = incomingIntent.getStringExtra("from");
+
         setContentView(R.layout.activity_event);
+
+        if(cameFrom != null) {
+            if (cameFrom.equals("hosted")) {
+                setContentView(R.layout.activity_myeventdetails);
+            }
+        }
+
+
 
         setTitle("A single event ");
 

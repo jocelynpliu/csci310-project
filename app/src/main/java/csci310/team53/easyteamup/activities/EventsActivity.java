@@ -34,6 +34,7 @@ public class EventsActivity extends AppCompatActivity implements RecyclerViewInt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_events);
+
         app = ((EasyTeamUp) this.getApplication());
 
         setTitle("Attending Events");
@@ -86,6 +87,8 @@ public class EventsActivity extends AppCompatActivity implements RecyclerViewInt
     public void onItemClick(int position) {
         Log.d("---INDEX: " +  String.valueOf(position), "Clicked!!");
         Intent intent = new Intent(this, EventDetailsActivity.class);
+
+
         startActivity(intent);
     }
 }

@@ -86,7 +86,9 @@ public class HostedEventsActivity extends AppCompatActivity implements RecyclerV
     @Override
     public void onItemClick(int position) {
         Log.d("---INDEX: " +  String.valueOf(position), "Clicked!!");
-        Intent intent = new Intent(this, EventDetailsActivity.class);
+        Intent intent = new Intent( this, EventDetailsActivity.class);
+        intent.putExtra("from", "hosted");
+
         startActivity(intent);
     }
 }
