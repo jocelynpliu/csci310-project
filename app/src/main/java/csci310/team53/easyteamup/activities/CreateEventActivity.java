@@ -223,39 +223,37 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
             invitees.add(userIDs.get(index));
         }
 
-        createEventButton.setOnClickListener(v -> {
-            // Create new event
-            final Event event = new Event();
-            ObjectId id = new ObjectId();
-            event.setId(id);
-            event.setName(nameBox.getText().toString());
-            event.setLocation(locationBox.getText().toString());
-            event.setDescription(descriptionBox.getText().toString());
-            event.setHost(new ObjectId(app.getRealm().currentUser().getId()));
-            event.setPrivate(isPrivateBox.isChecked());
-            event.setInvitees(invitees);
-            event.setDate(dateText.getText().toString());
-            event.setStart(startTimeText.getText().toString());
-            event.setEnd(endTimeText.getText().toString());
-            //event.setTimeSlots(timeSlots);
+        // Create new event
+        final Event event = new Event();
+        ObjectId id = new ObjectId();
+        event.setId(id);
+        event.setName(nameBox.getText().toString());
+        event.setLocation(locationBox.getText().toString());
+        event.setDescription(descriptionBox.getText().toString());
+        event.setHost(new ObjectId(app.getRealm().currentUser().getId()));
+        event.setPrivate(isPrivateBox.isChecked());
+        event.setInvitees(invitees);
+        event.setDate(dateText.getText().toString());
+        event.setStart(startTimeText.getText().toString());
+        event.setEnd(endTimeText.getText().toString());
+        event.setTimeSlots(timeSlots);
+        Log.v("Event: ", timeSlots.toString());
 
-            // Check if all event fields are filled out
-            if (!event.isValid()) {
-                // Provide some user feedback with an error message
-                Toast.makeText(CreateEventActivity.this, "You must fill out all fields!", Toast.LENGTH_SHORT).show();
-                return;
+        // Check if all event fields are filled out
+        if (!event.isValid()) {
+            // Provide some user feedback with an error message
+            Toast.makeText(CreateEventActivity.this, "You must fill out all fields!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Add event to database
+        app.getEventHandler().createEvent(event).getAsync(task -> {
+            if (task.isSuccess()) {
+                app.getMessageHandler().sendInviteMessage(invitees, id);
+                finish();
+            } else {
+                Log.v("Event", task.getError().getErrorMessage() + task.getError().getErrorType() + task.getError().getErrorCode());
             }
-
-            // Add event to database
-            app.getEventHandler().createEvent(event).getAsync(task -> {
-                if (task.isSuccess()) {
-                    app.getMessageHandler().sendInviteMessage(invitees, id);
-                    finish();
-                } else {
-                    Log.v("Event", task.getError().getErrorMessage() + task.getError().getErrorType() + task.getError().getErrorCode());
-                }
-            });
-
         });
     }
 
