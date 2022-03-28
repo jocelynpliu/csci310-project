@@ -2,6 +2,7 @@ package csci310.team53.easyteamup.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,10 +43,11 @@ public class InviteResultActivity extends AppCompatActivity {
         // Notify host
         if (isAttending) {
             app.getMessageHandler().sendMessage(Arrays.asList(new ObjectId(hostID)), "Someone joined your event!");
-            app.getEventHandler().attendEvent(eventID);
+//            app.getEventHandler().attendEvent(eventID);
         } else {
+            Log.d("NOT ", "ATTENDING------------------");
             app.getMessageHandler().sendMessage(Arrays.asList(new ObjectId(hostID)), "Someone denied an invite to your event!");
-            app.getEventHandler().denyEvent(eventID);
+//            app.getEventHandler().denyEvent(eventID);
         }
 
         // final LayoutInflater factory = getLayoutInflater();

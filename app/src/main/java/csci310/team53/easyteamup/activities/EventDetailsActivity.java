@@ -156,7 +156,7 @@ public class EventDetailsActivity extends AppCompatActivity {
             myLeaveButton = (Button) findViewById(R.id.leaveEventButton);
             myLeaveButton.setOnClickListener(v -> {
                 // Add this user to list of attendees for specified event
-                app.getEventHandler().attendEvent(eventID).getAsync(task -> {
+                app.getEventHandler().denyEvent(eventID).getAsync(task -> {
 
                     if (task.isSuccess()) {
 
