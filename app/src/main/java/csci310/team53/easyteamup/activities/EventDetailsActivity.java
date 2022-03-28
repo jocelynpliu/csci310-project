@@ -17,6 +17,7 @@ import java.util.Locale;
 
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
+import csci310.team53.easyteamup.data.Event;
 
 public class EventDetailsActivity extends AppCompatActivity {
 
@@ -63,6 +64,20 @@ public class EventDetailsActivity extends AppCompatActivity {
                 setContentView(R.layout.activity_attending_event);
             }
 
+
+        app.getEventHandler().retrieveEvent(eventID).getAsync(task -> {
+            if (task.isSuccess()) {
+                Event event = task.get().next();
+                ((EditText) findViewById(R.id.eventName)).setText(event.getName());
+                ((EditText) findViewById(R.id.eventAddress)).setText(event.getLocation());
+                ((EditText) findViewById(R.id.description)).setText(event.getDescription());
+                ((EditText) findViewById(R.id.dateText)).setText(event.getDate());
+                ((EditText) findViewById(R.id.startTimeText)).setText(event.getStart());
+                ((EditText) findViewById(R.id.endTimeText)).setText(event.getEnd());
+            } else {
+                Log.v("EVENTS", "ERROR: " + task.getError().getErrorMessage());
+            }
+        });
 
 
         setTitle("A single event ");

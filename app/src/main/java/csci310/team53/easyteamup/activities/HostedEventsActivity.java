@@ -13,6 +13,7 @@ import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
 import csci310.team53.easyteamup.activities.adapters.EventsRecyclerAdapter;
 import csci310.team53.easyteamup.activities.adapters.RecyclerViewInterface;
+import csci310.team53.easyteamup.data.Event;
 
 /**
  * The hosted events screen, displaying events that this user is hosting.
@@ -23,6 +24,7 @@ public class HostedEventsActivity extends AppCompatActivity implements RecyclerV
 
     private EasyTeamUp app;
     private RecyclerView myHostedEventsRecyclerView;
+    private EventsRecyclerAdapter myAdapter;
 
     private Button myHostedEventsButton;
     private Button inboxButton;
@@ -49,7 +51,7 @@ public class HostedEventsActivity extends AppCompatActivity implements RecyclerV
         app.getEventHandler().retrieveHostedEvents().getAsync(task -> {
             if (task.isSuccess()) {
                 Log.v("Events", "Has Next: " + task.get().hasNext());
-                EventsRecyclerAdapter myAdapter = new EventsRecyclerAdapter(app, this, task.get(), this);
+                myAdapter = new EventsRecyclerAdapter(app, this, task.get(), this);
                 myHostedEventsRecyclerView.setAdapter(myAdapter);
                 myHostedEventsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             } else {
@@ -86,8 +88,11 @@ public class HostedEventsActivity extends AppCompatActivity implements RecyclerV
     @Override
     public void onItemClick(int position) {
         Log.d("---INDEX: " +  String.valueOf(position), "Clicked!!");
+        Event e = myAdapter.getEvents().get(position);
+
         Intent intent = new Intent( HostedEventsActivity.this, EventDetailsActivity.class);
         intent.putExtra("from", "hosted");
+        intent.putExtra("eventID", e.getId().toString());
 
         startActivity(intent);
     }
