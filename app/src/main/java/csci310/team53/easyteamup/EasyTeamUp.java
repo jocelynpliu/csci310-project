@@ -6,6 +6,7 @@ import csci310.team53.easyteamup.handlers.DatabaseHandler;
 import csci310.team53.easyteamup.handlers.EventHandler;
 import csci310.team53.easyteamup.handlers.MessageHandler;
 import csci310.team53.easyteamup.handlers.UserHandler;
+import csci310.team53.easyteamup.handlers.VotingHandler;
 import io.realm.Realm;
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
@@ -24,6 +25,7 @@ public class EasyTeamUp extends Application {
     private EventHandler eventHandler;
     private MessageHandler messageHandler;
     private DatabaseHandler databaseHandler;
+    private VotingHandler votingHandler;
 
     /**
      * Initializes all necessary handlers and database management.
@@ -41,6 +43,7 @@ public class EasyTeamUp extends Application {
         userHandler = new UserHandler(this);
         eventHandler = new EventHandler(this);
         messageHandler = new MessageHandler(this);
+        votingHandler = new VotingHandler(this);
     }
 
     /**
@@ -91,5 +94,13 @@ public class EasyTeamUp extends Application {
      */
     public MessageHandler getMessageHandler() {
         return messageHandler;
+    }
+
+    /**
+     * Getter for voting handler instance.
+     * @return voting handler
+     */
+    public VotingHandler getVotingHandler() {
+        return votingHandler;
     }
 }
