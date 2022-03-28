@@ -48,7 +48,6 @@ public class EventsActivity extends AppCompatActivity implements RecyclerViewInt
         // Retrieve events this user is attending from database and display from adapter.
         app.getEventHandler().retrieveAttendingEvents().getAsync(task -> {
             if (task.isSuccess()) {
-                Log.v("Events", "Has Next: " + task.get().hasNext());
                 EventsRecyclerAdapter myAdapter = new EventsRecyclerAdapter(app, this, task.get(), this);
                 eventsRecyclerView.setAdapter(myAdapter);
                 eventsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -86,9 +85,6 @@ public class EventsActivity extends AppCompatActivity implements RecyclerViewInt
     public void onItemClick(int position) {
         Log.d("---INDEX: " +  String.valueOf(position), "Clicked!!");
         Intent intent = new Intent(this, EventDetailsActivity.class);
-
-
-
         startActivity(intent);
     }
 }
