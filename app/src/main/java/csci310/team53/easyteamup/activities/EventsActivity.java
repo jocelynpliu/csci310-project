@@ -89,6 +89,7 @@ public class EventsActivity extends AppCompatActivity implements RecyclerViewInt
         Intent intent = new Intent(this, EventDetailsActivity.class);
 
 
+
         startActivity(intent);
     }
 }
