@@ -47,8 +47,55 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
         Log.d("inside", "mapsactitivy------------------------------------");
 
-//        binding = ActivityMapsBinding.inflate(getLayoutInflater());
 
+
+
+
+        app = (EasyTeamUp) this.getApplication();
+
+        app.getEventHandler().retrievePublicEvents().getAsync(task -> {
+            if (task.isSuccess()) {
+                List<Event> events = new ArrayList<Event>();
+                while(task.get().hasNext()){
+                    Event e = task.get().next();
+
+                    events.add(e);
+                    Log.d("!!!loc", e.getLocation() ) ;
+
+
+                }
+
+                Log.d("!!!SIZXE", String.valueOf(events.size() ) ) ;
+
+                for(Event e :events) {
+                        Log.d("EVENT!!!!! ", e.getName());
+
+                        LatLng address2 = getLocationFromAddress(this, e.getLocation());
+
+                        if(address2 == null){
+                            continue;
+                        }
+
+                        mMap.addMarker(new MarkerOptions().position(address2).title(e.getName()));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(address2));
+                        mMap.animateCamera(CameraUpdateFactory.zoomTo(10.0f));
+
+                        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                            @Override
+                            public void onInfoWindowClick(Marker marker) {
+                                Intent intent1 = new Intent(MapsActivity.this, EventDetailsActivity.class);
+                                String title = marker.getTitle();
+                                intent1.putExtra("eventTitle", title);
+                                startActivity(intent1);
+                            }
+                        });
+
+
+                }
+
+
+            }
+        });
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -56,23 +103,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
 
-        List<Event> events = new ArrayList<Event>();
-        app = (EasyTeamUp) this.getApplication();
-
-
-
-        // Retrieve public events from database and display from adapter.
-        app.getEventHandler().retrievePublicEvents().getAsync(task -> {
-            if (task.isSuccess()) {
-             while(task.get().hasNext()){
-                 events.add((task.get().next()));
-             }
-            }
-        });
-
-        for(Event a: events){
-            Log.d("!!!loc", a.getLocation());
-        }
 
 
 
@@ -122,26 +152,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
 
-        LatLng address = getLocationFromAddress(this, "3911 Figueroa St, Los Angeles, CA 90037") ;
-        mMap.addMarker(new MarkerOptions().position(address).title("Marker "));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(address));
-        mMap.animateCamera( CameraUpdateFactory.zoomTo( 11.0f ) );
-
-        LatLng address2 = getLocationFromAddress(this, "1 World Way, Los Angeles, CA 90045") ;
-        mMap.addMarker(new MarkerOptions().position(address2).title("Marker 2 "));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(address2));
-        mMap.animateCamera( CameraUpdateFactory.zoomTo( 11.0f ) );
-
-
-        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-            @Override
-            public void onInfoWindowClick(Marker marker) {
-                Intent intent1 = new Intent( MapsActivity.this, EventDetailsActivity.class);
-                String title = marker.getTitle();
-                intent1.putExtra("eventTitle", title);
-                startActivity(intent1);
-            }
-        });
+//        LatLng address = getLocationFromAddress(this, "3911 Figueroa St, Los Angeles, CA 90037") ;
+//        mMap.addMarker(new MarkerOptions().position(address).title("Marker "));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(address));
+//        mMap.animateCamera( CameraUpdateFactory.zoomTo( 11.0f ) );
+//
+//        LatLng address2 = getLocationFromAddress(this, "1 World Way, Los Angeles, CA 90045") ;
+//        mMap.addMarker(new MarkerOptions().position(address2).title("Marker 2 "));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(address2));
+//        mMap.animateCamera( CameraUpdateFactory.zoomTo( 11.0f ) );
+//
+//
+//
+//        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+//            @Override
+//            public void onInfoWindowClick(Marker marker) {
+//                Intent intent1 = new Intent( MapsActivity.this, EventDetailsActivity.class);
+//                String title = marker.getTitle();
+//                intent1.putExtra("eventTitle", title);
+//                startActivity(intent1);
+//            }
+//        });
     }
 
     //credit: https://stackoverflow.com/questions/24352192/android-google-maps-add-marker-by-address
