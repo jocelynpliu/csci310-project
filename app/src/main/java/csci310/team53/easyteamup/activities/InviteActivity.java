@@ -2,6 +2,7 @@ package csci310.team53.easyteamup.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -45,6 +46,8 @@ public class InviteActivity extends AppCompatActivity {
                 ((EditText) findViewById(R.id.dateText)).setText(event.getDate());
                 ((EditText) findViewById(R.id.startTimeText)).setText(event.getStart());
                 ((EditText) findViewById(R.id.endTimeText)).setText(event.getEnd());
+            } else {
+                Log.v("EVENTS", "ERROR: " + task.getError().getErrorMessage());
             }
         });
 
@@ -85,7 +88,7 @@ public class InviteActivity extends AppCompatActivity {
                 if (task.isSuccess()) {
                     Intent intent = new Intent(InviteActivity.this, InviteResultActivity.class);
                     intent.putExtra("isAttending", true);
-                    intent.putExtra("hostID", task.get().getHost());
+                    intent.putExtra("hostID", task.get().getHost().toString());
                     startActivity(intent);
                 }
             });
@@ -98,7 +101,7 @@ public class InviteActivity extends AppCompatActivity {
                 if (task.isSuccess()) {
                     Intent intent = new Intent(InviteActivity.this, InviteResultActivity.class);
                     intent.putExtra("isAttending", false);
-                    intent.putExtra("hostID", task.get().getHost());
+                    intent.putExtra("hostID", task.get().getHost().toString());
                     startActivity(intent);
                 }
             });

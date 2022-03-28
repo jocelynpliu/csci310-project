@@ -35,14 +35,14 @@ public class MessageHandler {
      * @param receivers list of user IDs of the users receiving this message.
      * @param content The content body of the message.
      */
-    public void sendMessage(List<String> receivers, String content) {
+    public void sendMessage(List<ObjectId> receivers, String content) {
         ObjectId id = new ObjectId();
         String sender = app.getRealm().currentUser().getId();
         Message message = new Message(id, sender, receivers, content);
         app.getDatabase().messages.insertOne(message).getAsync(task -> {
             if (task.isSuccess()) {
-                for (String userID : receivers) {
-                    Document findQuery = new Document("_id", new ObjectId(userID));
+                for (ObjectId userID : receivers) {
+                    Document findQuery = new Document("_id", new ObjectId(userID.toString()));
                     Document updateQuery = new Document("$push", new Document("messages", id));
                     app.getDatabase().users.findOneAndUpdate(findQuery, updateQuery).getAsync(task2 -> {
                         if (!task2.isSuccess()) {

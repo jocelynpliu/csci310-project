@@ -70,7 +70,7 @@ public class MessageRecyclerAdapter extends RecyclerView.Adapter<MessageRecycler
     @Override
     public void onBindViewHolder(@NonNull MessageRecyclerAdapter.MyViewHolder holder, int position) {
         Message msg = messages.get(position);
-        app.getDatabase().users.findOne(new Document("_id", new ObjectId(msg.getSender()))).getAsync(task -> {
+        app.getDatabase().users.findOne(new Document("_id", msg.getSender())).getAsync(task -> {
             if (task.isSuccess()) {
                 User sender = task.get();
                 holder.myTextView1.setText(sender.getUsername());

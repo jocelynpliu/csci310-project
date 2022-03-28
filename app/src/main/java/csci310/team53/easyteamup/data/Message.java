@@ -1,5 +1,7 @@
 package csci310.team53.easyteamup.data;
 
+import org.bson.codecs.pojo.annotations.BsonId;
+import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
 
 import java.util.List;
@@ -12,11 +14,13 @@ import java.util.List;
  */
 public class Message {
 
+    @BsonProperty("_id")
+    @BsonId
     private ObjectId id;
-    private String sender;
-    private List<String> receivers;
+    private ObjectId sender;
+    private List<ObjectId> receivers;
     private String content;
-    private String event;
+    private ObjectId event;
 
     /**
      * Empty constructor to be used by MongoDB POJO.
@@ -31,9 +35,9 @@ public class Message {
      * @param receivers List of user IDs that have received this message.
      * @param content The content body of the message.
      */
-    public Message(ObjectId id, String sender, List<String> receivers, String content) {
+    public Message(ObjectId id, String sender, List<ObjectId> receivers, String content) {
         this.id = id;
-        this.sender = sender;
+        this.sender = new ObjectId(sender);
         this.receivers = receivers;
         this.content = content;
     }
@@ -47,12 +51,12 @@ public class Message {
      * @param content The content body of the message.
      * @param event The event ID for this invite notification.
      */
-    public Message(ObjectId id, String sender, List<String> receivers, String content, String event) {
+    public Message(ObjectId id, String sender, List<ObjectId> receivers, String content, String event) {
         this.id = id;
-        this.sender = sender;
+        this.sender = new ObjectId(sender);
         this.receivers = receivers;
         this.content = content;
-        this.event = event;
+        this.event = new ObjectId(event);
     }
 
     /**
@@ -62,9 +66,9 @@ public class Message {
      * @param receivers List of user IDs that have received this message.
      * @param content The content body of the message.
      */
-    public Message(String sender, List<String> receivers, String content) {
+    public Message(String sender, List<ObjectId> receivers, String content) {
         this.id = new ObjectId();
-        this.sender = sender;
+        this.sender = new ObjectId(sender);
         this.receivers = receivers;
         this.content = content;
     }
@@ -77,19 +81,19 @@ public class Message {
         this.id = id;
     }
 
-    public String getSender() {
+    public ObjectId getSender() {
         return sender;
     }
 
-    public void setSender(String sender) {
+    public void setSender(ObjectId sender) {
         this.sender = sender;
     }
 
-    public List<String> getReceivers() {
+    public List<ObjectId> getReceivers() {
         return receivers;
     }
 
-    public void setReceivers(List<String> receivers) {
+    public void setReceivers(List<ObjectId> receivers) {
         this.receivers = receivers;
     }
 
@@ -101,11 +105,11 @@ public class Message {
         this.content = content;
     }
 
-    public String getEvent() {
+    public ObjectId getEvent() {
         return event;
     }
 
-    public void setEvent(String event) {
+    public void setEvent(ObjectId event) {
         this.event = event;
     }
 }

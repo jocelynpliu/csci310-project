@@ -70,7 +70,7 @@ public class EventsRecyclerAdapter extends RecyclerView.Adapter<EventsRecyclerAd
     @Override
     public void onBindViewHolder(@NonNull EventsRecyclerAdapter.MyViewHolder holder, int position) {
         Event e = events.get(position);
-        app.getDatabase().users.findOne(new Document("_id", new ObjectId(e.getHost()))).getAsync(task -> {
+        app.getDatabase().users.findOne(new Document("_id", e.getHost())).getAsync(task -> {
             if (task.isSuccess()) {
                 User user = task.get();
                 holder.myTextView1.setText(e.getName());

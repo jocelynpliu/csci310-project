@@ -54,6 +54,7 @@ public class HostedEventsActivity extends AppCompatActivity implements RecyclerV
                 myHostedEventsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             } else {
                 Log.v("Events", "ERROR: " + task.getError().getErrorMessage());
+                Log.v("Events", "ERROR: " + task.getError().getException().getMessage());
             }
         });
 

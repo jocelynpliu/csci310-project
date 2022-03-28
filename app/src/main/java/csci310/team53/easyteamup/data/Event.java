@@ -2,6 +2,8 @@ package csci310.team53.easyteamup.data;
 
 import android.util.Pair;
 
+import org.bson.codecs.pojo.annotations.BsonId;
+import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
 
 import java.time.LocalDateTime;
@@ -17,18 +19,20 @@ import java.util.Map;
  */
 public class Event {
 
+    @BsonProperty("_id")
+    @BsonId
     private ObjectId id;
     private String name;
     private String location;
     private String description;
-    private String host;
+    private ObjectId host;
     private boolean isPrivate;
     private String date;
     private String start;
     private String end;
     private List<ObjectId> invitees;
     private List<ObjectId> attendees;
-    private Map<Pair<String, String>, Integer> timeSlots;
+    //private Map<Pair<String, String>, Integer> timeSlots;
 
     /**
      * Blank constructor to be utilized by MongoDB POJO.
@@ -54,7 +58,7 @@ public class Event {
         this.name = name;
         this.location = location;
         this.description = description;
-        this.host = host;
+        this.host = new ObjectId(host);
         this.isPrivate = isPrivate;
         this.date = date;
         this.start = start;
@@ -71,7 +75,7 @@ public class Event {
         if (name == null || name.isEmpty()) return false;
         if (location == null || location.isEmpty()) return false;
         if (description == null || description.isEmpty()) return false;
-        if (host == null || host.isEmpty()) return false;
+        if (host == null) return false;
         if (date == null || date.isEmpty()) return false;
         if (start == null || start.isEmpty()) return false;
         if (end == null || end.isEmpty()) return false;
@@ -108,11 +112,11 @@ public class Event {
         this.description = description;
     }
 
-    public String getHost() {
+    public ObjectId getHost() {
         return host;
     }
 
-    public void setHost(String host) {
+    public void setHost(ObjectId host) {
         this.host = host;
     }
 
@@ -160,7 +164,7 @@ public class Event {
         this.attendees = attendees;
     }
 
-    public Map<Pair<String, String>, Integer> getTimeSlots() { return timeSlots; }
+    //public Map<Pair<String, String>, Integer> getTimeSlots() { return timeSlots; }
 
-    public void setTimeSlots(Map<Pair<String, String>, Integer> timeSlots) { this.timeSlots = timeSlots; }
+    //public void setTimeSlots(Map<Pair<String, String>, Integer> timeSlots) { this.timeSlots = timeSlots; }
 }

@@ -1,12 +1,9 @@
 package csci310.team53.easyteamup.handlers;
 
-import android.util.Log;
-
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 
 import csci310.team53.easyteamup.EasyTeamUp;
@@ -88,7 +85,7 @@ public class EventHandler {
     public RealmResultTask<Event> attendEvent(String eventID) {
         User user = app.getRealm().currentUser();
         Document findQuery = new Document("_id", new ObjectId(eventID));
-        Document updateQuery = new Document("$push", new Document("attendees", user.getId()));
+        Document updateQuery = new Document("$push", new Document("attendees", new ObjectId(user.getId())));
         return app.getDatabase().events.findOneAndUpdate(findQuery, updateQuery);
     }
 
@@ -100,7 +97,7 @@ public class EventHandler {
     public RealmResultTask<Event> denyEvent(String eventID) {
         User user = app.getRealm().currentUser();
         Document findQuery = new Document("_id", new ObjectId(eventID));
-        Document updateQuery = new Document("$pull", new Document("attendees", user.getId()));
+        Document updateQuery = new Document("$pull", new Document("attendees", new ObjectId(user.getId())));
         return app.getDatabase().events.findOneAndUpdate(findQuery, updateQuery);
     }
 
@@ -111,7 +108,7 @@ public class EventHandler {
      */
     public RealmResultTask<MongoCursor<Event>> retrieveHostedEvents() {
         String id = app.getRealm().currentUser().getId();
-        return app.getDatabase().events.find(new Document("host", id)).sort(new Document("_id", -1)).iterator();
+        return app.getDatabase().events.find(new Document("host", new ObjectId(id))).sort(new Document("_id", -1)).iterator();
     }
 
     /**
@@ -131,7 +128,7 @@ public class EventHandler {
      */
     public RealmResultTask<MongoCursor<Event>> retrieveAttendingEvents() {
         User user = app.getRealm().currentUser();
-        Document queryFilter = new Document("attendees", user.getId());
+        Document queryFilter = new Document("attendees", new ObjectId(user.getId()));
         return app.getDatabase().events.find(queryFilter).iterator();
     }
 

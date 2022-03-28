@@ -217,25 +217,25 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
      * Grabs data from form fields and creates a new Event object in database.
      */
     private void createEvent() {
-        final EditText name = (EditText) findViewById(R.id.eventName);
-        final EditText location = (EditText) findViewById(R.id.eventAddress);
-        final EditText description = (EditText) findViewById(R.id.description);
-        final CheckBox isPrivate = (CheckBox) findViewById(R.id.checkBox);
+        final EditText nameBox = (EditText) findViewById(R.id.eventName);
+        final EditText locationBox = (EditText) findViewById(R.id.eventAddress);
+        final EditText descriptionBox = (EditText) findViewById(R.id.description);
+        final CheckBox isPrivateBox = (CheckBox) findViewById(R.id.checkBox);
 
         createEventButton.setOnClickListener(v -> {
             // Create new event
             final Event event = new Event();
             event.setId(new ObjectId());
-            event.setName(name.getText().toString());
-            event.setLocation(location.getText().toString());
-            event.setDescription(description.getText().toString());
-            event.setHost(app.getRealm().currentUser().getId());
-            event.setPrivate(isPrivate.isChecked());
+            event.setName(nameBox.getText().toString());
+            event.setLocation(locationBox.getText().toString());
+            event.setDescription(descriptionBox.getText().toString());
+            event.setHost(new ObjectId(app.getRealm().currentUser().getId()));
+            event.setPrivate(isPrivateBox.isChecked());
             event.setInvitees(new ArrayList<ObjectId>());
             event.setDate(dateText.getText().toString());
             event.setStart(startTimeText.getText().toString());
             event.setEnd(endTimeText.getText().toString());
-            event.setTimeSlots(timeSlots);
+            //event.setTimeSlots(timeSlots);
 
             // Check if all event fields are filled out
             if (!event.isValid()) {

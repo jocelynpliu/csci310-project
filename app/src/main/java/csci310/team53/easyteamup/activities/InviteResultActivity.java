@@ -6,6 +6,8 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.bson.types.ObjectId;
+
 import java.util.Arrays;
 
 import csci310.team53.easyteamup.EasyTeamUp;
@@ -38,9 +40,9 @@ public class InviteResultActivity extends AppCompatActivity {
 
         // Notify host
         if (isAttending) {
-            app.getMessageHandler().sendMessage(Arrays.asList(hostID), "Someone joined your event!");
+            app.getMessageHandler().sendMessage(Arrays.asList(new ObjectId(hostID)), "Someone joined your event!");
         } else {
-            app.getMessageHandler().sendMessage(Arrays.asList(hostID), "Someone denied an invite to your event!");
+            app.getMessageHandler().sendMessage(Arrays.asList(new ObjectId(hostID)), "Someone denied an invite to your event!");
         }
 
         // final LayoutInflater factory = getLayoutInflater();
