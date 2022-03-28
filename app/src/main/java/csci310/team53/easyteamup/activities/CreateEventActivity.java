@@ -11,7 +11,6 @@ import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Switch;
@@ -43,6 +42,7 @@ import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
 import csci310.team53.easyteamup.activities.dialogs.TimeSlotDialog;
 import csci310.team53.easyteamup.data.Event;
+import csci310.team53.easyteamup.util.TimeSlot;
 
 /**
  * Activity that allows users to enter in details to create an event.
@@ -69,7 +69,7 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
 
     // time slot layout
     private LinearLayout timeSlotLayout;
-    private Map<Pair<String, String>, Integer> timeSlots;
+    private List<TimeSlot> timeSlots;
     private Calendar calendar;
 
     // users
@@ -79,12 +79,13 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
 
     private boolean votingAllowed;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createevent);
 
-        timeSlots = new HashMap<Pair<String, String>, Integer>();
+        timeSlots = new ArrayList<>();
         invitedUsers = new ArrayList<String>();
 
         inviteButton = (Button) findViewById(R.id.inviteButton);
@@ -212,8 +213,7 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
         timeSlotLayout.addView(timeSlotTextView);
 
         // adding to the Event class
-        Pair<String, String> slot = new Pair<>(start, end);
-        timeSlots.put(slot, 0);
+        timeSlots.add(new TimeSlot(start, end));
     }
 
     /**
@@ -245,12 +245,7 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
         event.setDate(dateText.getText().toString());
         event.setStart(startTimeText.getText().toString());
         event.setEnd(endTimeText.getText().toString());
-//        event.setTimeSlots(timeSlots);
-
-        // converting end time to localdate
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm a");
-        LocalDateTime dateTime = LocalDateTime.parse(event.getEnd(), formatter);
-
+        event.setTimeSlots(timeSlots);
 
         // Check if all event fields are filled out
         if (!event.isValid()) {
@@ -262,7 +257,11 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
         // Add event to database
         app.getEventHandler().createEvent(event).getAsync(task -> {
             if (task.isSuccess()) {
-                app.getVotingHandler().startVote(id, dateTime);
+                // converting end time to localdate
+                // TODO: Fix all this
+                //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm a");
+                //LocalDateTime dateTime = LocalDateTime.parse(event.getEnd(), formatter);
+                //app.getVotingHandler().startVote(id, dateTime);
                 app.getMessageHandler().sendInviteMessage(invitees, id);
                 finish();
             } else {

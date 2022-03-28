@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import csci310.team53.easyteamup.util.TimeSlot;
+
 /**
  * Represents an Event in the MongoDB Atlas database.
  * Serializable POJO.
@@ -32,7 +34,7 @@ public class Event {
     private String end;
     private List<ObjectId> invitees;
     private List<ObjectId> attendees;
-    private Map<Pair<String, String>, Integer> timeSlots;
+    private List<TimeSlot> timeSlots;
 
     /**
      * Blank constructor to be utilized by MongoDB POJO.
@@ -52,8 +54,9 @@ public class Event {
      * @param start the start time of the event.
      * @param end the end time of the event.
      * @param invitees the list of invitees (list of user IDs).
+     * @param timeSlots list of time slot objects.
      */
-    public Event(ObjectId id, String name, String location, String description, String host, boolean isPrivate, String date, String start, String end, List<ObjectId> invitees, Map<Pair<String, String>, Integer> timeSlots) {
+    public Event(ObjectId id, String name, String location, String description, String host, boolean isPrivate, String date, String start, String end, List<ObjectId> invitees, List<TimeSlot> timeSlots) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -165,7 +168,7 @@ public class Event {
         this.attendees = attendees;
     }
 
-    public Map<Pair<String, String>, Integer> getTimeSlots() { return timeSlots; }
+    public List<TimeSlot> getTimeSlots() { return timeSlots; }
 
-    public void setTimeSlots(Map<Pair<String, String>, Integer> timeSlots) { this.timeSlots = timeSlots; }
+    public void setTimeSlots(List<TimeSlot> timeSlots) { this.timeSlots = timeSlots; }
 }

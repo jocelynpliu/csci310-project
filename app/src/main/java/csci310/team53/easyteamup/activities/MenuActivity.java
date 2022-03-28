@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -18,8 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;

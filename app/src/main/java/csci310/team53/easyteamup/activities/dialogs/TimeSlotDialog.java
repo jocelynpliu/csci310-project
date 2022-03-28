@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,22 +46,15 @@ public class TimeSlotDialog extends AppCompatDialogFragment {
 
         builder.setView(view);
         builder.setTitle("Add Time Slot");
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+        builder.setNegativeButton("Cancel", (dialogInterface, i) -> {
 
-            }
         });
 
         // ADD button: should add time slot
-        builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                String start = startTimeText.getText().toString();
-                String end = endTimeText.getText().toString();
-
-                listener.addSlot(start, end);
-            }
+        builder.setPositiveButton("Add", (dialogInterface, i) -> {
+            String start = startTimeText.getText().toString();
+            String end = endTimeText.getText().toString();
+            listener.addSlot(start, end);
         });
 
         calendar = Calendar.getInstance();
@@ -81,21 +73,11 @@ public class TimeSlotDialog extends AppCompatDialogFragment {
             setTimePicker(v, hourOfDay, minute, endTimeText);
         };
 
+        startTimeButton.setOnClickListener(view1 ->
+                new TimePickerDialog(getActivity(), d_sTime, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show());
 
-        startTimeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new TimePickerDialog(getActivity(), d_sTime, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show();
-            }
-        });
-
-        endTimeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new TimePickerDialog(getActivity(), d_eTime, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show();
-            }
-        });
-
+        endTimeButton.setOnClickListener(view12 ->
+                new TimePickerDialog(getActivity(), d_eTime, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show());
 
         return builder.create();
     }
