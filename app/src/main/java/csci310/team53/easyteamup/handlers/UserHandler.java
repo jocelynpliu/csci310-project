@@ -115,11 +115,11 @@ public class UserHandler {
     }
 
     /**
-     * Retrieves all users from the database.
+     * Retrieves all users from the database (in alphabetical order).
      * @return an async task to work with.
      */
     public RealmResultTask<MongoCursor<csci310.team53.easyteamup.data.User>> getAllUsers() {
-        return app.getDatabase().users.find(new Document()).iterator();
+        return app.getDatabase().users.find(new Document()).sort(new Document("username", 1)).iterator();
     }
 
 }
