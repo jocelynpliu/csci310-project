@@ -44,7 +44,7 @@ public class EventDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EasyTeamUp app = (EasyTeamUp) this.getApplication();
 
-        //if you came from hosted, cameFrom will not be null
+
         String cameFrom = getIntent().getStringExtra("from");
         Log.d("cameFrom ", cameFrom + "!!!!");
 
@@ -180,21 +180,46 @@ public class EventDetailsActivity extends AppCompatActivity {
 
         if(cameFrom.equals("hosted")){
             myConfirmButton = (Button) findViewById(R.id.confirmButton);
-            myLeaveButton.setOnClickListener(v -> {
+            myConfirmButton.setOnClickListener(v -> {
                 // Add this user to list of attendees for specified event
-                app.getEventHandler().updateEvent(eventID, ).getAsync(task -> {
+                EditText titleV = (EditText) findViewById(R.id.eventName);
+                EditText locationV= (EditText) findViewById(R.id.eventAddress) ;
+                EditText descripV = (EditText) findViewById(R.id.description);
+                EditText dateV= (EditText) findViewById(R.id.dateText);
+                EditText startV= (EditText) findViewById(R.id.startTimeText);
+                EditText endV = (EditText) findViewById(R.id.endTimeText);
 
-                    if (task.isSuccess()) {
+                String titleN = titleV.getText().toString();
+                String locationN = locationV.getText().toString();
+                String descripN = descripV.getText().toString();
+                String dateN = dateV.getText().toString();
+                String startN = startV.getText().toString();
+                String endN = endV.getText().toString();
 
-                        Log.d("eventID!! ", eventID);
+                app.getEventHandler().updateEvent(eventID, titleN, locationN, descripN, dateN, startN, endN, null, null);
 
-                        Intent intent = new Intent(EventDetailsActivity.this, InviteResultActivity.class);
-                        intent.putExtra("isAttending", );
+                Intent intent = new Intent(EventDetailsActivity.this, InviteResultActivity.class);
+                        intent.putExtra("isAttending", true);
                         intent.putExtra("hostID", "NOTIFYattendees");
-                        intent.putExtra("eventID", task.get().getId().toString());
+                        intent.putExtra("eventID", eventID);
                         startActivity(intent);
-                    }
-                });
+
+//                        .getAsync(task -> {
+//
+//                    if (task.isSuccess()) {
+//
+//                        Log.d("eventID!! ", eventID);
+//
+//                        Intent intent = new Intent(EventDetailsActivity.this, InviteResultActivity.class);
+//                        intent.putExtra("isAttending", true);
+//                        intent.putExtra("hostID", "NOTIFYattendees");
+//                        intent.putExtra("eventID", task.get().getId().toString());
+//                        startActivity(intent);
+//                    }
+//                });
+
+
+
             });
         }
     }

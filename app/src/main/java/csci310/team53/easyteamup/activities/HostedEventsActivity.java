@@ -94,6 +94,7 @@ public class HostedEventsActivity extends AppCompatActivity implements RecyclerV
         intent.putExtra("from", "hosted");
         intent.putExtra("eventID", e.getId().toString());
 
+
         startActivity(intent);
     }
 }

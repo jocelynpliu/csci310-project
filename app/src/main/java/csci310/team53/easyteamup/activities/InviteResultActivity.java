@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -46,6 +47,9 @@ public class InviteResultActivity extends AppCompatActivity {
         // Notify host
 
         if(hostID.equals("NOTIFYattendees")){
+            TextView tv = (TextView)findViewById(R.id.eventTitleTV) ;
+            tv.setText("Invitees have been notified of your changes!");
+
             app.getEventHandler().retrieveEvent(eventID).getAsync(task -> {
                 List<ObjectId> attendees;
                 if (task.isSuccess()) {
