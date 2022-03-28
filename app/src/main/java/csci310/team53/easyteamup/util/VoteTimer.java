@@ -29,7 +29,7 @@ public class VoteTimer implements Runnable {
         Document findQuery = new Document("_id", new ObjectId(eventID));
         app.getDatabase().events.findOneAndUpdate(findQuery, updateQuery).getAsync(task -> {
             if (task.isSuccess()) {
-                // TODO: Anything you wanna do in the callback would be done here.
+                // TODO: Notify users of set time
             }
         });
     }

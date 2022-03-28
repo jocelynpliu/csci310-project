@@ -1,5 +1,12 @@
 package csci310.team53.easyteamup.handlers;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
+import org.bson.types.ObjectId;
+
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.concurrent.Executors;
@@ -25,8 +32,12 @@ public class VotingHandler {
     }
 
     // TODO: Add additional parameters to pass in list of vote slots maybe?
-    public void startVote(String eventID, LocalDateTime voteEnd) {
-        LocalDateTime date = LocalDateTime.of(2018, 6, 17, 18, 30, 0);
-        scheduler.schedule(new VoteTimer(app, eventID), LocalDateTime.now().until(date, ChronoUnit.MINUTES), TimeUnit.MINUTES);
+    public void startVote(ObjectId eventID, LocalDateTime voteEnd) {
+        LocalDateTime now = LocalDateTime.now();
+
+        Duration duration = Duration.between(now, voteEnd);
+        long diff = Math.abs(duration.toMinutes());
+
+        scheduler.schedule(new VoteTimer(app, eventID.toString()), diff, TimeUnit.MINUTES);
     }
 }

@@ -27,6 +27,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import org.bson.types.ObjectId;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -72,6 +74,8 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
     private List<String> users;
     private List<String> invitedUsers;
     private ArrayList<ObjectId> userIDs;
+
+    private boolean votingAllowed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,8 +127,10 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
         toggle.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 voting.setVisibility(View.VISIBLE);
+                votingAllowed = true;
             } else {
                 voting.setVisibility(View.GONE);
+                votingAllowed = false;
             }
         });
 
@@ -236,8 +242,12 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
         event.setDate(dateText.getText().toString());
         event.setStart(startTimeText.getText().toString());
         event.setEnd(endTimeText.getText().toString());
-        event.setTimeSlots(timeSlots);
-        Log.v("Event: ", timeSlots.toString());
+//        event.setTimeSlots(timeSlots);
+
+        // converting end time to localdate
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm a");
+        LocalDateTime dateTime = LocalDateTime.parse(event.getEnd(), formatter);
+
 
         // Check if all event fields are filled out
         if (!event.isValid()) {
@@ -249,6 +259,7 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
         // Add event to database
         app.getEventHandler().createEvent(event).getAsync(task -> {
             if (task.isSuccess()) {
+                app.getVotingHandler().startVote(id, dateTime);
                 app.getMessageHandler().sendInviteMessage(invitees, id);
                 finish();
             } else {
