@@ -12,6 +12,7 @@ import java.util.Map;
 
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.data.Event;
+import csci310.team53.easyteamup.util.TimeSlot;
 import io.realm.mongodb.RealmResultTask;
 import io.realm.mongodb.User;
 import io.realm.mongodb.mongo.iterable.MongoCursor;
@@ -36,7 +37,7 @@ public class EventHandler {
         this.app = app;
     }
 
-    /**
+    /**\
      * Creates a new Event object in the database.
      *
      * @param name Name of the event.
@@ -48,7 +49,7 @@ public class EventHandler {
      * @param invitees List of user IDs of invited guests.
      * @return an async task that you must run .getAsync() on.
      */
-    public RealmResultTask<InsertOneResult> createEvent(String name, String location, String description, String date, String start, String end, boolean isPrivate, List<ObjectId> invitees, Map<Pair<String, String>, Integer> timeSlots) {
+    public RealmResultTask<InsertOneResult> createEvent(String name, String location, String description, String date, String start, String end, boolean isPrivate, List<ObjectId> invitees, List<TimeSlot> timeSlots) {
         ObjectId id = new ObjectId();
         User host = app.getRealm().currentUser();
         Event event = new Event(id, name, location, description, host.getId(), isPrivate, date, start, end, invitees, timeSlots);
