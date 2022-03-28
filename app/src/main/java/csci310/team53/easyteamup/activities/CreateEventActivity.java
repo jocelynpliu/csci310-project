@@ -167,7 +167,6 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
         new TimePickerDialog(CreateEventActivity.this, vTime, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show();
     }
 
-
     // so MenuActivity can return the invited users
     ActivityResultLauncher<Intent> menuResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {

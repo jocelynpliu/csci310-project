@@ -27,7 +27,7 @@ import csci310.team53.easyteamup.R;
  */
 public class MenuActivity extends AppCompatActivity {
 
-    // TODO: connect this to the backend
+
     ListView listView;
 
     ArrayList<String> users;
@@ -39,6 +39,8 @@ public class MenuActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        // TODO: connect this to the backend
         users = new ArrayList<String>();
         users.add("Jocelyn");
         users.add("Justin");
