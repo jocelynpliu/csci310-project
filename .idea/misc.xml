@@ -25,6 +25,8 @@
         <entry key="app/src/main/res/drawable/customborder.xml" value="0.1425" />
         <entry key="app/src/main/res/drawable/ic_clock.xml" value="0.146" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.144" />
+        <entry key="app/src/main/res/drawable/ic_map.xml" value="0.1365" />
+        <entry key="app/src/main/res/drawable/ic_place.xml" value="0.1365" />
         <entry key="app/src/main/res/layout/activity_createacct.xml" value="0.28249969482421877" />
         <entry key="app/src/main/res/layout/activity_createevent.xml" value="0.19313541898791423" />
         <entry key="app/src/main/res/layout/activity_event.xml" value="0.19640299479166667" />

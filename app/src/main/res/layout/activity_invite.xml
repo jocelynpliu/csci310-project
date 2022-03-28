@@ -16,75 +16,58 @@
         android:layout_gravity="center">
 
         <TextView
-            android:textColor="@color/black"
-            android:inputType="none"
-            android:enabled="false"
-            android:id="@+id/registerTitleText"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:text="Invitation"
-            android:textSize="34sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.505"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="?android:attr/actionBarSize"/>
-
-        <EditText
-            android:textColor="@color/black"
-            android:inputType="none"
-            android:enabled="false"
             android:id="@+id/eventName"
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:layout_marginHorizontal="25dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="?actionBarSize"
             android:ems="10"
+            android:gravity="center"
             android:hint="Event name"
-            android:minHeight="48dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.159"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/registerTitleText" />
-
-        <EditText
-            android:textColor="@color/black"
             android:inputType="none"
-            android:enabled="false"
+            android:minHeight="48dp"
+            android:textSize="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.52"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:inputType="none"
             android:id="@+id/eventAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="25dp"
             android:layout_marginTop="16dp"
+            android:textSize="24dp"
             android:ems="10"
             android:hint="Event address"
-
+            android:drawableLeft="@drawable/ic_place"
+            android:drawablePadding="6dp"
+            android:gravity="center_vertical"
             android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.159"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/eventName" />
 
-        <EditText
-            android:textColor="@color/black"
+        <TextView
             android:inputType="none"
-            android:enabled="false"
             android:id="@+id/description"
             android:layout_width="match_parent"
-            android:layout_height="135dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="25dp"
             android:layout_marginTop="16dp"
             android:ems="10"
-            android:gravity="start|top"
+            android:textSize="20dp"
             android:hint="Event description"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.98"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/eventAddress" />
 
 
-        <EditText
+        <TextView
             android:id="@+id/dateText"
             android:layout_width="286dp"
             android:layout_height="44dp"
@@ -96,6 +79,7 @@
             android:hint="Event date"
             android:inputType="date"
             android:minHeight="48dp"
+            android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/description" />
 
@@ -104,7 +88,6 @@
             android:layout_width="52dp"
             android:layout_height="48dp"
             android:layout_marginTop="16dp"
-            android:onClick="datePickerClick"
             app:icon="@drawable/ic_date"
             app:iconGravity="textStart"
             app:iconPadding="0dp"
@@ -113,7 +96,7 @@
             app:layout_constraintStart_toEndOf="@+id/dateText"
             app:layout_constraintTop_toBottomOf="@+id/description" />
 
-        <EditText
+        <TextView
             android:id="@+id/startTimeText"
             android:layout_width="286dp"
             android:layout_height="wrap_content"
@@ -124,6 +107,7 @@
             android:hint="Start time"
             android:inputType="date"
             android:minHeight="48dp"
+            android:textSize="20dp"
             android:onClick="sTimePickerClick"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dateText" />
@@ -133,7 +117,6 @@
             android:layout_width="52dp"
             android:layout_height="48dp"
             android:layout_marginTop="16dp"
-            android:onClick="sTimePickerClick"
             app:icon="@drawable/ic_clock"
             app:iconGravity="textStart"
             app:iconPadding="0dp"
@@ -142,7 +125,7 @@
             app:layout_constraintStart_toEndOf="@+id/startTimeText"
             app:layout_constraintTop_toBottomOf="@+id/dateText" />
 
-        <EditText
+        <TextView
             android:id="@+id/endTimeText"
             android:layout_width="286dp"
             android:layout_height="wrap_content"
@@ -153,6 +136,7 @@
             android:hint="End time"
             android:inputType="date"
             android:minHeight="48dp"
+            android:textSize="20dp"
             android:onClick="eTimePickerClick"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/startTimeText" />
@@ -162,7 +146,6 @@
             android:layout_width="52dp"
             android:layout_height="48dp"
             android:layout_marginTop="12dp"
-            android:onClick="eTimePickerClick"
             app:icon="@drawable/ic_clock"
             app:iconGravity="textStart"
             app:iconPadding="0dp"

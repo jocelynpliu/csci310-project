@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -40,12 +41,12 @@ public class InviteActivity extends AppCompatActivity {
         app.getEventHandler().retrieveEvent(eventID).getAsync(task -> {
             if (task.isSuccess()) {
                 Event event = task.get().next();
-                ((EditText) findViewById(R.id.eventName)).setText(event.getName());
-                ((EditText) findViewById(R.id.eventAddress)).setText(event.getLocation());
-                ((EditText) findViewById(R.id.description)).setText(event.getDescription());
-                ((EditText) findViewById(R.id.dateText)).setText(event.getDate());
-                ((EditText) findViewById(R.id.startTimeText)).setText(event.getStart());
-                ((EditText) findViewById(R.id.endTimeText)).setText(event.getEnd());
+                ((TextView) findViewById(R.id.eventName)).setText(event.getName());
+                ((TextView) findViewById(R.id.eventAddress)).setText(event.getLocation());
+                ((TextView) findViewById(R.id.description)).setText(event.getDescription());
+                ((TextView) findViewById(R.id.dateText)).setText(event.getDate());
+                ((TextView) findViewById(R.id.startTimeText)).setText(event.getStart());
+                ((TextView) findViewById(R.id.endTimeText)).setText(event.getEnd());
             } else {
                 Log.v("EVENTS", "ERROR: " + task.getError().getErrorMessage());
             }
