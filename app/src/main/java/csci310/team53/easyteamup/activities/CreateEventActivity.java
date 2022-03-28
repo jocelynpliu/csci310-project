@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -239,8 +240,8 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
 
             // Check if all event fields are filled out
             if (!event.isValid()) {
-                // TODO: Provide some user feedback with an error message
-                // For example: "You must fill out all form fields to create an event!"
+                // Provide some user feedback with an error message
+                Toast.makeText(CreateEventActivity.this, "You must fill out all fields!", Toast.LENGTH_SHORT).show();
                 return;
             }
 

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -64,15 +65,17 @@ public class LoginActivity extends AppCompatActivity {
      */
     private void login(String username, String password) {
         Callable<Void> success = () -> {
-            Log.v("User", "Logged in successfully");
+            Toast.makeText(LoginActivity.this, "Logged in successfully!", Toast.LENGTH_SHORT).show();
             EasyTeamUp app = ((EasyTeamUp) this.getApplication());
             app.initializeDatabase(app.getUserHandler().getUser());
             openHomeActivity();
             return null;
         };
         Callable<Void> fail = () -> {
-            Log.v("User", "Failed to login");
-            //TODO: Provide some error message that login failed and clear EditText
+            // Provide some error message that login failed and clear EditText
+            usernameInput.setText("");
+            passwordInput.setText("");
+            Toast.makeText(LoginActivity.this, "Invalid username or password!", Toast.LENGTH_SHORT).show();
             return null;
         };
         ((EasyTeamUp) this.getApplication()).getUserHandler().login(username, password, success, fail);

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -59,11 +60,13 @@ public class RegistrationActivity extends AppCompatActivity {
             String username = usernameInput.getText().toString();
             String password = passwordInput.getText().toString();
             if (username.isEmpty() || password.isEmpty()) {
-                // TODO: Display error message saying "must fill in all fields" or something.
+                // Display error message
+                Toast.makeText(RegistrationActivity.this, "All fields must be filled!", Toast.LENGTH_SHORT).show();
                 return;
             }
             if (username.length() < 6 || password.length() < 6) {
-                // TODO: Display error message saying "must be at least 6 characters" or something.
+                // Display error message
+                Toast.makeText(RegistrationActivity.this, "Password must be at least 6 characters!", Toast.LENGTH_SHORT).show();
                 return;
             }
             register(username, password);
