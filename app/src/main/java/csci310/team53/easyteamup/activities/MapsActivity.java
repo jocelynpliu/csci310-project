@@ -76,7 +76,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                         mMap.addMarker(new MarkerOptions().position(address2).title(e.getName()));
                         mMap.moveCamera(CameraUpdateFactory.newLatLng(address2));
-                        mMap.animateCamera(CameraUpdateFactory.zoomTo(10.0f));
+                        mMap.animateCamera(CameraUpdateFactory.zoomTo(13.0f));
 
                         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
                             @Override
