@@ -51,12 +51,12 @@ public class Message {
      * @param content The content body of the message.
      * @param event The event ID for this invite notification.
      */
-    public Message(ObjectId id, String sender, List<ObjectId> receivers, String content, String event) {
+    public Message(ObjectId id, String sender, List<ObjectId> receivers, String content, ObjectId event) {
         this.id = id;
         this.sender = new ObjectId(sender);
         this.receivers = receivers;
         this.content = content;
-        this.event = new ObjectId(event);
+        this.event = event;
     }
 
     /**

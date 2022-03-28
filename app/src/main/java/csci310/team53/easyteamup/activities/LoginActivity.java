@@ -65,7 +65,6 @@ public class LoginActivity extends AppCompatActivity {
      */
     private void login(String username, String password) {
         Callable<Void> success = () -> {
-            Toast.makeText(LoginActivity.this, "Logged in successfully!", Toast.LENGTH_SHORT).show();
             EasyTeamUp app = ((EasyTeamUp) this.getApplication());
             app.initializeDatabase(app.getUserHandler().getUser());
             openHomeActivity();
