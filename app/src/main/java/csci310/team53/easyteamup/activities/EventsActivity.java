@@ -13,6 +13,7 @@ import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
 import csci310.team53.easyteamup.activities.adapters.EventsRecyclerAdapter;
 import csci310.team53.easyteamup.activities.adapters.RecyclerViewInterface;
+import csci310.team53.easyteamup.data.Event;
 
 /**
  * The events screen, displaying events that the user has marked as attending.
@@ -23,6 +24,7 @@ public class EventsActivity extends AppCompatActivity implements RecyclerViewInt
 
     private EasyTeamUp app;
     private RecyclerView eventsRecyclerView;
+    private EventsRecyclerAdapter myAdapter;
 
     private Button myEventsButton;
     private Button myHostedEventsButton;
@@ -48,7 +50,7 @@ public class EventsActivity extends AppCompatActivity implements RecyclerViewInt
         // Retrieve events this user is attending from database and display from adapter.
         app.getEventHandler().retrieveAttendingEvents().getAsync(task -> {
             if (task.isSuccess()) {
-                EventsRecyclerAdapter myAdapter = new EventsRecyclerAdapter(app, this, task.get(), this);
+                 myAdapter = new EventsRecyclerAdapter(app, this, task.get(), this);
                 eventsRecyclerView.setAdapter(myAdapter);
                 eventsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             } else {
@@ -84,7 +86,16 @@ public class EventsActivity extends AppCompatActivity implements RecyclerViewInt
     @Override
     public void onItemClick(int position) {
         Log.d("---INDEX: " +  String.valueOf(position), "Clicked!!");
-        Intent intent = new Intent(this, EventDetailsActivity.class);
+
+        Event e = myAdapter.getEvents().get(position);
+
+        Log.d("click eventsactivity ", e.getName() + "!!!!!!!!!!");
+
+        Intent intent = new Intent(EventsActivity.this, EventDetailsActivity.class);
+        intent.putExtra("eventID", e.getId().toString());
+        intent.putExtra("from", "attending");
+
+
         startActivity(intent);
     }
 }
