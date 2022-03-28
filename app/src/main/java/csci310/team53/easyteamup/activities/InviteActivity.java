@@ -3,6 +3,7 @@ package csci310.team53.easyteamup.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
@@ -38,7 +39,12 @@ public class InviteActivity extends AppCompatActivity {
         app.getEventHandler().retrieveEvent(eventID).getAsync(task -> {
             if (task.isSuccess()) {
                 Event event = task.get().next();
-                // TODO: Fill in activity view stuff here!!
+                ((EditText) findViewById(R.id.eventName)).setText(event.getName());
+                ((EditText) findViewById(R.id.eventAddress)).setText(event.getLocation());
+                ((EditText) findViewById(R.id.description)).setText(event.getDescription());
+                ((EditText) findViewById(R.id.dateText)).setText(event.getDate());
+                ((EditText) findViewById(R.id.startTimeText)).setText(event.getStart());
+                ((EditText) findViewById(R.id.endTimeText)).setText(event.getEnd());
             }
         });
 
