@@ -74,16 +74,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             continue;
                         }
 
-                        mMap.addMarker(new MarkerOptions().position(address2).title(e.getName()));
+                        mMap.addMarker(new MarkerOptions().position(address2).title(e.getName()).snippet(e.getId().toString()) );
                         mMap.moveCamera(CameraUpdateFactory.newLatLng(address2));
                         mMap.animateCamera(CameraUpdateFactory.zoomTo(13.0f));
 
                         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
                             @Override
                             public void onInfoWindowClick(Marker marker) {
+
+                                String snip = marker.getSnippet();
+                                marker.setSnippet("");
+
                                 Intent intent1 = new Intent(MapsActivity.this, EventDetailsActivity.class);
-                                String title = marker.getTitle();
-                                intent1.putExtra("eventTitle", title);
+                               intent1.putExtra("from", "map");
+                               intent1.putExtra("eventID", snip );
+
+
                                 startActivity(intent1);
                             }
                         });

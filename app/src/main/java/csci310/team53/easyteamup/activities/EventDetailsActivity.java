@@ -70,7 +70,11 @@ public class EventDetailsActivity extends AppCompatActivity {
                 ((EditText) findViewById(R.id.dateText)).setText(event.getDate());
                 ((EditText) findViewById(R.id.startTimeText)).setText(event.getStart());
                 ((EditText) findViewById(R.id.endTimeText)).setText(event.getEnd());
-                ((CheckBox) findViewById(R.id.checkBox)).setChecked(event.isPrivate());
+
+                if(cameFrom.equals("hosted")) {
+                    ((CheckBox) findViewById(R.id.checkBox)).setChecked(event.isPrivate());
+                }
+
             } else {
                 Log.v("EVENTS", "ERROR: " + task.getError().getErrorMessage());
             }
@@ -140,7 +144,7 @@ public class EventDetailsActivity extends AppCompatActivity {
         Log.d("camefrom", "camefrom is " + cameFrom);
 //      Log.d("eventID!! ", eventID);
 
-        if (cameFrom.equals("home") ) {
+        if (cameFrom.equals("home") || cameFrom.equals("map") ) {
             myjoinButton = (Button) findViewById(R.id.joinEventButton);
             myjoinButton.setOnClickListener(v -> {
                 // Add this user to list of attendees for specified event
@@ -207,21 +211,6 @@ public class EventDetailsActivity extends AppCompatActivity {
                         intent.putExtra("hostID", "NOTIFYattendees");
                         intent.putExtra("eventID", eventID);
                         startActivity(intent);
-
-//                        .getAsync(task -> {
-//
-//                    if (task.isSuccess()) {
-//
-//                        Log.d("eventID!! ", eventID);
-//
-//                        Intent intent = new Intent(EventDetailsActivity.this, InviteResultActivity.class);
-//                        intent.putExtra("isAttending", true);
-//                        intent.putExtra("hostID", "NOTIFYattendees");
-//                        intent.putExtra("eventID", task.get().getId().toString());
-//                        startActivity(intent);
-//                    }
-//                });
-
 
 
             });
