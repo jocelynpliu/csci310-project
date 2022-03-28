@@ -69,7 +69,9 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
     private Calendar calendar;
 
     // users
+    private List<String> users;
     private List<String> invitedUsers;
+    private ArrayList<ObjectId> userIDs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,7 +168,9 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
                 public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
-                        invitedUsers = (ArrayList<String>) data.getSerializableExtra("users");
+                        users = (ArrayList<String>) data.getSerializableExtra("users");
+                        invitedUsers = (ArrayList<String>) data.getSerializableExtra("invitedUsers");
+                        userIDs = (ArrayList<ObjectId>) data.getSerializableExtra("userIDs");
                     }
                 }
             });
@@ -212,22 +216,24 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
         final EditText locationBox = (EditText) findViewById(R.id.eventAddress);
         final EditText descriptionBox = (EditText) findViewById(R.id.description);
         final CheckBox isPrivateBox = (CheckBox) findViewById(R.id.checkBox);
-        final List<ObjectId> invitedUserIDs = new ArrayList<ObjectId>();
-        for (String id : invitedUsers) {
-            Log.v("ID", id);
-            //invitedUserIDs.add(new ObjectId(id));
+        final List<ObjectId> invitees = new ArrayList<ObjectId>();
+        for (String user : invitedUsers) {
+            int index = users.indexOf(user);
+            Log.v("ID", user + " - " + userIDs.get(index).toString());
+            invitees.add(userIDs.get(index));
         }
 
         createEventButton.setOnClickListener(v -> {
             // Create new event
             final Event event = new Event();
-            event.setId(new ObjectId());
+            ObjectId id = new ObjectId();
+            event.setId(id);
             event.setName(nameBox.getText().toString());
             event.setLocation(locationBox.getText().toString());
             event.setDescription(descriptionBox.getText().toString());
             event.setHost(new ObjectId(app.getRealm().currentUser().getId()));
             event.setPrivate(isPrivateBox.isChecked());
-            event.setInvitees(invitedUserIDs);
+            event.setInvitees(invitees);
             event.setDate(dateText.getText().toString());
             event.setStart(startTimeText.getText().toString());
             event.setEnd(endTimeText.getText().toString());
@@ -243,6 +249,7 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
             // Add event to database
             app.getEventHandler().createEvent(event).getAsync(task -> {
                 if (task.isSuccess()) {
+                    app.getMessageHandler().sendInviteMessage(invitees, id);
                     finish();
                 } else {
                     Log.v("Event", task.getError().getErrorMessage() + task.getError().getErrorType() + task.getError().getErrorCode());

@@ -15,9 +15,15 @@ import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
+import org.bson.types.ObjectId;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
+import csci310.team53.easyteamup.data.User;
 
 /**
  * Search menu launched from CreateEventActivity, allows user to search for users to invite to event.
@@ -28,6 +34,7 @@ public class MenuActivity extends AppCompatActivity {
 
     private ListView listView;
 
+    private ArrayList<ObjectId> userIDs;
     private ArrayList<String> users;
     private ArrayList<String> invitedUsers;
 
@@ -37,33 +44,38 @@ public class MenuActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        // TODO: connect this to the backend
-        users = new ArrayList<String>();
-        users.add("tapeters");
-        users.add("wickedlemon");
-        users.add("jocelynliu");
-        users.add("supakid123");
-        users.add("lolzar");
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        listView = findViewById(R.id.userListView);
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, users);
-        listView.setAdapter(arrayAdapter);
-        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        listView.setItemsCanFocus(false);
+        EasyTeamUp app = (EasyTeamUp) this.getApplication();
+        userIDs = new ArrayList<ObjectId>();
+        users = new ArrayList<String>();
 
-        listView.setOnItemClickListener((adapterView, view, i, l) -> view.setSelected(true));
+        app.getUserHandler().getAllUsers().getAsync(task -> {
+            while (task.get().hasNext()) {
+                User user = task.get().next();
+                users.add(user.getUsername());
+                userIDs.add(user.getId());
+            }
 
-        inviteButton = (Button) findViewById(R.id.menuInviteButton);
-        inviteButton.setOnClickListener(view -> {
-            menuInvite();
-            Intent resultIntent = new Intent();
-            resultIntent.putExtra("users", invitedUsers);
-            setResult(Activity.RESULT_OK, resultIntent);
-            finish();
+            listView = findViewById(R.id.userListView);
+            arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, users);
+            listView.setAdapter(arrayAdapter);
+            listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+            listView.setItemsCanFocus(false);
+
+            listView.setOnItemClickListener((adapterView, view, i, l) -> view.setSelected(true));
+
+            inviteButton = (Button) findViewById(R.id.menuInviteButton);
+            inviteButton.setOnClickListener(view -> {
+                menuInvite();
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("users", users);
+                resultIntent.putExtra("invitedUsers", invitedUsers);
+                resultIntent.putExtra("userIDs", userIDs);
+                setResult(Activity.RESULT_OK, resultIntent);
+                finish();
+            });
         });
     }
 

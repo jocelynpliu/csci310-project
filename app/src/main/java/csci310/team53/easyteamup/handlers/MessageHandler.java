@@ -55,6 +55,32 @@ public class MessageHandler {
     }
 
     /**
+     * Creates a new message and adds it to the receivers' profile.
+     *
+     * @param receivers list of user IDs of the users receiving this message.
+     * @param content The content body of the message.
+     */
+    public void sendInviteMessage(List<ObjectId> receivers, ObjectId eventID) {
+        ObjectId id = new ObjectId();
+        String sender = app.getRealm().currentUser().getId();
+        String content = "You have been invited to an event!";
+        Message message = new Message(id, sender, receivers, content, eventID);
+        app.getDatabase().messages.insertOne(message).getAsync(task -> {
+            if (task.isSuccess()) {
+                for (ObjectId userID : receivers) {
+                    Document findQuery = new Document("_id", new ObjectId(userID.toString()));
+                    Document updateQuery = new Document("$push", new Document("messages", id));
+                    app.getDatabase().users.findOneAndUpdate(findQuery, updateQuery).getAsync(task2 -> {
+                        if (!task2.isSuccess()) {
+                            Log.v("Message", "ERROR: " + task2.getError().getErrorMessage());
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    /**
      * Removes all messages from the current user's inbox.
      * Will keep the messages themselves in the database, just disassociate them from this user.
      */

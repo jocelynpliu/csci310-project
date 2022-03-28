@@ -2,6 +2,8 @@ package csci310.team53.easyteamup.handlers;
 
 import android.util.Log;
 
+import org.bson.Document;
+
 import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -10,7 +12,9 @@ import javax.annotation.Nullable;
 import csci310.team53.easyteamup.EasyTeamUp;
 import io.realm.mongodb.App;
 import io.realm.mongodb.Credentials;
+import io.realm.mongodb.RealmResultTask;
 import io.realm.mongodb.User;
+import io.realm.mongodb.mongo.iterable.MongoCursor;
 
 /**
  * Handles user authentication and methods.
@@ -90,6 +94,14 @@ public class UserHandler {
     @Nullable
     public User getUser() {
         return userRef.get();
+    }
+
+    /**
+     * Retrieves all users from the database.
+     * @return an async task to work with.
+     */
+    public RealmResultTask<MongoCursor<csci310.team53.easyteamup.data.User>> getAllUsers() {
+        return app.getDatabase().users.find(new Document()).iterator();
     }
 
 }
