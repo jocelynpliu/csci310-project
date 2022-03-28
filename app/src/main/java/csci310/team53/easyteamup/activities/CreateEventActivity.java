@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -22,7 +23,9 @@ import org.bson.types.ObjectId;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
@@ -54,6 +57,7 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
 
     // times lot layout
     private LinearLayout timeSlotLayout;
+    private Map<Pair<String, String>, Integer> timeSlots;
 
     private Calendar calendar;
 
@@ -169,15 +173,20 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
     }
 
     /**
-     * adds time slot in a TextView in the layout
+     * adds time slot
      */
     @Override
     public void addSlot(String start, String end) {
+        // adding in the layout
         final LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         final TextView timeSlotTextView = new TextView(this);
         timeSlotTextView.setLayoutParams(lparams);
         timeSlotTextView.setText(start + " to " + end);
         timeSlotLayout.addView(timeSlotTextView);
+
+        // adding to the Event class
+        Pair<String, String> slot = new Pair<>(start, end);
+        timeSlots.put(slot, 0);
     }
 
     /**
@@ -202,6 +211,7 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
             event.setDate(dateText.getText().toString());
             event.setStart(startTimeText.getText().toString());
             event.setEnd(endTimeText.getText().toString());
+            event.setTimeSlots(timeSlots);
 
             // Check if all event fields are filled out
             if (!event.isValid()) {
