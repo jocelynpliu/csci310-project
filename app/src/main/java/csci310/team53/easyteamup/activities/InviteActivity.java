@@ -5,11 +5,11 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
 import csci310.team53.easyteamup.data.Event;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * Shows invite notification details, including an 'accept' and 'deny' button.

@@ -4,9 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
-import csci310.team53.easyteamup.R;
-
 import androidx.appcompat.app.AppCompatActivity;
+
+import csci310.team53.easyteamup.R;
 
 public class EventDetailsActivity extends AppCompatActivity {
 

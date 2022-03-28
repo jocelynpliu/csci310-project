@@ -1,5 +1,6 @@
 package csci310.team53.easyteamup.activities;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -15,6 +16,10 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -62,12 +67,16 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
 
     private Calendar calendar;
 
+    // users
+    private List<String> invitedUsers;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createevent);
 
         timeSlots = new HashMap<Pair<String, String>, Integer>();
+        invitedUsers = new ArrayList<String>();
 
         inviteButton = (Button) findViewById(R.id.inviteButton);
         inviteButton.setOnClickListener(v ->  openMenu());
@@ -159,13 +168,24 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
     }
 
 
+    // so MenuActivity can return the invited users
+    ActivityResultLauncher<Intent> menuResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        invitedUsers = (ArrayList<String>) data.getSerializableExtra("users");
+                    }
+                }
+            });
 
     /**
      * Opens menu to search for users to invite
      */
     public void openMenu() {
         Intent intent = new Intent(this, MenuActivity.class);
-        startActivity(intent);
+        menuResultLauncher.launch(intent);
     }
 
     /**

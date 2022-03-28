@@ -1,7 +1,5 @@
 package csci310.team53.easyteamup.activities;
 
-import androidx.fragment.app.FragmentActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
@@ -10,6 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 
+import androidx.fragment.app.FragmentActivity;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -17,14 +17,12 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-//import android.support.v4.app.Fragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
-
 import csci310.team53.easyteamup.data.Event;
 import csci310.team53.easyteamup.databinding.ActivityMapsBinding;
 
