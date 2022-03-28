@@ -10,7 +10,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -32,7 +34,7 @@ import csci310.team53.easyteamup.data.Event;
  *
  * @author Jocelyn Liu, Thomas Peters
  */
-public class CreateEventActivity extends AppCompatActivity {
+public class CreateEventActivity extends AppCompatActivity implements TimeSlotDialog.DialogListener {
 
     private EasyTeamUp app;
     private Button createEventButton;
@@ -44,11 +46,14 @@ public class CreateEventActivity extends AppCompatActivity {
     private EditText endTimeText;
     private EditText votingTimeText;
 
-
+    // date/time pickers
     private DatePickerDialog.OnDateSetListener date;
     private TimePickerDialog.OnTimeSetListener sTime;
     private TimePickerDialog.OnTimeSetListener eTime;
     private TimePickerDialog.OnTimeSetListener vTime;
+
+    // times lot layout
+    private LinearLayout timeSlotLayout;
 
     private Calendar calendar;
 
@@ -115,6 +120,9 @@ public class CreateEventActivity extends AppCompatActivity {
             }
         });
 
+        // getting the LinearLayout where all the time slots will be added to
+        timeSlotLayout = (LinearLayout) findViewById(R.id.timeSlotLayout);
+
     }
 
     public void setTimePicker(View view, int hourOfDay, int minute, EditText text) {
@@ -158,6 +166,18 @@ public class CreateEventActivity extends AppCompatActivity {
     public void openDialog() {
         TimeSlotDialog dialog = new TimeSlotDialog();
         dialog.show(getSupportFragmentManager(), "Add time slot");
+    }
+
+    /**
+     * adds time slot in a TextView in the layout
+     */
+    @Override
+    public void addSlot(String start, String end) {
+        final LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        final TextView timeSlotTextView = new TextView(this);
+        timeSlotTextView.setLayoutParams(lparams);
+        timeSlotTextView.setText(start + " to " + end);
+        timeSlotLayout.addView(timeSlotTextView);
     }
 
     /**

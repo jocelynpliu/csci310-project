@@ -3,6 +3,7 @@ package csci310.team53.easyteamup;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -30,8 +31,9 @@ public class TimeSlotDialog extends AppCompatDialogFragment {
     private TimePickerDialog.OnTimeSetListener d_sTime;
     private TimePickerDialog.OnTimeSetListener d_eTime;
 
-    private Calendar calendar;
+    private DialogListener listener;
 
+    private Calendar calendar;
 
     @NonNull
     @Override
@@ -49,10 +51,15 @@ public class TimeSlotDialog extends AppCompatDialogFragment {
 
             }
         });
+
+        // ADD button: should add time slot
         builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                String start = startTimeText.getText().toString();
+                String end = endTimeText.getText().toString();
 
+                listener.addSlot(start, end);
             }
         });
 
@@ -91,6 +98,18 @@ public class TimeSlotDialog extends AppCompatDialogFragment {
         return builder.create();
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        try {
+            listener = (DialogListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + "must implement dialog listener");
+        }
+
+    }
+
     public void setTimePicker(View view, int hourOfDay, int minute, EditText text) {
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
         calendar.set(Calendar.MINUTE, minute);
@@ -99,4 +118,7 @@ public class TimeSlotDialog extends AppCompatDialogFragment {
         text.setText(sdf.format(calendar.getTime()));
     }
 
+    public interface DialogListener {
+        void addSlot(String start, String end);
+    }
 }
