@@ -43,19 +43,15 @@ public class CreateEventActivity extends AppCompatActivity {
     private EditText startTimeText;
     private EditText endTimeText;
     private EditText votingTimeText;
-    private EditText dialogSTimeText;
-    private EditText dialogETimeText;
+
 
     private DatePickerDialog.OnDateSetListener date;
     private TimePickerDialog.OnTimeSetListener sTime;
     private TimePickerDialog.OnTimeSetListener eTime;
     private TimePickerDialog.OnTimeSetListener vTime;
 
-    // dialog time pickers
-    private TimePickerDialog.OnTimeSetListener d_sTime;
-    private TimePickerDialog.OnTimeSetListener d_eTime;
-
     private Calendar calendar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,8 +69,7 @@ public class CreateEventActivity extends AppCompatActivity {
         startTimeText = findViewById(R.id.startTimeText);
         endTimeText = findViewById(R.id.endTimeText);
         votingTimeText = findViewById(R.id.votingTimeText);
-        dialogSTimeText = findViewById(R.id.dialogStartTimeText);
-        dialogETimeText = findViewById(R.id.dialogEndTimeText);
+
         calendar = Calendar.getInstance();
 
         date = (view, year, month, day) -> {
@@ -96,14 +91,6 @@ public class CreateEventActivity extends AppCompatActivity {
 
         vTime = (view, hourOfDay, minute) -> {
             setTimePicker(view, hourOfDay, minute, votingTimeText);
-        };
-
-        d_sTime = (view, hourOfDay, minute) -> {
-            setTimePicker(view, hourOfDay, minute, dialogSTimeText);
-        };
-
-        d_eTime = (view, hourOfDay, minute) -> {
-            setTimePicker(view, hourOfDay, minute, dialogETimeText);
         };
 
         // toggle button for showing voting layout
@@ -154,13 +141,7 @@ public class CreateEventActivity extends AppCompatActivity {
         new TimePickerDialog(CreateEventActivity.this, vTime, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show();
     }
 
-    public void dialogSTimePickerClick(View view) {
-        new TimePickerDialog(CreateEventActivity.this, d_sTime, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show();
-    }
 
-    public void dialogETimePickerClick(View view) {
-        new TimePickerDialog(CreateEventActivity.this, d_eTime, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show();
-    }
 
     /**
      * Opens menu to search for users to invite
