@@ -32,7 +32,7 @@ public class Event {
     private String end;
     private List<ObjectId> invitees;
     private List<ObjectId> attendees;
-    //private Map<Pair<String, String>, Integer> timeSlots;
+    private Map<Pair<String, String>, Integer> timeSlots;
 
     /**
      * Blank constructor to be utilized by MongoDB POJO.
@@ -53,7 +53,7 @@ public class Event {
      * @param end the end time of the event.
      * @param invitees the list of invitees (list of user IDs).
      */
-    public Event(ObjectId id, String name, String location, String description, String host, boolean isPrivate, String date, String start, String end, List<ObjectId> invitees) {
+    public Event(ObjectId id, String name, String location, String description, String host, boolean isPrivate, String date, String start, String end, List<ObjectId> invitees, Map<Pair<String, String>, Integer> timeSlots) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -65,6 +65,7 @@ public class Event {
         this.end = end;
         this.invitees = invitees;
         this.attendees = new ArrayList<>();
+        this.timeSlots = timeSlots;
     }
 
     /**
@@ -164,7 +165,7 @@ public class Event {
         this.attendees = attendees;
     }
 
-    //public Map<Pair<String, String>, Integer> getTimeSlots() { return timeSlots; }
+    public Map<Pair<String, String>, Integer> getTimeSlots() { return timeSlots; }
 
-    //public void setTimeSlots(Map<Pair<String, String>, Integer> timeSlots) { this.timeSlots = timeSlots; }
+    public void setTimeSlots(Map<Pair<String, String>, Integer> timeSlots) { this.timeSlots = timeSlots; }
 }

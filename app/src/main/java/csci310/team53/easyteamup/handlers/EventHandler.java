@@ -1,10 +1,13 @@
 package csci310.team53.easyteamup.handlers;
 
+import android.util.Pair;
+
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.data.Event;
@@ -44,10 +47,10 @@ public class EventHandler {
      * @param invitees List of user IDs of invited guests.
      * @return an async task that you must run .getAsync() on.
      */
-    public RealmResultTask<InsertOneResult> createEvent(String name, String location, String description, String date, String start, String end, boolean isPrivate, List<ObjectId> invitees) {
+    public RealmResultTask<InsertOneResult> createEvent(String name, String location, String description, String date, String start, String end, boolean isPrivate, List<ObjectId> invitees, Map<Pair<String, String>, Integer> timeSlots) {
         ObjectId id = new ObjectId();
         User host = app.getRealm().currentUser();
-        Event event = new Event(id, name, location, description, host.getId(), isPrivate, date, start, end, invitees);
+        Event event = new Event(id, name, location, description, host.getId(), isPrivate, date, start, end, invitees, timeSlots);
         return app.getDatabase().events.insertOne(event);
     }
 

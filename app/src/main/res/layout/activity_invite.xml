@@ -13,8 +13,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="500dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="?android:attr/actionBarSize">
+        android:layout_gravity="center">
 
         <TextView
             android:inputType="none"
@@ -27,7 +26,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="?android:attr/actionBarSize"/>
 
         <EditText
             android:inputType="none"
@@ -168,59 +168,6 @@
             app:layout_constraintTop_toBottomOf="@+id/startTimeText" />
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/votingLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:padding="8dp"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <EditText
-                android:id="@+id/votingTimeText"
-                android:layout_width="286dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="25dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:ems="8"
-                android:hint="Allow voting until"
-                android:inputType="date"
-                android:minHeight="48dp"
-                android:onClick="vTimePickerClick"
-                app:layout_constraintStart_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/votingTime"
-                android:layout_width="52dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="16dp"
-                android:onClick="vTimePickerClick"
-                app:icon="@drawable/ic_clock"
-                app:iconGravity="textStart"
-                app:iconPadding="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.479"
-                app:layout_constraintStart_toEndOf="@+id/votingTimeText"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/timeSlotButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:drawableLeft="@android:drawable/ic_input_add"
-                android:text="Add time slot"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/votingTime" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
         <Button
             android:id="@+id/acceptButton"
             android:layout_width="wrap_content"
@@ -228,21 +175,23 @@
             android:layout_marginEnd="11dp"
             android:text="Accept"
             app:layout_constraintBaseline_toBaselineOf="@+id/denyButton"
+            app:layout_constraintTop_toBottomOf="@id/endTimeText"
             app:layout_constraintEnd_toStartOf="@+id/denyButton"
             app:layout_constraintStart_toStartOf="parent" />
+
 
         <Button
             android:id="@+id/denyButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="536dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="27dp"
             android:text="Deny"
             app:layout_constraintBottom_toTopOf="@+id/homeButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/acceptButton"
-            app:layout_constraintTop_toTopOf="parent" />
-
+            app:layout_constraintTop_toBottomOf="@id/endTimeText"
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/inboxButton"
