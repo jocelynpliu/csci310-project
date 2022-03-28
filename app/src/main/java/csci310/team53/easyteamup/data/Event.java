@@ -1,10 +1,13 @@
 package csci310.team53.easyteamup.data;
 
+import android.util.Pair;
+
 import org.bson.types.ObjectId;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Represents an Event in the MongoDB Atlas database.
@@ -25,6 +28,7 @@ public class Event {
     private String end;
     private List<ObjectId> invitees;
     private List<ObjectId> attendees;
+    private Map<Pair<String, String>, Integer> timeSlots;
 
     /**
      * Blank constructor to be utilized by MongoDB POJO.
@@ -155,4 +159,8 @@ public class Event {
     public void setAttendees(List<ObjectId> attendees) {
         this.attendees = attendees;
     }
+
+    public Map<Pair<String, String>, Integer> getTimeSlots() { return timeSlots; }
+
+    public void setTimeSlots(Map<Pair<String, String>, Integer> timeSlots) { this.timeSlots = timeSlots; }
 }
