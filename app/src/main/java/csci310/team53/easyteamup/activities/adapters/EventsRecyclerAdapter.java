@@ -14,17 +14,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
 import csci310.team53.easyteamup.data.Event;
 import csci310.team53.easyteamup.data.User;
 import io.realm.mongodb.mongo.iterable.MongoCursor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * Dynamic data processing for EventsActivity.java
+ * Dynamic data processing for HomeActivity.java
  *
  * @author Justin Nakama, Thomas Peters
  */
@@ -86,11 +86,11 @@ public class EventsRecyclerAdapter extends RecyclerView.Adapter<EventsRecyclerAd
     }
 
     /**
-     * View holder object goes into adapter object in EventsActivity.java
+     * View holder object goes into adapter object in HomeActivity.java
      *
      * @author Justin Nakama
      */
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    protected static class MyViewHolder extends RecyclerView.ViewHolder {
 
         private final CardView myCardView;
         private final TextView myTextView1;
@@ -100,13 +100,13 @@ public class EventsRecyclerAdapter extends RecyclerView.Adapter<EventsRecyclerAd
         public MyViewHolder(@NonNull View view, RecyclerViewInterface recyclerViewInterface) {
             super(view);
             // Define click listener for the ViewHolder's View
-            // myTextView = (TextView) view.findViewById(R.id.homeView);
+            //myTextView = (TextView) view.findViewById(R.id.homeView);
             myCardView = (CardView) view.findViewById(R.id.cardView);
             myTextView1 = (TextView) view.findViewById(R.id.homeView);
             myTextView2 = (TextView) view.findViewById(R.id.hostView);
             myTextView3 = (TextView) view.findViewById(R.id.dateView);
-            Log.d("----- SETTING ON CLICK ", myCardView+ "   -----------------------------------");
 
+            Log.d("----- SETTING ON CLICK ", myCardView+ "   -----------------------------------");
             myCardView.setOnClickListener(view1 -> {
                 if(recyclerViewInterface != null){
                     int position = getAdapterPosition();

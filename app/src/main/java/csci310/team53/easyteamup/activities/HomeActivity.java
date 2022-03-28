@@ -12,7 +12,7 @@ import android.widget.Button;
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
 
-import csci310.team53.easyteamup.activities.adapters.HomeRecyclerAdapter;
+import csci310.team53.easyteamup.activities.adapters.EventsRecyclerAdapter;
 import csci310.team53.easyteamup.activities.adapters.RecyclerViewInterface;
 
 /**
@@ -50,7 +50,7 @@ public class HomeActivity extends AppCompatActivity implements RecyclerViewInter
         // Retrieve public events from database and display from adapter.
         app.getEventHandler().retrievePublicEvents().getAsync(task -> {
             if (task.isSuccess()) {
-                HomeRecyclerAdapter myAdapter = new HomeRecyclerAdapter (app, this, task.get(), this);
+                EventsRecyclerAdapter myAdapter = new EventsRecyclerAdapter(app, this, task.get(), this);
                 homeRecyclerView.setAdapter(myAdapter);
                 homeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             }

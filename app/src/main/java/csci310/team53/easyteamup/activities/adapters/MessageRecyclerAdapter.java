@@ -14,24 +14,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
-import csci310.team53.easyteamup.data.Event;
+import csci310.team53.easyteamup.data.Message;
 import csci310.team53.easyteamup.data.User;
 import io.realm.mongodb.mongo.iterable.MongoCursor;
 
-/**
- * Dynamic data processing for HomeActivity.java
- *
- * @author Justin Nakama, Thomas Peters
- */
-public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapter.MyViewHolder> {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class MessageRecyclerAdapter extends RecyclerView.Adapter<MessageRecyclerAdapter.MyViewHolder> {
 
     private final EasyTeamUp app;
-    private final List<Event> events;
+    private final List<Message> messages;
     private final Context context;
     private final RecyclerViewInterface recyclerViewInterface;
 
@@ -40,17 +36,21 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
      *
      * @param app reference to EasyTeamUp main application class
      * @param ct context
-     * @param events iterator of retrieved events
+     * @param messages iterator of retrieved messages
      * @param recyclerViewInterface recycler view interface
      */
-    public HomeRecyclerAdapter(EasyTeamUp app, Context ct, MongoCursor<Event> events, RecyclerViewInterface recyclerViewInterface) {
+    public MessageRecyclerAdapter(EasyTeamUp app, Context ct, MongoCursor<Message> messages, RecyclerViewInterface recyclerViewInterface) {
         this.app = app;
-        this.events = new ArrayList<Event>();
-        while (events.hasNext()) {
-            this.events.add(events.next());
+        this.messages = Collections.synchronizedList(new ArrayList<Message>());
+        while (messages.hasNext()) {
+            this.messages.add(messages.next());
         }
         context = ct;
         this.recyclerViewInterface = recyclerViewInterface;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
     }
 
     /**
@@ -61,37 +61,31 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.home_row, parent, false);
-        return new HomeRecyclerAdapter.MyViewHolder(view, recyclerViewInterface);
+        return new MessageRecyclerAdapter.MyViewHolder(view, recyclerViewInterface);
     }
 
     /**
      * This is where the actual event data is displayed on the screen!
      */
     @Override
-    public void onBindViewHolder(@NonNull HomeRecyclerAdapter.MyViewHolder holder, int position) {
-        Event e = events.get(position);
-        app.getDatabase().users.findOne(new Document("_id", new ObjectId(e.getHost()))).getAsync(task -> {
+    public void onBindViewHolder(@NonNull MessageRecyclerAdapter.MyViewHolder holder, int position) {
+        Message msg = messages.get(position);
+        app.getDatabase().users.findOne(new Document("_id", new ObjectId(msg.getSender()))).getAsync(task -> {
             if (task.isSuccess()) {
-                User user = task.get();
-                holder.myTextView1.setText(e.getName());
-                holder.myTextView2.setText(user.getUsername());
-                holder.myTextView3.setText(e.getStart());
+                User sender = task.get();
+                holder.myTextView1.setText(sender.getUsername());
+                holder.myTextView2.setText(msg.getContent());
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return events.size();
+        return messages.size();
     }
 
-    /**
-     * View holder object goes into adapter object in HomeActivity.java
-     *
-     * @author Justin Nakama
-     */
-    protected static class MyViewHolder extends RecyclerView.ViewHolder {
-
+    /** view holder object goes into adapter object in InboxActivity.java */
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
         private final CardView myCardView;
         private final TextView myTextView1;
         private final TextView myTextView2;
@@ -100,7 +94,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
         public MyViewHolder(@NonNull View view, RecyclerViewInterface recyclerViewInterface) {
             super(view);
             // Define click listener for the ViewHolder's View
-            //myTextView = (TextView) view.findViewById(R.id.homeView);
+            // myTextView = (TextView) view.findViewById(R.id.homeView);
             myCardView = (CardView) view.findViewById(R.id.cardView);
             myTextView1 = (TextView) view.findViewById(R.id.homeView);
             myTextView2 = (TextView) view.findViewById(R.id.hostView);
@@ -115,8 +109,10 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
                         recyclerViewInterface.onItemClick(position);
                     }
                 }
+
             });
+
+
         }
     }
 }
-

@@ -12,7 +12,7 @@ import android.widget.Button;
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
 
-import csci310.team53.easyteamup.activities.adapters.HostedEventsRecyclerAdapter;
+import csci310.team53.easyteamup.activities.adapters.EventsRecyclerAdapter;
 import csci310.team53.easyteamup.activities.adapters.RecyclerViewInterface;
 
 /**
@@ -50,7 +50,7 @@ public class HostedEventsActivity extends AppCompatActivity implements RecyclerV
         app.getEventHandler().retrieveHostedEvents().getAsync(task -> {
             if (task.isSuccess()) {
                 Log.v("Events", "Has Next: " + task.get().hasNext());
-                HostedEventsRecyclerAdapter myAdapter = new HostedEventsRecyclerAdapter(app, this, task.get(), this);
+                EventsRecyclerAdapter myAdapter = new EventsRecyclerAdapter(app, this, task.get(), this);
                 myHostedEventsRecyclerView.setAdapter(myAdapter);
                 myHostedEventsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             } else {

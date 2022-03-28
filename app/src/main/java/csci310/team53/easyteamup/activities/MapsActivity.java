@@ -1,15 +1,12 @@
 package csci310.team53.easyteamup.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
-import android.provider.CalendarContract;
 import android.util.Log;
 import android.widget.Button;
 
@@ -22,23 +19,14 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 //import android.support.v4.app.Fragment;
 
-import org.bson.Document;
-import org.bson.types.ObjectId;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
 
-import csci310.team53.easyteamup.activities.adapters.HomeRecyclerAdapter;
 import csci310.team53.easyteamup.data.Event;
-import csci310.team53.easyteamup.data.User;
 import csci310.team53.easyteamup.databinding.ActivityMapsBinding;
-import io.realm.RealmResults;
-import io.realm.mongodb.RealmResultTask;
-import io.realm.mongodb.mongo.iterable.MongoCursor;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {

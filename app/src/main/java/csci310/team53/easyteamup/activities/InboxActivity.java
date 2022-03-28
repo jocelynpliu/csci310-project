@@ -16,7 +16,7 @@ import org.bson.types.ObjectId;
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
 
-import csci310.team53.easyteamup.activities.adapters.InboxRecyclerAdapter;
+import csci310.team53.easyteamup.activities.adapters.MessageRecyclerAdapter;
 import csci310.team53.easyteamup.activities.adapters.RecyclerViewInterface;
 import csci310.team53.easyteamup.data.Message;
 
@@ -29,7 +29,7 @@ public class InboxActivity extends AppCompatActivity implements RecyclerViewInte
 
     private EasyTeamUp app;
     private RecyclerView inboxRecyclerView;
-    private InboxRecyclerAdapter myAdapter;
+    private MessageRecyclerAdapter myAdapter;
 
     private Button inboxButton;
     private Button myHomeButton;
@@ -58,7 +58,7 @@ public class InboxActivity extends AppCompatActivity implements RecyclerViewInte
         app.getDatabase().users.find(userQuery).iterator().getAsync(task -> {
             Document query = new Document("_id", new Document("$in", task.get().next().getMessages()));
             app.getDatabase().messages.find(query).iterator().getAsync(task2 -> {
-                myAdapter = new InboxRecyclerAdapter(app, this, task2.get(), this);
+                myAdapter = new MessageRecyclerAdapter(app, this, task2.get(), this);
                 inboxRecyclerView.setAdapter(myAdapter);
                 inboxRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             });
