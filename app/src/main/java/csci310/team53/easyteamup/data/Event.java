@@ -1,15 +1,11 @@
 package csci310.team53.easyteamup.data;
 
-import android.util.Pair;
-
 import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import csci310.team53.easyteamup.util.TimeSlot;
 

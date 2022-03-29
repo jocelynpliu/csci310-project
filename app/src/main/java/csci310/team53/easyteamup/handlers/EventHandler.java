@@ -1,14 +1,12 @@
 package csci310.team53.easyteamup.handlers;
 
 import android.util.Log;
-import android.util.Pair;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.data.Event;

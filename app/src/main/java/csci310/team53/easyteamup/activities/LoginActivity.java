@@ -4,26 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.bson.Document;
-import org.bson.types.ObjectId;
-
 import csci310.team53.easyteamup.R;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Callable;
-
 import csci310.team53.easyteamup.EasyTeamUp;
-import csci310.team53.easyteamup.data.User;
-import io.realm.mongodb.App;
+
+import java.util.concurrent.Callable;
 
 /**
  * Initial activity screen, allows user to login or begin registration.
