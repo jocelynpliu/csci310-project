@@ -33,7 +33,6 @@ public class VotingHandler {
     }
 
     // TODO: Add additional parameters to pass in list of vote slots maybe?
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public void startVote(ObjectId eventID, LocalTime voteEnd) {
         LocalTime now = LocalTime.now();
 

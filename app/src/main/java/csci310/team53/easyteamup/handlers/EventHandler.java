@@ -188,5 +188,4 @@ public class EventHandler {
         return app.getDatabase().events.find(new Document("_id", new ObjectId(eventID))).iterator();
     }
 
-
 }

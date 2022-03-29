@@ -3,17 +3,22 @@ package csci310.team53.easyteamup.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
 import csci310.team53.easyteamup.activities.adapters.EventsRecyclerAdapter;
 import csci310.team53.easyteamup.activities.adapters.RecyclerViewInterface;
 import csci310.team53.easyteamup.data.Event;
+import csci310.team53.easyteamup.util.TimeSlot;
 
 /**
  * The events screen, displaying events that the user has marked as attending.
@@ -30,6 +35,11 @@ public class EventsActivity extends AppCompatActivity implements RecyclerViewInt
     private Button myHostedEventsButton;
     private Button myHomeButton;
     private Button inboxButton;
+
+    private ListView listView;
+    private ArrayAdapter<String> arrayAdapter;
+    private ArrayList<String> timeSlots;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +67,16 @@ public class EventsActivity extends AppCompatActivity implements RecyclerViewInt
                 Log.v("Events", "ERROR: " + task.getError().getErrorMessage());
             }
         });
+
+        // getting timeSlots
+        // TODO: Retrieve time slots and put into an ArrayList<TimeSlot>
+        ArrayList<TimeSlot> timeSlotsObjectList;
+
+        listView = findViewById(R.id.userListView);
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, timeSlots);
+        listView.setAdapter(arrayAdapter);
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        listView.setItemsCanFocus(false);
 
         //go to inbox
         inboxButton = (Button) findViewById(R.id.inboxButton);
