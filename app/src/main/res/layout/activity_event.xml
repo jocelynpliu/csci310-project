@@ -59,7 +59,6 @@
             android:layout_marginTop="16dp"
             android:ems="10"
             android:hint="Event address"
-
             android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.159"
@@ -72,11 +71,11 @@
             android:enabled="false"
             android:id="@+id/description"
             android:layout_width="match_parent"
-            android:layout_height="135dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="25dp"
             android:layout_marginTop="16dp"
             android:ems="10"
-            android:gravity="start|top"
+            android:gravity="center_vertical"
             android:hint="Event description"
 
             app:layout_constraintEnd_toEndOf="parent"
@@ -114,33 +113,128 @@
             app:layout_constraintStart_toEndOf="@+id/dateText"
             app:layout_constraintTop_toBottomOf="@+id/description" />
 
-        <ListView
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/timeConstraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/dateText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:listSelector="#488BC34A"
-            android:id="@+id/timeSlotListView">
-        </ListView>
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/startEndLayout"
+                >
+                <EditText
+                    android:id="@+id/startTimeText"
+                    android:layout_width="286dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="25dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:ems="8"
+                    android:hint="Start time"
+                    android:inputType="date"
+                    android:minHeight="48dp"
+                    android:onClick="sTimePickerClick"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <Button
+                    android:id="@+id/sTime"
+                    android:layout_width="52dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="16dp"
+                    android:onClick="sTimePickerClick"
+                    app:icon="@drawable/ic_clock"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.51"
+                    app:layout_constraintStart_toEndOf="@+id/startTimeText"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/endTimeText"
+                    android:layout_width="286dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="25dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:ems="8"
+                    android:hint="End time"
+                    android:inputType="date"
+                    android:minHeight="48dp"
+                    android:onClick="eTimePickerClick"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/startTimeText" />
+
+                <Button
+                    android:id="@+id/eTime"
+                    android:layout_width="52dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="12dp"
+                    android:onClick="eTimePickerClick"
+                    app:icon="@drawable/ic_clock"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.51"
+                    app:layout_constraintStart_toEndOf="@+id/endTimeText"
+                    app:layout_constraintTop_toBottomOf="@+id/startTimeText" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/votingConstraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                >
+                <TextView
+                    android:id="@+id/voteTitleText"
+                    android:ems="8"
+                    android:layout_height="wrap_content"
+                    android:layout_width="286dp"
+                    android:text="Choose a time slot:"
+                    android:padding="16dp"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+                <ListView
+                    android:id="@+id/timeSlotListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/voteTitleText"
+                    android:listSelector="#488BC34A">
+                </ListView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
             android:id="@+id/joinEventButton"
             android:layout_width="250dp"
             android:layout_height="60dp"
+            android:layout_marginTop="16dp"
             android:text="Join Event"
             app:layout_constraintBottom_toTopOf="@+id/homeButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/timeConstraintLayout">
         </Button>
 
         <Button
             android:id="@+id/inboxButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-
             android:layout_marginStart="16dp"
             android:layout_marginBottom="4dp"
             android:paddingStart="2dp"

@@ -6,13 +6,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -42,6 +47,10 @@ public class EventDetailsActivity extends AppCompatActivity {
     private TimePickerDialog.OnTimeSetListener sTime;
     private TimePickerDialog.OnTimeSetListener eTime;
 
+    private ListView listView;
+    private ArrayAdapter<String> arrayAdapter;
+    private ArrayList<String> timeSlots;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +72,8 @@ public class EventDetailsActivity extends AppCompatActivity {
             setContentView(R.layout.activity_attending_event);
         }
 
+
+        // getting time slots
         app.getEventHandler().retrieveEvent(eventID).getAsync(task -> {
             if (task.isSuccess()) {
                 Event event = task.get().next();
@@ -74,8 +85,27 @@ public class EventDetailsActivity extends AppCompatActivity {
                 ((EditText) findViewById(R.id.dateText)).setText(event.getDate());
 
                 if (timeSlots == null) {
-                    //((EditText) findViewById(R.id.startTimeText)).setText(event.getStart());
-                    //((EditText) findViewById(R.id.endTimeText)).setText(event.getEnd());
+                    ((EditText) findViewById(R.id.startTimeText)).setText(event.getStart());
+                    ((EditText) findViewById(R.id.endTimeText)).setText(event.getEnd());
+                    ((ConstraintLayout) findViewById(R.id.votingConstraintLayout)).setVisibility(View.GONE);
+                }
+                else {
+                    ((ConstraintLayout) findViewById(R.id.startEndLayout)).setVisibility(View.GONE);
+
+                    List<String> stringTimeSlots = new ArrayList<String>();
+                    for (int i = 0; i < timeSlots.size(); i++) {
+                        TimeSlot curr = timeSlots.get(i);
+                        stringTimeSlots.add(curr.getStart() + " to " + curr.getEnd());
+                    }
+
+                    Log.v("slots: ", stringTimeSlots.toString());
+
+                    listView = findViewById(R.id.timeSlotListView);
+                    arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, stringTimeSlots);
+                    listView.setAdapter(arrayAdapter);
+                    listView.setItemsCanFocus(false);
+                    listView.setOnItemClickListener((adapterView, view, i, l) -> view.setSelected(true));
+
                 }
 
                 if(cameFrom.equals("hosted")) {
@@ -83,7 +113,6 @@ public class EventDetailsActivity extends AppCompatActivity {
                 }
                 else if (cameFrom.equals("attending")) {
                     // TODO: Display each slot on activity view using recycler
-
                 }
 
             } else {
@@ -91,7 +120,7 @@ public class EventDetailsActivity extends AppCompatActivity {
             }
         });
 
-        setTitle("A single event ");
+        setTitle("Event");
 
         //button stuff---------------------------------------
         //go to inbox
