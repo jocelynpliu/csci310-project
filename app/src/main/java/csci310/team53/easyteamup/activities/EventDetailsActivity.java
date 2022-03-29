@@ -206,8 +206,7 @@ public class EventDetailsActivity extends AppCompatActivity {
                 });
 
                 // checked time slot
-                // TODO: send updated timeSlot list to database
-                List<TimeSlot> updatedTimeSlots = checkedSlot();
+//                List<TimeSlot> updatedTimeSlots = checkedSlot();
 //                app.getEventHandler().updateEvent();
 
             });
@@ -222,9 +221,6 @@ public class EventDetailsActivity extends AppCompatActivity {
                     if (task.isSuccess()) {
 
                         Log.d("eventID!! ", eventID);
-
-
-
                         Intent intent = new Intent(EventDetailsActivity.this, InviteResultActivity.class);
                         intent.putExtra("isAttending", false);
                         intent.putExtra("hostID", task.get().getHost().toString());
