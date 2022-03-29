@@ -127,12 +127,15 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
         // toggle button for showing voting layout
         Switch toggle = (Switch) findViewById(R.id.votingSwitch);
         ConstraintLayout voting = (ConstraintLayout) findViewById(R.id.votingLayout);
+        ConstraintLayout startEnd = (ConstraintLayout) findViewById(R.id.startEndLayout);
         toggle.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 voting.setVisibility(View.VISIBLE);
+                startEnd.setVisibility(View.GONE);
                 votingAllowed = true;
             } else {
                 voting.setVisibility(View.GONE);
+                startEnd.setVisibility(View.VISIBLE);
                 votingAllowed = false;
             }
         });
@@ -219,7 +222,6 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
     /**
      * Grabs data from form fields and creates a new Event object in database.
      */
-    @RequiresApi(api = Build.VERSION_CODES.O)
     private void createEvent() {
         final EditText nameBox = (EditText) findViewById(R.id.eventName);
         final EditText locationBox = (EditText) findViewById(R.id.eventAddress);
@@ -259,9 +261,9 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
             if (task.isSuccess()) {
                 // converting end time to localdate
                 // TODO: Fix all this
-                //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm a");
-                //LocalDateTime dateTime = LocalDateTime.parse(event.getEnd(), formatter);
-                //app.getVotingHandler().startVote(id, dateTime);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm a");
+                LocalDateTime dateTime = LocalDateTime.parse(event.getEnd(), formatter);
+                app.getVotingHandler().startVote(id, dateTime);
                 app.getMessageHandler().sendInviteMessage(invitees, id);
                 finish();
             } else {

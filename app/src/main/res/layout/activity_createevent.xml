@@ -18,7 +18,7 @@
             android:id="@+id/registerTitleText"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="88dp"
             android:text="Create an Event"
             android:textSize="34sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -100,63 +100,71 @@
             app:layout_constraintStart_toEndOf="@+id/dateText"
             app:layout_constraintTop_toBottomOf="@+id/description" />
 
-        <EditText
-            android:id="@+id/startTimeText"
-            android:layout_width="286dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="25dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:ems="8"
-            android:hint="Start time"
-            android:inputType="date"
-            android:minHeight="48dp"
-            android:onClick="sTimePickerClick"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dateText" />
+            android:id="@+id/startEndLayout"
+            app:layout_constraintTop_toBottomOf="@+id/dateText">
+            <EditText
+                android:id="@+id/startTimeText"
+                android:layout_width="286dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:ems="8"
+                android:hint="Start time"
+                android:inputType="date"
+                android:minHeight="48dp"
+                android:onClick="sTimePickerClick"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                 />
 
-        <Button
-            android:id="@+id/sTime"
-            android:layout_width="52dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="16dp"
-            android:onClick="sTimePickerClick"
-            app:icon="@drawable/ic_clock"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.51"
-            app:layout_constraintStart_toEndOf="@+id/startTimeText"
-            app:layout_constraintTop_toBottomOf="@+id/dateText" />
+            <Button
+                android:id="@+id/sTime"
+                android:layout_width="52dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
+                android:onClick="sTimePickerClick"
+                app:icon="@drawable/ic_clock"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.51"
+                app:layout_constraintStart_toEndOf="@+id/startTimeText"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/endTimeText"
-            android:layout_width="286dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="25dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:ems="8"
-            android:hint="End time"
-            android:inputType="date"
-            android:minHeight="48dp"
-            android:onClick="eTimePickerClick"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/startTimeText" />
+            <EditText
+                android:id="@+id/endTimeText"
+                android:layout_width="286dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:ems="8"
+                android:hint="End time"
+                android:inputType="date"
+                android:minHeight="48dp"
+                android:onClick="eTimePickerClick"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/startTimeText" />
 
-        <Button
-            android:id="@+id/eTime"
-            android:layout_width="52dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="12dp"
-            android:onClick="eTimePickerClick"
-            app:icon="@drawable/ic_clock"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.51"
-            app:layout_constraintStart_toEndOf="@+id/endTimeText"
-            app:layout_constraintTop_toBottomOf="@+id/startTimeText" />
+            <Button
+                android:id="@+id/eTime"
+                android:layout_width="52dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="12dp"
+                android:onClick="eTimePickerClick"
+                app:icon="@drawable/ic_clock"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.51"
+                app:layout_constraintStart_toEndOf="@+id/endTimeText"
+                app:layout_constraintTop_toBottomOf="@+id/startTimeText" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <Switch
             android:id="@+id/votingSwitch"
@@ -166,7 +174,7 @@
             android:text="Allow voting on time slots"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/endTimeText"/>
+            app:layout_constraintTop_toBottomOf="@+id/startEndLayout"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/votingLayout"
