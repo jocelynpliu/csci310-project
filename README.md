@@ -1,5 +1,22 @@
 # CSCI 310 Project - Easy Team Up
 
+1. Unzip the zip file somewhere on your computer, maybe your desktop.
+2. Open Android Studio.
+3. Click "File", then "Open..."
+4. Navigate to where the zip file was unzipped. Click on the folder.
+5. Inside this folder should have two folders. One is called ".idea" and the other is called "310Project"
+6. Click on "310Project". It should open, and display two folders called "app" and "Gradle Scripts"
+7. In Tools > Device Manager, create a device. We used the Pixel 2, with API level 28 "Pie".
+8.  Now in the top left, the "app" module should be selected. If you click the green arrow next to "Pixel 2 API 28", the app should run.
+9. It may take a second to load. You can create an account, or use 
+username: "tapeters"
+password: "mypassword"
+
+Thanks!
+Let me know if you have problems. 
+You can email Justin Nakama at jnakama@usc.edu. 
+
+
 ## 3 main features
 
 ###### Feature 1: View Active Events
