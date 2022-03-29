@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -49,6 +50,7 @@ public class EventDetailsActivity extends AppCompatActivity {
 
     private ListView listView;
     private ArrayAdapter<String> arrayAdapter;
+    List<TimeSlot> timeSlots;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +78,7 @@ public class EventDetailsActivity extends AppCompatActivity {
         app.getEventHandler().retrieveEvent(eventID).getAsync(task -> {
             if (task.isSuccess()) {
                 Event event = task.get().next();
-                List<TimeSlot> timeSlots = event.getTimeSlots();
+                timeSlots = event.getTimeSlots();
 
                 ((EditText) findViewById(R.id.eventName)).setText(event.getName());
                 ((EditText) findViewById(R.id.eventAddress)).setText(event.getLocation());
@@ -190,16 +192,23 @@ public class EventDetailsActivity extends AppCompatActivity {
                 app.getEventHandler().attendEvent(eventID).getAsync(task -> {
 
                     if (task.isSuccess()) {
-
                         Log.d("eventID!! ", eventID);
+
 
                         Intent intent = new Intent(EventDetailsActivity.this, InviteResultActivity.class);
                         intent.putExtra("isAttending", true);
                         intent.putExtra("hostID", task.get().getHost().toString());
                         intent.putExtra("eventID", task.get().getId().toString());
+
                         startActivity(intent);
                     }
                 });
+
+                // checked time slot
+                // TODO: send updated timeSlot list to database
+                List<TimeSlot> updatedTimeSlots = checkedSlot();
+//                app.getEventHandler().updateEvent();
+
             });
         }
 
@@ -212,6 +221,8 @@ public class EventDetailsActivity extends AppCompatActivity {
                     if (task.isSuccess()) {
 
                         Log.d("eventID!! ", eventID);
+
+
 
                         Intent intent = new Intent(EventDetailsActivity.this, InviteResultActivity.class);
                         intent.putExtra("isAttending", false);
@@ -275,5 +286,18 @@ public class EventDetailsActivity extends AppCompatActivity {
     public void eTimePickerClick(View view) {
         new TimePickerDialog(EventDetailsActivity.this, eTime, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show();
 
+    }
+
+    private List<TimeSlot> checkedSlot() {
+        // getting all checked users
+        TimeSlot checkedSlot;
+
+        int checkedIndex = listView.getCheckedItemPosition();
+        checkedSlot = timeSlots.get(checkedIndex);
+        checkedSlot.setVotes(checkedSlot.getVotes() + 1);
+
+        timeSlots.add(checkedIndex, checkedSlot);
+
+        return timeSlots;
     }
 }
