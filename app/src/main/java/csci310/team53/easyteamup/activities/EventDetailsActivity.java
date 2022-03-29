@@ -207,7 +207,17 @@ public class EventDetailsActivity extends AppCompatActivity {
                 // checked time slot
                 // TODO: send updated timeSlot list to database
                 List<TimeSlot> updatedTimeSlots = checkedSlot();
-//                app.getEventHandler().updateEvent();
+                app.getEventHandler().updateEventVotes(eventID, updatedTimeSlots);
+
+
+
+                        Intent intent = new Intent(EventDetailsActivity.this, InviteResultActivity.class);
+                        intent.putExtra("isAttending", true);
+                        intent.putExtra("hostID", app.getUserHandler().getUser().toString() );
+                        intent.putExtra("eventID", eventID);
+                        startActivity(intent);
+                    
+
 
             });
         }

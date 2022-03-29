@@ -110,6 +110,28 @@ public class EventHandler {
         });
     }
 
+
+    public void updateEventVotes(String eventID, List<TimeSlot> updateVotes) {
+        Document findQuery = new Document("_id", new ObjectId(eventID));
+        app.getDatabase().events.findOne(findQuery).getAsync(task -> {
+            if (task.isSuccess()) {
+                Document update = new Document("_id", task.get().getId());
+
+                if (updateVotes != null) { update.append("timeSlots", updateVotes); }
+
+                app.getDatabase().events.updateOne(findQuery, new Document("$set", update)).getAsync(task2 -> {
+                    if (task2.isSuccess()) {
+                        Log.v("Event", "Successfully updated event!");
+                    } else {
+                        Log.v("Event", "ERROR: " + task2.getError().getErrorMessage());
+                    }
+                });
+            } else {
+                Log.v("Event", "ERROR: " + task.getError().getErrorMessage());
+            }
+        });
+    }
+
     /**
      * Deletes an event from the database given the event ID.
      *
@@ -184,7 +206,12 @@ public class EventHandler {
      */
     public RealmResultTask<MongoCursor<Event>> retrieveEvent(String eventID) {
         return app.getDatabase().events.find(new Document("_id", new ObjectId(eventID))).iterator();
+
+
     }
+
+
+
 
 
 }
