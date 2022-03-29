@@ -85,28 +85,29 @@ public class EventDetailsActivity extends AppCompatActivity {
                 ((EditText) findViewById(R.id.description)).setText(event.getDescription());
                 ((EditText) findViewById(R.id.dateText)).setText(event.getDate());
 
-                if (timeSlots == null) {
-                    ((EditText) findViewById(R.id.startTimeText)).setText(event.getStart());
-                    ((EditText) findViewById(R.id.endTimeText)).setText(event.getEnd());
-                    ((ConstraintLayout) findViewById(R.id.votingConstraintLayout)).setVisibility(View.GONE);
-                }
-                else {
-                    ((ConstraintLayout) findViewById(R.id.startEndLayout)).setVisibility(View.GONE);
-
-                    List<String> stringTimeSlots = new ArrayList<String>();
-                    for (int i = 0; i < timeSlots.size(); i++) {
-                        TimeSlot curr = timeSlots.get(i);
-                        stringTimeSlots.add(curr.getStart() + " to " + curr.getEnd());
+                if (!cameFrom.equals("hosted")) {
+                    if (timeSlots == null) {
+                        ((EditText) findViewById(R.id.startTimeText)).setText(event.getStart());
+                        ((EditText) findViewById(R.id.endTimeText)).setText(event.getEnd());
+                        ((ConstraintLayout) findViewById(R.id.votingConstraintLayout)).setVisibility(View.GONE);
                     }
+                    else {
+                        ((ConstraintLayout) findViewById(R.id.startEndLayout)).setVisibility(View.GONE);
 
-                    Log.v("slots: ", stringTimeSlots.toString());
+                        List<String> stringTimeSlots = new ArrayList<String>();
+                        for (int i = 0; i < timeSlots.size(); i++) {
+                            TimeSlot curr = timeSlots.get(i);
+                            stringTimeSlots.add(curr.getStart() + " to " + curr.getEnd());
+                        }
 
-                    listView = findViewById(R.id.timeSlotListView);
-                    arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, stringTimeSlots);
-                    listView.setAdapter(arrayAdapter);
-                    listView.setItemsCanFocus(false);
-                    listView.setOnItemClickListener((adapterView, view, i, l) -> view.setSelected(true));
+                        Log.v("slots: ", stringTimeSlots.toString());
 
+                        listView = findViewById(R.id.timeSlotListView);
+                        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, stringTimeSlots);
+                        listView.setAdapter(arrayAdapter);
+                        listView.setItemsCanFocus(false);
+                        listView.setOnItemClickListener((adapterView, view, i, l) -> view.setSelected(true));
+                    }
                 }
 
                 if(cameFrom.equals("hosted")) {
@@ -205,19 +206,8 @@ public class EventDetailsActivity extends AppCompatActivity {
                 });
 
                 // checked time slot
-                // TODO: send updated timeSlot list to database
-                List<TimeSlot> updatedTimeSlots = checkedSlot();
-                app.getEventHandler().updateEventVotes(eventID, updatedTimeSlots);
-
-
-
-                        Intent intent = new Intent(EventDetailsActivity.this, InviteResultActivity.class);
-                        intent.putExtra("isAttending", true);
-                        intent.putExtra("hostID", app.getUserHandler().getUser().toString() );
-                        intent.putExtra("eventID", eventID);
-                        startActivity(intent);
-                    
-
+//                List<TimeSlot> updatedTimeSlots = checkedSlot();
+//                app.getEventHandler().updateEvent();
 
             });
         }
@@ -231,9 +221,6 @@ public class EventDetailsActivity extends AppCompatActivity {
                     if (task.isSuccess()) {
 
                         Log.d("eventID!! ", eventID);
-
-
-
                         Intent intent = new Intent(EventDetailsActivity.this, InviteResultActivity.class);
                         intent.putExtra("isAttending", false);
                         intent.putExtra("hostID", task.get().getHost().toString());
