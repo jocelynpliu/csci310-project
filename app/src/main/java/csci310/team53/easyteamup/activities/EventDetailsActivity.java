@@ -14,11 +14,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
 import csci310.team53.easyteamup.data.Event;
+import csci310.team53.easyteamup.util.TimeSlot;
 
 public class EventDetailsActivity extends AppCompatActivity {
 
@@ -64,15 +66,24 @@ public class EventDetailsActivity extends AppCompatActivity {
         app.getEventHandler().retrieveEvent(eventID).getAsync(task -> {
             if (task.isSuccess()) {
                 Event event = task.get().next();
+                List<TimeSlot> timeSlots = event.getTimeSlots();
+
                 ((EditText) findViewById(R.id.eventName)).setText(event.getName());
                 ((EditText) findViewById(R.id.eventAddress)).setText(event.getLocation());
                 ((EditText) findViewById(R.id.description)).setText(event.getDescription());
                 ((EditText) findViewById(R.id.dateText)).setText(event.getDate());
-                //((EditText) findViewById(R.id.startTimeText)).setText(event.getStart());
-                //((EditText) findViewById(R.id.endTimeText)).setText(event.getEnd());
+
+                if (timeSlots == null) {
+                    //((EditText) findViewById(R.id.startTimeText)).setText(event.getStart());
+                    //((EditText) findViewById(R.id.endTimeText)).setText(event.getEnd());
+                }
 
                 if(cameFrom.equals("hosted")) {
                     ((CheckBox) findViewById(R.id.checkBox)).setChecked(event.isPrivate());
+                }
+                else if (cameFrom.equals("attending")) {
+                    // TODO: Display each slot on activity view using recycler
+
                 }
 
             } else {

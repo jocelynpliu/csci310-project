@@ -40,7 +40,6 @@ public class EventsActivity extends AppCompatActivity implements RecyclerViewInt
     private ArrayAdapter<String> arrayAdapter;
     private ArrayList<String> timeSlots;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +59,7 @@ public class EventsActivity extends AppCompatActivity implements RecyclerViewInt
         // Retrieve events this user is attending from database and display from adapter.
         app.getEventHandler().retrieveAttendingEvents().getAsync(task -> {
             if (task.isSuccess()) {
-                 myAdapter = new EventsRecyclerAdapter(app, this, task.get(), this);
+                myAdapter = new EventsRecyclerAdapter(app, this, task.get(), this);
                 eventsRecyclerView.setAdapter(myAdapter);
                 eventsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             } else {
@@ -68,15 +67,13 @@ public class EventsActivity extends AppCompatActivity implements RecyclerViewInt
             }
         });
 
-        // getting timeSlots
-        // TODO: Retrieve time slots and put into an ArrayList<TimeSlot>
-        ArrayList<TimeSlot> timeSlotsObjectList;
-
+        /**
         listView = findViewById(R.id.userListView);
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, timeSlots);
         listView.setAdapter(arrayAdapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         listView.setItemsCanFocus(false);
+         */
 
         //go to inbox
         inboxButton = (Button) findViewById(R.id.inboxButton);
@@ -114,7 +111,6 @@ public class EventsActivity extends AppCompatActivity implements RecyclerViewInt
         Intent intent = new Intent(EventsActivity.this, EventDetailsActivity.class);
         intent.putExtra("eventID", e.getId().toString());
         intent.putExtra("from", "attending");
-
 
         startActivity(intent);
     }
