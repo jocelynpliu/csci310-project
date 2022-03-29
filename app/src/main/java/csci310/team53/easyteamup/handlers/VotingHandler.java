@@ -8,6 +8,7 @@ import org.bson.types.ObjectId;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -33,8 +34,8 @@ public class VotingHandler {
 
     // TODO: Add additional parameters to pass in list of vote slots maybe?
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void startVote(ObjectId eventID, LocalDateTime voteEnd) {
-        LocalDateTime now = LocalDateTime.now();
+    public void startVote(ObjectId eventID, LocalTime voteEnd) {
+        LocalTime now = LocalTime.now();
 
         Duration duration = Duration.between(now, voteEnd);
         long diff = Math.abs(duration.toMinutes());
