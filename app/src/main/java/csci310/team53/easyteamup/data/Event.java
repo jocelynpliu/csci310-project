@@ -81,8 +81,8 @@ public class Event {
         if (description == null || description.isEmpty()) return false;
         if (host == null) return false;
         if (date == null || date.isEmpty()) return false;
-        if (start == null || start.isEmpty()) return false;
-        if (end == null || end.isEmpty()) return false;
+        if (start == null || start.isEmpty() && timeSlots.isEmpty()) return false;
+        if (end == null || end.isEmpty() && timeSlots.isEmpty()) return false;
         return true;
     }
 

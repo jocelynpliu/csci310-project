@@ -71,6 +71,7 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
     private LinearLayout timeSlotLayout;
     private List<TimeSlot> timeSlots;
     private Calendar calendar;
+    private String voteTimeString;
 
     // users
     private List<String> users;
@@ -155,6 +156,14 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
         String format = "hh:mm a";
         SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US);
         text.setText(sdf.format(calendar.getTime()));
+
+        // voting text needs to be in different format
+        if (text == findViewById(R.id.votingTimeText)) {
+            String voteFormat = "HH:mm";
+            SimpleDateFormat votesdf = new SimpleDateFormat(voteFormat, Locale.US);
+            voteTimeString = votesdf.format(calendar.getTime());
+            Log.v("setTime: ", voteTimeString);
+        }
     }
 
     public void datePickerClick(View view) {
@@ -219,10 +228,20 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
         timeSlots.add(new TimeSlot(start, end));
     }
 
+    // TODO: implement
+    public void startTimer() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(voteTimeString, formatter);
+        Log.v("time: ", dateTime.toString());
+
+    }
+
+
     /**
      * Grabs data from form fields and creates a new Event object in database.
      */
     private void createEvent() {
+
         final EditText nameBox = (EditText) findViewById(R.id.eventName);
         final EditText locationBox = (EditText) findViewById(R.id.eventAddress);
         final EditText descriptionBox = (EditText) findViewById(R.id.description);
@@ -256,14 +275,11 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
             return;
         }
 
+
+
         // Add event to database
         app.getEventHandler().createEvent(event).getAsync(task -> {
             if (task.isSuccess()) {
-                // converting end time to localdate
-                // TODO: Fix all this
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm a");
-                LocalDateTime dateTime = LocalDateTime.parse(event.getEnd(), formatter);
-                app.getVotingHandler().startVote(id, dateTime);
                 app.getMessageHandler().sendInviteMessage(invitees, id);
                 finish();
             } else {
