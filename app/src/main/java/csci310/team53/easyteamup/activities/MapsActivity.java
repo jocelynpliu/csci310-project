@@ -83,7 +83,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             public void onInfoWindowClick(Marker marker) {
 
                                 String snip = marker.getSnippet();
-                                marker.setSnippet("");
+                                marker.setSnippet(null);
 
                                 Intent intent1 = new Intent(MapsActivity.this, EventDetailsActivity.class);
                                intent1.putExtra("from", "map");
