@@ -49,7 +49,6 @@ public class EventDetailsActivity extends AppCompatActivity {
 
     private ListView listView;
     private ArrayAdapter<String> arrayAdapter;
-    private ArrayList<String> timeSlots;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
