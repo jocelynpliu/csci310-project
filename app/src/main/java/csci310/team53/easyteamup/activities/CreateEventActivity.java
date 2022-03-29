@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -28,15 +27,12 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import org.bson.types.ObjectId;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
@@ -79,6 +75,7 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
     private ArrayList<ObjectId> userIDs;
 
     private boolean votingAllowed;
+    LocalTime voteLocalTime;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -127,6 +124,7 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
 
         // toggle button for showing voting layout
         Switch toggle = (Switch) findViewById(R.id.votingSwitch);
+        votingAllowed = false;
         ConstraintLayout voting = (ConstraintLayout) findViewById(R.id.votingLayout);
         ConstraintLayout startEnd = (ConstraintLayout) findViewById(R.id.startEndLayout);
         toggle.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -161,8 +159,11 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
         if (text == findViewById(R.id.votingTimeText)) {
             String voteFormat = "HH:mm";
             SimpleDateFormat votesdf = new SimpleDateFormat(voteFormat, Locale.US);
+
+            // voting end time
             voteTimeString = votesdf.format(calendar.getTime());
-            Log.v("setTime: ", voteTimeString);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+            voteLocalTime = LocalTime.parse(voteTimeString, formatter);
         }
     }
 
@@ -228,14 +229,12 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
         timeSlots.add(new TimeSlot(start, end));
     }
 
-    // TODO: implement
-    public void startTimer() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        LocalDateTime dateTime = LocalDateTime.parse(voteTimeString, formatter);
-        Log.v("time: ", dateTime.toString());
+    public void startVotingTimer() {
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+//        LocalDateTime dateTime = LocalDateTime.parse(voteTimeString, formatter);
+//        Log.v("dateTime: ", dateTime.toString());
 
     }
-
 
     /**
      * Grabs data from form fields and creates a new Event object in database.
@@ -275,13 +274,17 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
             return;
         }
 
-
+        if (votingAllowed) {
+            startVotingTimer();
+        }
 
         // Add event to database
         app.getEventHandler().createEvent(event).getAsync(task -> {
             if (task.isSuccess()) {
                 app.getMessageHandler().sendInviteMessage(invitees, id);
-                finish();
+                app.getVotingHandler().startVote(id, voteLocalTime);
+                Intent intent = new Intent(CreateEventActivity.this, HomeActivity.class);
+                startActivity(intent);
             } else {
                 Log.v("Event", task.getError().getErrorMessage() + task.getError().getErrorType() + task.getError().getErrorCode());
             }
