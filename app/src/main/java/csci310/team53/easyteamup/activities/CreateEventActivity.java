@@ -271,7 +271,10 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
         app.getEventHandler().createEvent(event).getAsync(task -> {
             if (task.isSuccess()) {
                 app.getMessageHandler().sendInviteMessage(invitees, id);
-                app.getVotingHandler().startVote(id, voteLocalTime);
+                if (votingAllowed) {
+                    //startVotingTimer();
+                    app.getVotingHandler().startVote(id, voteLocalTime);
+                }
                 Intent intent = new Intent(CreateEventActivity.this, HomeActivity.class);
                 startActivity(intent);
             } else {
