@@ -72,8 +72,6 @@ public class InviteResultActivity extends AppCompatActivity {
 //
         }
 
-
-
         // final LayoutInflater factory = getLayoutInflater();
         // final View textEntryView = factory.inflate(R.layout.activity_confirm, null);
 

@@ -67,14 +67,6 @@ public class EventsActivity extends AppCompatActivity implements RecyclerViewInt
             }
         });
 
-        /**
-        listView = findViewById(R.id.userListView);
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, timeSlots);
-        listView.setAdapter(arrayAdapter);
-        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        listView.setItemsCanFocus(false);
-         */
-
         //go to inbox
         inboxButton = (Button) findViewById(R.id.inboxButton);
         inboxButton.setOnClickListener(v -> {

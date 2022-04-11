@@ -5,14 +5,20 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -42,6 +48,10 @@ public class EventDetailsActivity extends AppCompatActivity {
     private TimePickerDialog.OnTimeSetListener sTime;
     private TimePickerDialog.OnTimeSetListener eTime;
 
+    private ListView listView;
+    private ArrayAdapter<String> arrayAdapter;
+    List<TimeSlot> timeSlots;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,19 +73,41 @@ public class EventDetailsActivity extends AppCompatActivity {
             setContentView(R.layout.activity_attending_event);
         }
 
+
+        // getting time slots
         app.getEventHandler().retrieveEvent(eventID).getAsync(task -> {
             if (task.isSuccess()) {
                 Event event = task.get().next();
-                List<TimeSlot> timeSlots = event.getTimeSlots();
+                timeSlots = event.getTimeSlots();
 
                 ((EditText) findViewById(R.id.eventName)).setText(event.getName());
                 ((EditText) findViewById(R.id.eventAddress)).setText(event.getLocation());
                 ((EditText) findViewById(R.id.description)).setText(event.getDescription());
                 ((EditText) findViewById(R.id.dateText)).setText(event.getDate());
 
-                if (timeSlots == null) {
-                    //((EditText) findViewById(R.id.startTimeText)).setText(event.getStart());
-                    //((EditText) findViewById(R.id.endTimeText)).setText(event.getEnd());
+                if (!cameFrom.equals("hosted")) {
+                    if (timeSlots == null) {
+                        ((EditText) findViewById(R.id.startTimeText)).setText(event.getStart());
+                        ((EditText) findViewById(R.id.endTimeText)).setText(event.getEnd());
+                        ((ConstraintLayout) findViewById(R.id.votingConstraintLayout)).setVisibility(View.GONE);
+                    }
+                    else {
+                        ((ConstraintLayout) findViewById(R.id.startEndLayout)).setVisibility(View.GONE);
+
+                        List<String> stringTimeSlots = new ArrayList<String>();
+                        for (int i = 0; i < timeSlots.size(); i++) {
+                            TimeSlot curr = timeSlots.get(i);
+                            stringTimeSlots.add(curr.getStart() + " to " + curr.getEnd());
+                        }
+
+                        Log.v("slots: ", stringTimeSlots.toString());
+
+                        listView = findViewById(R.id.timeSlotListView);
+                        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, stringTimeSlots);
+                        listView.setAdapter(arrayAdapter);
+                        listView.setItemsCanFocus(false);
+                        listView.setOnItemClickListener((adapterView, view, i, l) -> view.setSelected(true));
+                    }
                 }
 
                 if(cameFrom.equals("hosted")) {
@@ -83,7 +115,6 @@ public class EventDetailsActivity extends AppCompatActivity {
                 }
                 else if (cameFrom.equals("attending")) {
                     // TODO: Display each slot on activity view using recycler
-
                 }
 
             } else {
@@ -91,7 +122,7 @@ public class EventDetailsActivity extends AppCompatActivity {
             }
         });
 
-        setTitle("A single event ");
+        setTitle("Event");
 
         //button stuff---------------------------------------
         //go to inbox
@@ -162,16 +193,22 @@ public class EventDetailsActivity extends AppCompatActivity {
                 app.getEventHandler().attendEvent(eventID).getAsync(task -> {
 
                     if (task.isSuccess()) {
-
                         Log.d("eventID!! ", eventID);
+
 
                         Intent intent = new Intent(EventDetailsActivity.this, InviteResultActivity.class);
                         intent.putExtra("isAttending", true);
                         intent.putExtra("hostID", task.get().getHost().toString());
                         intent.putExtra("eventID", task.get().getId().toString());
+
                         startActivity(intent);
                     }
                 });
+
+                // checked time slot
+//                List<TimeSlot> updatedTimeSlots = checkedSlot();
+//                app.getEventHandler().updateEvent();
+
             });
         }
 
@@ -184,7 +221,6 @@ public class EventDetailsActivity extends AppCompatActivity {
                     if (task.isSuccess()) {
 
                         Log.d("eventID!! ", eventID);
-
                         Intent intent = new Intent(EventDetailsActivity.this, InviteResultActivity.class);
                         intent.putExtra("isAttending", false);
                         intent.putExtra("hostID", task.get().getHost().toString());
@@ -247,5 +283,18 @@ public class EventDetailsActivity extends AppCompatActivity {
     public void eTimePickerClick(View view) {
         new TimePickerDialog(EventDetailsActivity.this, eTime, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show();
 
+    }
+
+    private List<TimeSlot> checkedSlot() {
+        // getting all checked users
+        TimeSlot checkedSlot;
+
+        int checkedIndex = listView.getCheckedItemPosition();
+        checkedSlot = timeSlots.get(checkedIndex);
+        checkedSlot.setVotes(checkedSlot.getVotes() + 1);
+
+        timeSlots.add(checkedIndex, checkedSlot);
+
+        return timeSlots;
     }
 }

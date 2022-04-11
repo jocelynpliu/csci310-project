@@ -32,7 +32,6 @@ public class VotingHandler {
         this.scheduler = Executors.newScheduledThreadPool(100);
     }
 
-    // TODO: Add additional parameters to pass in list of vote slots maybe?
     public void startVote(ObjectId eventID, LocalTime voteEnd) {
         LocalTime now = LocalTime.now();
 

@@ -229,13 +229,6 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
         timeSlots.add(new TimeSlot(start, end));
     }
 
-    public void startVotingTimer() {
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-//        LocalDateTime dateTime = LocalDateTime.parse(voteTimeString, formatter);
-//        Log.v("dateTime: ", dateTime.toString());
-
-    }
-
     /**
      * Grabs data from form fields and creates a new Event object in database.
      */
