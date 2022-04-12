@@ -1,13 +1,28 @@
 package csci310.team53.easyteamup;
 
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.assertEquals;
 
 import android.content.Context;
+//import android.support.test.rule.ActivityTesRule;
 
+import androidx.test.core.app.ActivityScenario;
+import androidx.test.espresso.Espresso;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import androidx.test.platform.app.InstrumentationRegistry;
+
+//import static android.support.test.espresso.Espresso.onView;
+//import static android.support.test.espresso.action.ViewActions.typeText;
+//import static android.support.test.espresso.assertion.ViewAssertions.matches;
+//import static android.support.test.espresso.matcher.ViewMatchers.withId;
+//import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -23,9 +38,30 @@ public class BlackBoxTest {
     public ActivityScenarioRule<HomeActivity> activityRule = new ActivityScenarioRule<>(HomeActivity.class);
 
     @Test
-    public void addEventToDatabase() {
+    public void checkLogin() {
         // Test goes here
-        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.example.csci310", appContext.getPackageName());
+
+//        onView(withText("Hello world!")).check(matches(isDisplayed()));
+//
+//        ActivityScenario<HomeActivity> scenario = activityRule.getScenario();
+//
+//
+//        activityRule.getScenario().onActivity(activity -> {
+//
+//                }
+//        );
+
+        onView(withId(R.id.username)).perform(typeText("Hello"));
+
+
+
+            assertEquals(0,1);
+
+
+//        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+//        assertEquals("com.example.csci310", appContext.getPackageName());
+
+
+
     }
 }

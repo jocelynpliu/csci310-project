@@ -89,7 +89,7 @@ public class EventDetailsActivity extends AppCompatActivity {
                     if (timeSlots == null) {
                         ((EditText) findViewById(R.id.startTimeText)).setText(event.getStart());
                         ((EditText) findViewById(R.id.endTimeText)).setText(event.getEnd());
-                        ((ConstraintLayout) findViewById(R.id.votingConstraintLayout)).setVisibility(View.GONE);
+                       // ((ConstraintLayout) findViewById(R.id.votingConstraintLayout)).setVisibility(View.GONE);
                     }
                     else {
                         ((ConstraintLayout) findViewById(R.id.startEndLayout)).setVisibility(View.GONE);
