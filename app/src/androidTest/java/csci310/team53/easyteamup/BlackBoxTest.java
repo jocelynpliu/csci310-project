@@ -53,13 +53,11 @@ public class BlackBoxTest {
 //                }
 //        );
 
-        onView(withId(R.id.username)).perform(typeText("Hello"));
+        onView(withId(R.id.username)).perform(typeText("test username"));
+        onView(withId(R.id.username)).check(matches(withText("test username")));
 
-
-
-            assertEquals(0,1);
-
-
+        onView(withId(R.id.password)).perform(typeText("test password"));
+        onView(withId(R.id.password)).check(matches(withText("test password")));
 //        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 //        assertEquals("com.example.csci310", appContext.getPackageName());
 
