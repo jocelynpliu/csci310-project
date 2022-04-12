@@ -29,13 +29,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import csci310.team53.easyteamup.activities.HomeActivity;
+import csci310.team53.easyteamup.activities.LoginActivity;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class BlackBoxTest {
 
+
     @Rule
-    public ActivityScenarioRule<HomeActivity> activityRule = new ActivityScenarioRule<>(HomeActivity.class);
+    public ActivityScenarioRule<LoginActivity> activityRule = new ActivityScenarioRule<>(LoginActivity.class);
 
     @Test
     public void checkLogin() {
