@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        usernameInput = (EditText) findViewById(R.id.username);
+        usernameInput = (EditText) findViewById(R.id.loginUsername);
         passwordInput = (EditText) findViewById(R.id.password);
 
         TextView registerText = (TextView) findViewById(R.id.create_account);
