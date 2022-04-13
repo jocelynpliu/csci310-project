@@ -456,6 +456,37 @@ public class BlackBoxTest {
 
     }
 
+    // join and withdraw from invite
+    @Test
+    public void joinAndWithdrawInvite(){
+        logIn();
+        onView(withId(R.id.inboxButton)).perform(click());
+
+        onView(withId(R.id.inboxRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(3, click()));
+
+        onView(withId(R.id.acceptButton)).perform(click());
+
+
+        onView(withId(R.id.myEventsButton)).perform(click());
+        onView(withId(R.id.myEventsRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(4, click()));
+        try {
+            Thread.sleep(2000);
+        }
+        catch(Exception e){
+
+        }
+
+
+        onView(withId(R.id.eventName)).check(matches( withText("Demonstrate our app!") ) );
+
+        onView(withId(R.id.leaveEventButton)).perform(click());
+
+
+
+    }
+
+
+
 
 
 
