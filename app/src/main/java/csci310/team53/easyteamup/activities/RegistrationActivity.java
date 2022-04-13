@@ -51,7 +51,7 @@ public class RegistrationActivity extends AppCompatActivity {
         uploadButton = (Button) findViewById(R.id.upload_button);
         registerButton = (Button) findViewById(R.id.register_button);
         previewImage = (ImageView) findViewById(R.id.preview_image);
-        usernameInput = (EditText) findViewById(R.id.username);
+        usernameInput = (EditText) findViewById(R.id.loginUsername);
         passwordInput = (EditText) findViewById(R.id.password);
 
         uploadButton.setOnClickListener(view -> uploadPicture());
