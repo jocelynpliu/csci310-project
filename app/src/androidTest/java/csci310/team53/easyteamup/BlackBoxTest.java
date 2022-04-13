@@ -5,6 +5,7 @@ import static androidx.test.InstrumentationRegistry.getTargetContext;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 
@@ -379,6 +380,42 @@ public class BlackBoxTest {
 
         }
         onView(withId(R.id.eventName)).check(matches( withText("Greek Life Protest") ) );
+
+    }
+
+
+    // edit a hosted event
+    @Test
+    public void editEventFromHostedEvents(){
+        logIn();
+        onView(withId(R.id.hostedEventsButton)).perform(click());
+        onView(withId(R.id.myHostedEventsRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+
+        onView(withId(R.id.description)).perform(replaceText("changed"), closeSoftKeyboard());
+        onView(withId(R.id.confirmButton)).perform(click());
+        onView(withId(R.id.hostedEventsButton)).perform(click());
+
+        try {
+            Thread.sleep(2000);
+        }
+        catch(Exception e){
+
+        }
+        onView(withId(R.id.myHostedEventsRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.description)).check(matches( withText("changed") ) );
+
+        onView(withId(R.id.description)).perform(replaceText("unchanged"), closeSoftKeyboard());
+        onView(withId(R.id.confirmButton)).perform(click());
+        onView(withId(R.id.hostedEventsButton)).perform(click());
+
+        onView(withId(R.id.myHostedEventsRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        try {
+            Thread.sleep(2000);
+        }
+        catch(Exception e){
+
+        }
+        onView(withId(R.id.description)).check(matches( withText("unchanged") ) );
 
     }
 

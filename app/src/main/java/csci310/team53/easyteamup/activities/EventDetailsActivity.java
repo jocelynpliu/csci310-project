@@ -251,7 +251,7 @@ public class EventDetailsActivity extends AppCompatActivity {
                 String endN = endV.getText().toString();
                 boolean checkN = checkV.isChecked();
 
-                app.getEventHandler().updateEvent(eventID, titleN, locationN, descripN, dateN, startN, endN, checkN, null);
+                app.getEventHandler().updateEvent(eventID, titleN, descripN, locationN,  dateN, startN, endN, checkN, null);
 
                 Intent intent = new Intent(EventDetailsActivity.this, InviteResultActivity.class);
                         intent.putExtra("isAttending", true);
