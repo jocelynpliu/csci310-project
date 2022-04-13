@@ -5,6 +5,8 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
+import static androidx.test.espresso.action.ViewActions.swipeDown;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 
@@ -18,6 +20,7 @@ import static org.junit.Assert.assertEquals;
 import android.content.ComponentName;
 import android.util.Log;
 
+import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.espresso.intent.Intents;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
@@ -363,6 +366,25 @@ public class BlackBoxTest {
 
         }
         onView(withId(R.id.eventName)).check(matches( withText("Greek Life Protest") ) );
+    }
+
+
+    @Test
+    public void createEvent(){
+        logIn();
+        onView(withId(R.id.createEventButton)).perform(click());
+        String title = "testTest";
+        String adr = "Some Address";
+        String desc = "desc";
+
+        onView(withId(R.id.eventName)).perform(typeText(title), closeSoftKeyboard());
+        onView(withId(R.id.eventAddress)).perform(typeText(adr), closeSoftKeyboard());
+        onView(withId(R.id.description)).perform(typeText(desc),closeSoftKeyboard());
+
+        onView(withId(R.id.eventName)).check(matches( withText(title) ) );
+        onView(withId(R.id.eventAddress)).check(matches( withText(adr) ) );
+        onView(withId(R.id.description)).check(matches( withText(desc) ) );
+
     }
 
     // check buttons from map ---------------------------------------------------------------------
