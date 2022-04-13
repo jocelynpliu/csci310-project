@@ -171,21 +171,21 @@ public class WhiteBoxTest {
 
    }
 
-//    @Test
-//    public void testMapLogicSuccess(){
-//
-//        Context context = ApplicationProvider.getApplicationContext();
-//
-//        try( ActivityScenario<MapsActivity> scenario = ActivityScenario.launch(MapsActivity.class)) {
-//            scenario.onActivity( activity -> {
-//                LatLng ans = activity.getLocationFromAddress(context , "3607 Trousdale Pkwy, Los Angeles, CA 90089");
-//
-//                LatLng test = new LatLng(34.019963,-118.2861901);
-//                assertEquals(ans, test);
-//            });
-//        }
-//
-//    }
+    @Test
+    public void testMapLogicSuccess(){
+
+        Context context = ApplicationProvider.getApplicationContext();
+
+        try( ActivityScenario<MapsActivity> scenario = ActivityScenario.launch(MapsActivity.class)) {
+            scenario.onActivity( activity -> {
+                LatLng ans = activity.getLocationFromAddress(context , "3607 Trousdale Pkwy, Los Angeles, CA 90089");
+
+                LatLng test = new LatLng(34.019963,-118.2861901);
+                assertEquals(ans, test);
+            });
+        }
+
+    }
 
     @Test
     public void testMapLogicFail(){

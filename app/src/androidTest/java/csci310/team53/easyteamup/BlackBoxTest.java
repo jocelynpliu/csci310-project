@@ -46,6 +46,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.w3c.dom.Document;
 
 import csci310.team53.easyteamup.activities.EventsActivity;
 import csci310.team53.easyteamup.activities.HomeActivity;
@@ -60,7 +61,15 @@ public class BlackBoxTest {
 
     @Before
     public void setup() {
-
+//        onView(withId(R.id.loginUsername)).perform(typeText("tapeters"), closeSoftKeyboard());
+//        onView(withId(R.id.password)).perform(typeText("mypassword"), closeSoftKeyboard());
+//        onView(withId(R.id.login_button)).perform(click());
+//        try {
+//            Thread.sleep(1000);
+//        }
+//        catch(Exception e){
+//
+//        }
     }
 
     @Rule
@@ -78,8 +87,9 @@ public class BlackBoxTest {
         onView(withId(R.id.loginUsername)).perform(typeText("tapeters"));
         onView(withId(R.id.password)).perform(typeText("mypassword"), closeSoftKeyboard());
         onView(withId(R.id.login_button)).perform(click());
+
         try {
-            Thread.sleep(1000);
+            Thread.sleep(5000);
         }
         catch(Exception e){
 
@@ -97,7 +107,7 @@ public class BlackBoxTest {
         onView(withId(R.id.password)).perform(typeText("wrongpassword"), closeSoftKeyboard() );
         onView(withId(R.id.login_button)).perform(click());
         try {
-            Thread.sleep(2000);
+            Thread.sleep(5000);
         }
         catch(Exception e){
 
@@ -116,7 +126,7 @@ public class BlackBoxTest {
 
         onView(withId(R.id.myEventsButton)).perform(click());
         try {
-            Thread.sleep(2000);
+            Thread.sleep(5000);
         }
         catch(Exception e){
 
@@ -130,7 +140,7 @@ public class BlackBoxTest {
 
         onView(withId(R.id.inboxButton)).perform(click());
         try {
-            Thread.sleep(2000);
+            Thread.sleep(5000);
         }
         catch(Exception e){
 
@@ -145,7 +155,7 @@ public class BlackBoxTest {
 
         onView(withId(R.id.hostedEventsButton)).perform(click());
         try {
-            Thread.sleep(2000);
+            Thread.sleep(5000);
         }
         catch(Exception e){
 
@@ -160,7 +170,7 @@ public class BlackBoxTest {
 
         onView(withId(R.id.mapButton)).perform(click());
         try {
-            Thread.sleep(10000);
+            Thread.sleep(5000);
         }
         catch(Exception e){
 
@@ -436,7 +446,7 @@ public class BlackBoxTest {
         onView(withId(R.id.myEventsButton)).perform(click());
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(5000);
         }
         catch(Exception e){
 
@@ -453,7 +463,7 @@ public class BlackBoxTest {
         onView(withId(R.id.hostedEventsButton)).perform(click());
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(5000);
         }
         catch(Exception e){
 
@@ -480,7 +490,7 @@ public class BlackBoxTest {
         onView(withId(R.id.hostedEventsButton)).perform(click());
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(5000);
         }
         catch(Exception e){
 
@@ -494,7 +504,7 @@ public class BlackBoxTest {
 
         onView(withId(R.id.myHostedEventsRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         try {
-            Thread.sleep(2000);
+            Thread.sleep(5000);
         }
         catch(Exception e){
 
@@ -521,7 +531,7 @@ public class BlackBoxTest {
 
         onView(withId(R.id.leaveEventButton)).perform(click());
         try {
-            Thread.sleep(2000);
+            Thread.sleep(5000);
         }
         catch(Exception e){
 
@@ -553,7 +563,7 @@ public class BlackBoxTest {
         onView(withId(R.id.myEventsButton)).perform(click());
         onView(withId(R.id.myEventsRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(4, click()));
         try {
-            Thread.sleep(2000);
+            Thread.sleep(5000);
         }
         catch(Exception e){
 
@@ -569,14 +579,32 @@ public class BlackBoxTest {
     }
 
 
-    @Test
-    public void createEvent(){
-        logIn();
-        onView(withId(R.id.createEventButton)).perform(click());
-
-    }
-
-
+//in progress
+//    @Test
+//    public void createEvent(){
+//        logIn();
+//        onView(withId(R.id.createEventButton)).perform(click());
+//        String title = "testTest";
+//        String adr = "Some Address";
+//        String desc = "desc";
+//
+//        onView(withId(R.id.eventName)).perform(typeText(title));
+//        onView(withId(R.id.eventAddress)).perform(typeText(adr));
+//        onView(withId(R.id.description)).perform(typeText(desc));
+//        onView(withId(R.id.checkBox)).perform(click());
+//
+//        onView(withId(R.id.createEventButton)).perform(click());
+//
+//        Document query = new Document();
+//
+//        EasyTeamUp app.getDatabase().events.deleteOne(query).get();
+//
+//
+//
+//
+//
+//
+//    }
 
 
 
@@ -585,7 +613,7 @@ public class BlackBoxTest {
         onView(withId(R.id.password)).perform(typeText("mypassword"), closeSoftKeyboard());
         onView(withId(R.id.login_button)).perform(click());
         try {
-            Thread.sleep(1000);
+            Thread.sleep(5000);
         }
         catch(Exception e){
 
