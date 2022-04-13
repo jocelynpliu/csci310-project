@@ -183,6 +183,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public LatLng getLocationFromAddress(Context context, String strAddress)
     {
         Geocoder coder= new Geocoder(context);
+        Log.d("!!!!!!!!!!!!!!CCC", String.valueOf(context));
         List<Address> address;
         LatLng p1 = null;
 

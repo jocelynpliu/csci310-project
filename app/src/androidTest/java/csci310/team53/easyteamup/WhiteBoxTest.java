@@ -1,14 +1,25 @@
 package csci310.team53.easyteamup;
 
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import android.content.Context;
+import android.location.Geocoder;
 import android.util.Log;
 
+import androidx.test.core.app.ActivityScenario;
+import androidx.test.core.app.ApplicationProvider;
+import androidx.test.espresso.intent.Intents;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
+
+import com.google.android.gms.maps.model.LatLng;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -19,7 +30,10 @@ import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
 
+import csci310.team53.easyteamup.activities.EventDetailsActivity;
 import csci310.team53.easyteamup.activities.LoginActivity;
+import csci310.team53.easyteamup.activities.MapsActivity;
+import csci310.team53.easyteamup.activities.RegistrationActivity;
 import csci310.team53.easyteamup.data.Event;
 import csci310.team53.easyteamup.data.Message;
 import io.realm.mongodb.Credentials;
@@ -35,7 +49,9 @@ public class WhiteBoxTest {
     @Rule
     public ActivityTestRule<LoginActivity> loginActivityRule = new ActivityTestRule<>(LoginActivity.class);
 
+
     private EasyTeamUp app;
+
 
     /**
      * Creates an instance of the application class on startup and
@@ -48,6 +64,8 @@ public class WhiteBoxTest {
         Credentials credentials = Credentials.emailPassword("tapeters", "mypassword");
         app.getRealm().login(credentials);
         app.initializeDatabase(app.getRealm().currentUser());
+
+
     }
 
     /**
@@ -80,8 +98,8 @@ public class WhiteBoxTest {
     @Test
     public void addEventToDatabase() {
         // Create event object in local memory
-        ObjectId id = new ObjectId("625611b89ff84e72d1aab7de");
-        Event e = new Event(id, "Greek Life Protest", "USC Village",
+        ObjectId id = new ObjectId("625611b89ff84e72d1aab7d3");
+        Event e = new Event(id, "Greek Life Party", "USC Village",
                 "protest", "623d03730e82c57fefa52fb2", false, "11/02/2022", "11:00 AM",
                 "12:00 PM", new ArrayList<>(), new ArrayList<>());
 
@@ -127,9 +145,8 @@ public class WhiteBoxTest {
         assertEquals(m.getEvent(), retrievedMessage.getEvent());
 
 
-
     }
-    
+
 
     @Test
     public void sendNotification() {
@@ -144,4 +161,46 @@ public class WhiteBoxTest {
         user.logOut();
         assertFalse(user.isLoggedIn());
     }
+
+
+
+
+
+   @Test
+    public void testMapLogicNull(){
+
+        Intents.init();
+
+       Context context = ApplicationProvider.getApplicationContext();
+
+      try( ActivityScenario<MapsActivity> scenario = ActivityScenario.launch(MapsActivity.class)) {
+            scenario.onActivity( activity -> {
+                LatLng ans = activity.getLocationFromAddress(context , null);
+
+                assertEquals(ans, null);
+            });
+       }
+
+   }
+
+    @Test
+    public void testMapLogicSuccess(){
+
+        Intents.init();
+
+        Context context = ApplicationProvider.getApplicationContext();
+
+        try( ActivityScenario<MapsActivity> scenario = ActivityScenario.launch(MapsActivity.class)) {
+            scenario.onActivity( activity -> {
+                LatLng ans = activity.getLocationFromAddress(context , "3607 Trousdale Pkwy, Los Angeles, CA 90089 ");
+
+                LatLng test = new LatLng(34.019963,-118.2861901);
+                assertEquals(ans, test);
+            });
+        }
+
+    }
+
+
+
 }
