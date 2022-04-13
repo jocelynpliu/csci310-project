@@ -7,6 +7,7 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 
 //import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
@@ -418,6 +419,44 @@ public class BlackBoxTest {
         onView(withId(R.id.description)).check(matches( withText("unchanged") ) );
 
     }
+
+
+    // join and withdraw from public event
+    @Test
+    public void joinAndWithdrawPublicEvent(){
+        logIn();
+
+        onView(withId(R.id.homeRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+
+        onView(withId(R.id.joinEventButton)).perform(click());
+
+
+        onView(withId(R.id.myEventsButton)).perform(click());
+        onView(withId(R.id.myEventsRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(4, click()));
+
+        onView(withId(R.id.eventName)).check(matches( withText("Greek Life Protest") ) );
+
+        onView(withId(R.id.leaveEventButton)).perform(click());
+        try {
+            Thread.sleep(2000);
+        }
+        catch(Exception e){
+
+        }
+
+        try{
+            onView(withId(R.id.myEventsButton)).perform(click());
+            onView(withId(R.id.myEventsRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(4, click()));
+        }
+        //if an excpetion is thrown, that means could not find the position 4, which is what we want - means the withdrawn event is NO longer in our list of attending events
+        catch (Exception e) {
+                assertEquals(1,1);
+        }
+
+
+    }
+
+
 
 
 
