@@ -21,6 +21,10 @@ import csci310.team53.easyteamup.data.Event;
 import io.realm.mongodb.Credentials;
 import io.realm.mongodb.User;
 
+/**
+ * White box testing for EasyTeamUp
+ * @author Thomas Peters
+ */
 @RunWith(AndroidJUnit4.class)
 public class WhiteBoxTest {
 
@@ -29,6 +33,10 @@ public class WhiteBoxTest {
 
     private EasyTeamUp app;
 
+    /**
+     * Creates an instance of the application class on startup and
+     * signs in to a default user to access the realms database.
+     */
     @Before
     public void setup() {
         // Login as tapeters and initialize database
@@ -38,6 +46,9 @@ public class WhiteBoxTest {
         app.initializeDatabase(app.getRealm().currentUser());
     }
 
+    /**
+     * Test if realms login is successful and sets correct user.
+     */
     @Test
     public void realmsLogin() {
         User user = app.getRealm().currentUser();
@@ -46,6 +57,9 @@ public class WhiteBoxTest {
         assertEquals(user.getId(), "623d03730e82c57fefa52fb2");
     }
 
+    /**
+     * Test if an event can be added and retrieved from a database with the same info.
+     */
     @Test
     public void addEventToDatabase() {
         // Create event object in local memory
