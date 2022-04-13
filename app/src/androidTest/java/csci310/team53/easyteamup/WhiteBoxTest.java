@@ -129,57 +129,7 @@ public class WhiteBoxTest {
 
 
     }
-
-    //broken, ask thomas lol
-    //java.lang.IllegalStateException: RealmResultTaskImpl can only run on looper threads. Realm cannot be automatically updated on a thread without a looper.
-//    @Test
-//    public void UpdateEventInDatabase(){
-//        ObjectId id = new ObjectId("6242a2ffd1dd8037fdcbe1c0"); //Go Swimming event
-//        Event e = new Event(id, "Shoot hoops", "1026 W 34th St, Los Angeles, CA 90089",
-//                "get buckets", "623d03730e82c57fefa52fb2", true, "03/21/22", null,
-//                null, new ArrayList<>(), new ArrayList<>());
-//
-//        // Insert into database if not already there
-//        long count = app.getDatabase().events.count(new Document("_id", id)).get();
-//        if (count <= 0) {
-//            app.getDatabase().events.insertOne(e).get();
-//        }
-//
-//        String name = "Sing songs";
-//        String desc = "have fun";
-//        String location = "1025 W Exposition Blvd, Los Angeles, CA 90007";
-//        String date = "04/21/23";
-//
-//
-//        Document findQuery = new Document("_id", new ObjectId(String.valueOf(id)));
-//        app.getDatabase().events.findOne(findQuery).getAsync(task -> {
-//            if (task.isSuccess()) {
-//                Document update = new Document("_id", task.get().getId());
-//                if (name != null) { update.append("name", name); }
-//                if (desc != null) { update.append("description", desc); }
-//                if (location != null) { update.append("location", location); }
-//                if (date != null) { update.append("date", date); }
-//
-//                app.getDatabase().events.updateOne(findQuery, new Document("$set", update)).getAsync(task2 -> {
-//                    if (task2.isSuccess()) {
-//                        Log.v("Event", "Successfully updated event!");
-//                    } else {
-//                        Log.v("Event", "ERROR: " + task2.getError().getErrorMessage());
-//                    }
-//                });
-//            } else {
-//                Log.v("Event", "ERROR: " + task.getError().getErrorMessage());
-//            }
-//        });
-//
-//        // Retrieve event from database and check values
-//        Event retrievedEvent = app.getDatabase().events.findOne(new Document("_id", id)).get();
-//        assertEquals(name, retrievedEvent.getName());
-//        assertEquals(desc, retrievedEvent.getDescription());
-//        assertEquals(location, retrievedEvent.getLocation());
-//        assertEquals(date, retrievedEvent.getDate());
-//
-//    }
+    
 
     @Test
     public void sendNotification() {
