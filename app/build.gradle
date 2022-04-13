@@ -3,17 +3,10 @@ plugins {
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
     id 'jacoco'
 
+
 }
 apply plugin: 'realm-android'
 apply plugin: 'jacoco'
-
-jacoco {
-    toolVersion = "0.7.5.201505241946"
-    reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
-}
-
-
-
 
 
 android {
@@ -46,6 +39,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+
 }
 
 realm {

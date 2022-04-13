@@ -150,7 +150,8 @@ public class BlackBoxTest {
         catch(Exception e){
 
         }
-        intended(hasComponent(new ComponentName(getTargetContext(), HostedEventsActivity.class)));
+//        intended(hasComponent(new ComponentName(getTargetContext(), HostedEventsActivity.class)));
+        intended(hasComponent(HostedEventsActivity.class.getName()));
     }
 
     @Test
@@ -159,12 +160,13 @@ public class BlackBoxTest {
 
         onView(withId(R.id.mapButton)).perform(click());
         try {
-            Thread.sleep(2000);
+            Thread.sleep(10000);
         }
         catch(Exception e){
 
         }
-        intended(hasComponent(new ComponentName(getTargetContext(), MapsActivity.class)));
+//        intended(hasComponent(new ComponentName(getTargetContext(), MapsActivity.class)));
+        intended(hasComponent(MapsActivity.class.getName()));
     }
 
 
@@ -208,7 +210,7 @@ public class BlackBoxTest {
         onView(withId(R.id.myEventsButton)).perform(click());
         onView(withId(R.id.homeButton)).perform(click());
         try {
-            Thread.sleep(2000);
+            Thread.sleep(000);
         }
         catch(Exception e){
 
@@ -390,6 +392,12 @@ public class BlackBoxTest {
     public void homefromMap(){
         logIn();
         onView(withId(R.id.mapButton)).perform(click());
+        try {
+            Thread.sleep(2000);
+        }
+        catch(Exception e){
+
+        }
         onView(withId(R.id.homeButton)).perform(click());
 
         try {
@@ -416,6 +424,7 @@ public class BlackBoxTest {
 
         }
         intended(hasComponent(new ComponentName(getTargetContext(), InboxActivity.class)));
+
 
 
     }
@@ -560,14 +569,19 @@ public class BlackBoxTest {
     }
 
 
+    @Test
+    public void createEvent(){
+        logIn();
+        onView(withId(R.id.createEventButton)).perform(click());
 
+    }
 
 
 
 
 
     public void logIn(){
-        onView(withId(R.id.loginUsername)).perform(typeText("tapeters"));
+        onView(withId(R.id.loginUsername)).perform(typeText("tapeters"), closeSoftKeyboard());
         onView(withId(R.id.password)).perform(typeText("mypassword"), closeSoftKeyboard());
         onView(withId(R.id.login_button)).perform(click());
         try {
