@@ -169,7 +169,6 @@ public class WhiteBoxTest {
    @Test
     public void testMapLogicNull(){
 
-        Intents.init();
 
        Context context = ApplicationProvider.getApplicationContext();
 
@@ -185,9 +184,7 @@ public class WhiteBoxTest {
 
     @Test
     public void testMapLogicSuccess(){
-
-        Intents.init();
-
+        
         Context context = ApplicationProvider.getApplicationContext();
 
         try( ActivityScenario<MapsActivity> scenario = ActivityScenario.launch(MapsActivity.class)) {
