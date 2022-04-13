@@ -65,6 +65,11 @@ public class CreateEventActivity extends AppCompatActivity implements TimeSlotDi
 
     // time slot layout
     private LinearLayout timeSlotLayout;
+
+    public List<TimeSlot> getTimeSlots() {
+        return timeSlots;
+    }
+
     private List<TimeSlot> timeSlots;
     private Calendar calendar;
     private String voteTimeString;

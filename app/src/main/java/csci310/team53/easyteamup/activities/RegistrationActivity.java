@@ -79,7 +79,7 @@ public class RegistrationActivity extends AppCompatActivity {
      * @param username The input string username.
      * @param password The inout string password.
      */
-    private void register(String username, String password) {
+    public void register(String username, String password) {
         EasyTeamUp app = (EasyTeamUp) this.getApplication();
         Callable<Void> fail = () -> {
             //TODO: Provide some error message that registration failed.

@@ -1,21 +1,14 @@
 package csci310.team53.easyteamup;
 
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import android.content.Context;
-import android.location.Geocoder;
-import android.util.Log;
 
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.core.app.ApplicationProvider;
-import androidx.test.espresso.intent.Intents;
-import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
@@ -30,12 +23,13 @@ import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
 
-import csci310.team53.easyteamup.activities.EventDetailsActivity;
+import csci310.team53.easyteamup.activities.CreateEventActivity;
 import csci310.team53.easyteamup.activities.LoginActivity;
 import csci310.team53.easyteamup.activities.MapsActivity;
 import csci310.team53.easyteamup.activities.RegistrationActivity;
 import csci310.team53.easyteamup.data.Event;
 import csci310.team53.easyteamup.data.Message;
+import csci310.team53.easyteamup.util.TimeSlot;
 import io.realm.mongodb.Credentials;
 import io.realm.mongodb.User;
 
@@ -198,6 +192,44 @@ public class WhiteBoxTest {
 
     }
 
+    @Test
+    public void addSlot() {
+        Context context = ApplicationProvider.getApplicationContext();
+        try (ActivityScenario<CreateEventActivity> scenario = ActivityScenario.launch(CreateEventActivity.class)) {
+            scenario.onActivity( activity-> {
+                activity.addSlot("11:00 AM", "12:00 PM");
+
+                assertEquals(activity.getTimeSlots().get(0).getStart(), "11:00 AM");
+                assertEquals(activity.getTimeSlots().get(0).getEnd(), "12:00 PM");
+            });
+        }
+    }
+
+    @Test
+    public void getSlots() {
+        Context context = ApplicationProvider.getApplicationContext();
+        try (ActivityScenario<CreateEventActivity> scenario = ActivityScenario.launch(CreateEventActivity.class)) {
+            scenario.onActivity( activity-> {
+                activity.addSlot("11:00 AM", "12:00 PM");
+                activity.addSlot("12:00 PM", "1:00 PM");
+                activity.addSlot("1:00 PM", "2:00 PM");
+
+                assertEquals(activity.getTimeSlots().size(), 3);
+            });
+        }
+    }
+
+    @Test
+    public void registerUser() {
+        try (ActivityScenario<RegistrationActivity> scenario = ActivityScenario.launch(RegistrationActivity.class)) {
+            scenario.onActivity( activity-> {
+                activity.register("unittest", "password");
+//                csci310.team53.easyteamup.data.User testUser = app.getDatabase().users.findOne(new Document("username", "tapeters")).get();
+//                assertEquals("testuser", testUser.getUsername());
+
+            });
+        }
+    }
 
 
 }
