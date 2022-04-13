@@ -311,7 +311,8 @@ public class BlackBoxTest {
         intended(hasComponent(new ComponentName(getTargetContext(), InboxActivity.class)));
     }
 
- // view event on home
+
+    // view event on home------------------------------------------------------
     @Test
     public void viewEventfromHome(){
         logIn();
@@ -330,7 +331,7 @@ public class BlackBoxTest {
 
 
 
-    // view event from  attending events
+    // view event from  attending events------------------------
     @Test
     public void viewEventfromAttending(){
         logIn();
@@ -349,7 +350,7 @@ public class BlackBoxTest {
     }
 
 
-    // view invite from inbox
+    // view invite from inbox------------------
     @Test
     public void viewInviteFromInbox(){
         logIn();
@@ -367,7 +368,7 @@ public class BlackBoxTest {
     }
 
 
-    // view event from hosted events
+    // view event from hosted events-----------------------------------------------
     @Test
     public void viewEventFromHostedEvents(){
         logIn();
@@ -384,8 +385,81 @@ public class BlackBoxTest {
 
     }
 
+    // check buttons from map ---------------------------------------------------------------------
+    @Test
+    public void homefromMap(){
+        logIn();
+        onView(withId(R.id.mapButton)).perform(click());
+        onView(withId(R.id.homeButton)).perform(click());
 
-    // edit a hosted event
+        try {
+            Thread.sleep(2000);
+        }
+        catch(Exception e){
+
+        }
+        intended(hasComponent(new ComponentName(getTargetContext(), HomeActivity.class)), Intents.times(2));
+
+
+    }
+
+    @Test
+    public void inboxfromMap(){
+        logIn();
+        onView(withId(R.id.mapButton)).perform(click());
+        onView(withId(R.id.inboxButton)).perform(click());
+
+        try {
+            Thread.sleep(2000);
+        }
+        catch(Exception e){
+
+        }
+        intended(hasComponent(new ComponentName(getTargetContext(), InboxActivity.class)));
+
+
+    }
+
+    @Test
+    public void attendingfromMap(){
+        logIn();
+        onView(withId(R.id.mapButton)).perform(click());
+        onView(withId(R.id.myEventsButton)).perform(click());
+
+        try {
+            Thread.sleep(2000);
+        }
+        catch(Exception e){
+
+        }
+        intended(hasComponent(new ComponentName(getTargetContext(), EventsActivity.class)));
+
+
+    }
+
+    @Test
+    public void hostedfromMap(){
+        logIn();
+        onView(withId(R.id.mapButton)).perform(click());
+        onView(withId(R.id.hostedEventsButton)).perform(click());
+
+        try {
+            Thread.sleep(2000);
+        }
+        catch(Exception e){
+
+        }
+        intended(hasComponent(new ComponentName(getTargetContext(), HostedEventsActivity.class)));
+
+
+    }
+
+
+
+
+
+
+    // edit a hosted event ----------------------------------------------------------------------------
     @Test
     public void editEventFromHostedEvents(){
         logIn();
