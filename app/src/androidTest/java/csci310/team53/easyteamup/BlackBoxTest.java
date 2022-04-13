@@ -16,6 +16,8 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.assertEquals;
 
 import android.content.ComponentName;
+import android.util.Log;
+
 import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.espresso.intent.Intents;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
@@ -39,6 +41,8 @@ import csci310.team53.easyteamup.activities.MapsActivity;
 @LargeTest
 public class BlackBoxTest {
 
+    private static final int SLEEP_VALUE = 2000;
+
     @Before
     public void setup() { }
 
@@ -56,7 +60,7 @@ public class BlackBoxTest {
         onView(withId(R.id.password)).perform(typeText("mypassword"), closeSoftKeyboard());
         onView(withId(R.id.login_button)).perform(click());
         try {
-            Thread.sleep(1000);
+            Thread.sleep(SLEEP_VALUE);
         }
         catch(Exception e){
 
@@ -71,7 +75,7 @@ public class BlackBoxTest {
         onView(withId(R.id.password)).perform(typeText("wrongpassword"), closeSoftKeyboard() );
         onView(withId(R.id.login_button)).perform(click());
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEP_VALUE);
         }
         catch(Exception e){
 
@@ -89,7 +93,7 @@ public class BlackBoxTest {
 
         onView(withId(R.id.myEventsButton)).perform(click());
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEP_VALUE);
         }
         catch(Exception e){
 
@@ -103,7 +107,7 @@ public class BlackBoxTest {
 
         onView(withId(R.id.inboxButton)).perform(click());
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEP_VALUE);
         }
         catch(Exception e){
 
@@ -118,7 +122,7 @@ public class BlackBoxTest {
 
         onView(withId(R.id.hostedEventsButton)).perform(click());
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEP_VALUE);
         }
         catch(Exception e){
 
@@ -132,7 +136,7 @@ public class BlackBoxTest {
 
         onView(withId(R.id.mapButton)).perform(click());
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEP_VALUE);
         }
         catch(Exception e){
 
@@ -148,7 +152,7 @@ public class BlackBoxTest {
         onView(withId(R.id.myEventsButton)).perform(click());
         onView(withId(R.id.inboxButton)).perform(click());
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEP_VALUE);
         }
         catch(Exception e){
 
@@ -163,7 +167,7 @@ public class BlackBoxTest {
         onView(withId(R.id.myEventsButton)).perform(click());
         onView(withId(R.id.hostedEventsButton)).perform(click());
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEP_VALUE);
         }
         catch(Exception e){
 
@@ -179,7 +183,7 @@ public class BlackBoxTest {
         onView(withId(R.id.myEventsButton)).perform(click());
         onView(withId(R.id.homeButton)).perform(click());
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEP_VALUE);
         }
         catch(Exception e){
 
@@ -196,7 +200,7 @@ public class BlackBoxTest {
         onView(withId(R.id.inboxButton)).perform(click());
         onView(withId(R.id.myEventsButton)).perform(click());
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEP_VALUE);
         }
         catch(Exception e){
 
@@ -211,7 +215,7 @@ public class BlackBoxTest {
         onView(withId(R.id.inboxButton)).perform(click());
         onView(withId(R.id.hostedEventsButton)).perform(click());
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEP_VALUE);
         }
         catch(Exception e){
 
@@ -227,7 +231,7 @@ public class BlackBoxTest {
         onView(withId(R.id.inboxButton)).perform(click());
         onView(withId(R.id.myEventsButton)).perform(click());
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEP_VALUE);
         }
         catch(Exception e){
 
@@ -244,7 +248,7 @@ public class BlackBoxTest {
         onView(withId(R.id.hostedEventsButton)).perform(click());
         onView(withId(R.id.homeButton)).perform(click());
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEP_VALUE);
         }
         catch(Exception e){
 
@@ -259,7 +263,7 @@ public class BlackBoxTest {
         onView(withId(R.id.hostedEventsButton)).perform(click());
         onView(withId(R.id.myEventsButton)).perform(click());
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEP_VALUE);
         }
         catch(Exception e){
 
@@ -274,7 +278,7 @@ public class BlackBoxTest {
         onView(withId(R.id.hostedEventsButton)).perform(click());
         onView(withId(R.id.inboxButton)).perform(click());
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEP_VALUE);
         }
         catch(Exception e){
 
@@ -290,7 +294,7 @@ public class BlackBoxTest {
 
         onView(withId(R.id.homeRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEP_VALUE);
         }
         catch(Exception e){
 
@@ -308,7 +312,7 @@ public class BlackBoxTest {
 
         onView(withId(R.id.myEventsRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEP_VALUE);
         }
         catch(Exception e){
 
@@ -325,7 +329,7 @@ public class BlackBoxTest {
 
         onView(withId(R.id.inboxRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(3, click()));
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEP_VALUE);
         }
         catch(Exception e){
 
@@ -342,7 +346,7 @@ public class BlackBoxTest {
 
         onView(withId(R.id.myHostedEventsRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEP_VALUE);
         }
         catch(Exception e){
 
@@ -358,7 +362,7 @@ public class BlackBoxTest {
         onView(withId(R.id.homeButton)).perform(click());
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEP_VALUE);
         }
         catch(Exception e){
 
@@ -373,7 +377,7 @@ public class BlackBoxTest {
         onView(withId(R.id.inboxButton)).perform(click());
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEP_VALUE);
         }
         catch(Exception e){
 
@@ -388,7 +392,7 @@ public class BlackBoxTest {
         onView(withId(R.id.myEventsButton)).perform(click());
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEP_VALUE);
         }
         catch(Exception e){
 
@@ -403,7 +407,7 @@ public class BlackBoxTest {
         onView(withId(R.id.hostedEventsButton)).perform(click());
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEP_VALUE);
         }
         catch(Exception e){
 
@@ -423,7 +427,7 @@ public class BlackBoxTest {
         onView(withId(R.id.hostedEventsButton)).perform(click());
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEP_VALUE);
         }
         catch(Exception e){
 
@@ -437,7 +441,7 @@ public class BlackBoxTest {
 
         onView(withId(R.id.myHostedEventsRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEP_VALUE);
         }
         catch(Exception e){
 
@@ -464,7 +468,7 @@ public class BlackBoxTest {
 
         onView(withId(R.id.leaveEventButton)).perform(click());
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEP_VALUE);
         }
         catch(Exception e){
 
@@ -493,7 +497,7 @@ public class BlackBoxTest {
         onView(withId(R.id.myEventsButton)).perform(click());
         onView(withId(R.id.myEventsRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(4, click()));
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEP_VALUE);
         }
         catch(Exception e){
 
@@ -503,12 +507,12 @@ public class BlackBoxTest {
         onView(withId(R.id.leaveEventButton)).perform(click());
     }
 
-    public void logIn(){
-        onView(withId(R.id.loginUsername)).perform(typeText("tapeters"));
+    public void logIn() {
+        onView(withId(R.id.loginUsername)).perform(typeText("tapeters"), closeSoftKeyboard());
         onView(withId(R.id.password)).perform(typeText("mypassword"), closeSoftKeyboard());
         onView(withId(R.id.login_button)).perform(click());
         try {
-            Thread.sleep(1000);
+            Thread.sleep(SLEEP_VALUE);
         }
         catch(Exception e){
 
