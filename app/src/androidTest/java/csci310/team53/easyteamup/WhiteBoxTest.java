@@ -5,6 +5,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import android.util.Log;
+
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 
 import csci310.team53.easyteamup.activities.LoginActivity;
 import csci310.team53.easyteamup.data.Event;
+import csci310.team53.easyteamup.data.Message;
 import io.realm.mongodb.Credentials;
 import io.realm.mongodb.User;
 
@@ -102,8 +105,79 @@ public class WhiteBoxTest {
         assertEquals(e.getTimeSlots(), retrievedEvent.getTimeSlots());
     }
 
+    @Test
+    public void addMessageToDatabase() {
+        // Create event object in local memory
+        ObjectId id = new ObjectId("625611b89ff84e72d1aab7de");
+        ObjectId event = new ObjectId("623d03730e82c57fefa52fb2");
+        Message m = new Message(id, "625611b89ff84e72d1aab7de", null, "test",event );
+
+
+        // Insert into database if not already there
+        long count = app.getDatabase().messages.count(new Document("_id", id)).get();
+        if (count <= 0) {
+            app.getDatabase().messages.insertOne(m).get();
+        }
+
+        // Retrieve event from database and check values
+        Message retrievedMessage = app.getDatabase().messages.findOne(new Document("_id", id)).get();
+        assertEquals(m.getId(), retrievedMessage.getId());
+        assertEquals(m.getSender(), retrievedMessage.getSender());
+        assertEquals(m.getContent(), retrievedMessage.getContent());
+        assertEquals(m.getEvent(), retrievedMessage.getEvent());
+
+
+
+    }
+
+    //broken, ask thomas lol
+    //java.lang.IllegalStateException: RealmResultTaskImpl can only run on looper threads. Realm cannot be automatically updated on a thread without a looper.
 //    @Test
-//    public void removeEventFromDatabase(){
+//    public void UpdateEventInDatabase(){
+//        ObjectId id = new ObjectId("6242a2ffd1dd8037fdcbe1c0"); //Go Swimming event
+//        Event e = new Event(id, "Shoot hoops", "1026 W 34th St, Los Angeles, CA 90089",
+//                "get buckets", "623d03730e82c57fefa52fb2", true, "03/21/22", null,
+//                null, new ArrayList<>(), new ArrayList<>());
+//
+//        // Insert into database if not already there
+//        long count = app.getDatabase().events.count(new Document("_id", id)).get();
+//        if (count <= 0) {
+//            app.getDatabase().events.insertOne(e).get();
+//        }
+//
+//        String name = "Sing songs";
+//        String desc = "have fun";
+//        String location = "1025 W Exposition Blvd, Los Angeles, CA 90007";
+//        String date = "04/21/23";
+//
+//
+//        Document findQuery = new Document("_id", new ObjectId(String.valueOf(id)));
+//        app.getDatabase().events.findOne(findQuery).getAsync(task -> {
+//            if (task.isSuccess()) {
+//                Document update = new Document("_id", task.get().getId());
+//                if (name != null) { update.append("name", name); }
+//                if (desc != null) { update.append("description", desc); }
+//                if (location != null) { update.append("location", location); }
+//                if (date != null) { update.append("date", date); }
+//
+//                app.getDatabase().events.updateOne(findQuery, new Document("$set", update)).getAsync(task2 -> {
+//                    if (task2.isSuccess()) {
+//                        Log.v("Event", "Successfully updated event!");
+//                    } else {
+//                        Log.v("Event", "ERROR: " + task2.getError().getErrorMessage());
+//                    }
+//                });
+//            } else {
+//                Log.v("Event", "ERROR: " + task.getError().getErrorMessage());
+//            }
+//        });
+//
+//        // Retrieve event from database and check values
+//        Event retrievedEvent = app.getDatabase().events.findOne(new Document("_id", id)).get();
+//        assertEquals(name, retrievedEvent.getName());
+//        assertEquals(desc, retrievedEvent.getDescription());
+//        assertEquals(location, retrievedEvent.getLocation());
+//        assertEquals(date, retrievedEvent.getDate());
 //
 //    }
 
