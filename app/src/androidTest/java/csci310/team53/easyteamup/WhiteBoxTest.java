@@ -272,6 +272,22 @@ public class WhiteBoxTest {
     }
 
     @Test
+    public void addMultipleNullSlot() {
+        Context context = ApplicationProvider.getApplicationContext();
+        try (ActivityScenario<CreateEventActivity> scenario = ActivityScenario.launch(CreateEventActivity.class)) {
+            scenario.onActivity( activity-> {
+                activity.addSlot(null, null);
+                activity.addSlot(null, null);
+
+                assertEquals(activity.getTimeSlots().get(0).getStart(), null);
+                assertEquals(activity.getTimeSlots().get(0).getEnd(), null);
+                assertEquals(activity.getTimeSlots().get(1).getStart(), null);
+                assertEquals(activity.getTimeSlots().get(1).getEnd(), null);
+            });
+        }
+    }
+
+    @Test
     public void getSlots() {
         Context context = ApplicationProvider.getApplicationContext();
         try (ActivityScenario<CreateEventActivity> scenario = ActivityScenario.launch(CreateEventActivity.class)) {
