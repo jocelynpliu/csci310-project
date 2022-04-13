@@ -40,6 +40,7 @@ import csci310.team53.easyteamup.activities.HomeActivity;
 import csci310.team53.easyteamup.activities.HostedEventsActivity;
 import csci310.team53.easyteamup.activities.InboxActivity;
 import csci310.team53.easyteamup.activities.LoginActivity;
+import csci310.team53.easyteamup.activities.MapsActivity;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
@@ -137,6 +138,69 @@ public class BlackBoxTest {
         intended(hasComponent(new ComponentName(getTargetContext(), HostedEventsActivity.class)));
     }
 
+    @Test
+    public void mapFromHome(){
+        logIn();
+
+        onView(withId(R.id.mapButton)).perform(click());
+        try {
+            Thread.sleep(2000);
+        }
+        catch(Exception e){
+
+        }
+        intended(hasComponent(new ComponentName(getTargetContext(), MapsActivity.class)));
+    }
+
+    @Test
+    public void inboxFromAttending(){
+        logIn();
+
+        onView(withId(R.id.myEventsButton)).perform(click());
+        onView(withId(R.id.inboxButton)).perform(click());
+        try {
+            Thread.sleep(2000);
+        }
+        catch(Exception e){
+
+        }
+        intended(hasComponent(new ComponentName(getTargetContext(), InboxActivity.class)));
+    }
+
+    @Test
+    public void hostedFromAttending(){
+        logIn();
+
+        onView(withId(R.id.myEventsButton)).perform(click());
+        onView(withId(R.id.hostedEventsButton)).perform(click());
+        try {
+            Thread.sleep(2000);
+        }
+        catch(Exception e){
+
+        }
+        intended(hasComponent(new ComponentName(getTargetContext(), HostedEventsActivity.class)));
+    }
+
+
+    @Test
+    public void homeFromAttending(){
+        logIn();
+
+        onView(withId(R.id.myEventsButton)).perform(click());
+        onView(withId(R.id.homeButton)).perform(click());
+        try {
+            Thread.sleep(2000);
+        }
+        catch(Exception e){
+
+        }
+        intended(hasComponent(new ComponentName(getTargetContext(), HomeActivity.class)));
+    }
+
+
+
+
 
     public void logIn(){
         onView(withId(R.id.loginUsername)).perform(typeText("tapeters"));
@@ -149,5 +213,7 @@ public class BlackBoxTest {
 
         }
     }
+
+
 
 }
