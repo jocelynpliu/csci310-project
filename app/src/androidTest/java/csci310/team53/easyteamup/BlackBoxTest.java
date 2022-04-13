@@ -7,6 +7,9 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+
+//import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
+
 import static androidx.test.espresso.intent.Intents.intended;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -19,8 +22,12 @@ import android.content.Context;
 import android.content.Intent;
 //import android.support.test.rule.ActivityTesRule;
 
+import androidx.recyclerview.widget.RecyclerView;
+//import androidx.test.espresso.contrib.RecyclerViewActions;
+import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.espresso.intent.Intents;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
@@ -302,7 +309,22 @@ public class BlackBoxTest {
         intended(hasComponent(new ComponentName(getTargetContext(), InboxActivity.class)));
     }
 
+ // view event on home
+    @Test
+    public void viewEventfromHome(){
+        logIn();
 
+        onView(withId(R.id.homeRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        try {
+            Thread.sleep(2000);
+        }
+        catch(Exception e){
+
+        }
+        onView(withId(R.id.eventName)).check(matches( withText("Greek Life Protest") ) );
+
+
+    }
 
 
     public void logIn(){
