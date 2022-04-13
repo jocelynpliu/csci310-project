@@ -327,6 +327,64 @@ public class BlackBoxTest {
     }
 
 
+
+    // view event from  attending events
+    @Test
+    public void viewEventfromAttending(){
+        logIn();
+        onView(withId(R.id.myEventsButton)).perform(click());
+
+        onView(withId(R.id.myEventsRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        try {
+            Thread.sleep(2000);
+        }
+        catch(Exception e){
+
+        }
+        onView(withId(R.id.eventName)).check(matches( withText("Joan's Birthday BBQ") ) );
+
+
+    }
+
+
+    // view invite from inbox
+    @Test
+    public void viewInviteFromInbox(){
+        logIn();
+        onView(withId(R.id.inboxButton)).perform(click());
+
+        onView(withId(R.id.inboxRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(3, click()));
+        try {
+            Thread.sleep(2000);
+        }
+        catch(Exception e){
+
+        }
+        onView(withId(R.id.eventName)).check(matches( withText("Demonstrate our app!") ) );
+
+    }
+
+
+    // view event from hosted events
+    @Test
+    public void viewEventFromHostedEvents(){
+        logIn();
+        onView(withId(R.id.hostedEventsButton)).perform(click());
+
+        onView(withId(R.id.myHostedEventsRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        try {
+            Thread.sleep(2000);
+        }
+        catch(Exception e){
+
+        }
+        onView(withId(R.id.eventName)).check(matches( withText("Greek Life Protest") ) );
+
+    }
+
+
+
+
     public void logIn(){
         onView(withId(R.id.loginUsername)).perform(typeText("tapeters"));
         onView(withId(R.id.password)).perform(typeText("mypassword"), closeSoftKeyboard());
