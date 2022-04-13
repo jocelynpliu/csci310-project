@@ -1,5 +1,6 @@
 package csci310.team53.easyteamup;
 
+import static androidx.test.InstrumentationRegistry.getTargetContext;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
@@ -12,6 +13,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.assertEquals;
 
+import android.content.ComponentName;
 import android.content.Context;
 //import android.support.test.rule.ActivityTesRule;
 
@@ -33,6 +35,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import csci310.team53.easyteamup.activities.HomeActivity;
 import csci310.team53.easyteamup.activities.LoginActivity;
 
 @RunWith(AndroidJUnit4.class)
@@ -63,8 +66,8 @@ public class BlackBoxTest {
         catch(Exception e){
 
         }
-//        intended(hasComponent(new ComponentName(getTargetContext(), HomeActivity.class)));
-        onView(withId(R.id.homeLayout)).check(matches(isDisplayed()));
+        intended(hasComponent(new ComponentName(getTargetContext(), HomeActivity.class)));
+
 
 
     }
@@ -83,6 +86,7 @@ public class BlackBoxTest {
         }
 
         onView(withId(R.id.loginLayout)).check(matches(isDisplayed()));
+ //       intended(hasComponent(new ComponentName(getTargetContext(), LoginActivity.class)));
 
     }
 }
