@@ -9,7 +9,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.assertEquals;
 
 import android.content.Context;
-//import android.support.test.rule.ActivityTesRule;
 
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.Espresso;
@@ -17,6 +16,7 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import androidx.test.platform.app.InstrumentationRegistry;
+import androidx.test.rule.ActivityTestRule;
 
 //import static android.support.test.espresso.Espresso.onView;
 //import static android.support.test.espresso.action.ViewActions.typeText;
@@ -37,7 +37,7 @@ public class BlackBoxTest {
 
 
     @Rule
-    public ActivityScenarioRule<LoginActivity> activityRule = new ActivityScenarioRule<>(LoginActivity.class);
+    public ActivityTestRule<LoginActivity> activityRule = new ActivityTestRule<>(LoginActivity.class);
 
     @Test
     public void checkLogin() {
@@ -52,7 +52,6 @@ public class BlackBoxTest {
 //
 //                }
 //        );
-
         onView(withId(R.id.username)).perform(typeText("test username"));
         onView(withId(R.id.username)).check(matches(withText("test username")));
 
