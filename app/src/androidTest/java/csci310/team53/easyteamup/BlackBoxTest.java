@@ -1,5 +1,6 @@
 package csci310.team53.easyteamup;
 
+import static android.content.Intent.*;
 import static androidx.test.InstrumentationRegistry.getTargetContext;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -15,8 +16,10 @@ import static org.junit.Assert.assertEquals;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 //import android.support.test.rule.ActivityTesRule;
 
+import androidx.test.espresso.intent.Intents;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -58,6 +61,8 @@ public class BlackBoxTest {
     public IntentsTestRule<LoginActivity> intentsTestRule =
             new IntentsTestRule<>(LoginActivity.class);
 
+
+    // login tests-----------------------------------------------------------------------------------------------
     @Test
     public void checkLogin() {
 
@@ -95,6 +100,7 @@ public class BlackBoxTest {
     }
 
 
+    // buttons from home-------------------------------------------------------------------------------------
     @Test
     public void attendingFromHome(){
         logIn();
@@ -152,6 +158,9 @@ public class BlackBoxTest {
         intended(hasComponent(new ComponentName(getTargetContext(), MapsActivity.class)));
     }
 
+
+
+    // buttons from attending events-------------------------------------------------------------------------------------
     @Test
     public void inboxFromAttending(){
         logIn();
@@ -195,9 +204,103 @@ public class BlackBoxTest {
         catch(Exception e){
 
         }
-        intended(hasComponent(new ComponentName(getTargetContext(), HomeActivity.class)));
+        intended(hasComponent(new ComponentName(getTargetContext(), HomeActivity.class)), Intents.times(2));
     }
 
+
+    // buttons from inbox-------------------------------------------------------------------------------------
+    @Test
+    public void homeFromInbox(){
+        logIn();
+
+        onView(withId(R.id.inboxButton)).perform(click());
+        onView(withId(R.id.myEventsButton)).perform(click());
+        try {
+            Thread.sleep(2000);
+        }
+        catch(Exception e){
+
+        }
+        intended(hasComponent(new ComponentName(getTargetContext(), EventsActivity.class)));
+    }
+
+    @Test
+    public void hostedFromInbox(){
+        logIn();
+
+        onView(withId(R.id.inboxButton)).perform(click());
+        onView(withId(R.id.hostedEventsButton)).perform(click());
+        try {
+            Thread.sleep(2000);
+        }
+        catch(Exception e){
+
+        }
+        intended(hasComponent(new ComponentName(getTargetContext(), HostedEventsActivity.class)));
+    }
+
+
+    @Test
+    public void attendingFromInbox(){
+        logIn();
+
+        onView(withId(R.id.inboxButton)).perform(click());
+        onView(withId(R.id.myEventsButton)).perform(click());
+        try {
+            Thread.sleep(2000);
+        }
+        catch(Exception e){
+
+        }
+        intended(hasComponent(new ComponentName(getTargetContext(), EventsActivity.class)));
+    }
+
+
+    // buttons from hosted events-------------------------------------------------------------------------------------
+    @Test
+    public void homeFromHosted(){
+        logIn();
+
+        onView(withId(R.id.hostedEventsButton)).perform(click());
+        onView(withId(R.id.homeButton)).perform(click());
+        try {
+            Thread.sleep(2000);
+        }
+        catch(Exception e){
+
+        }
+        intended(hasComponent(new ComponentName(getTargetContext(), HomeActivity.class)), Intents.times(2));
+    }
+
+    @Test
+    public void attendingFromHosted(){
+        logIn();
+
+        onView(withId(R.id.hostedEventsButton)).perform(click());
+        onView(withId(R.id.myEventsButton)).perform(click());
+        try {
+            Thread.sleep(2000);
+        }
+        catch(Exception e){
+
+        }
+        intended(hasComponent(new ComponentName(getTargetContext(), EventsActivity.class)));
+    }
+
+    @Test
+    public void inboxFromHosted(){
+        logIn();
+
+        onView(withId(R.id.hostedEventsButton)).perform(click());
+        onView(withId(R.id.inboxButton)).perform(click());
+        try {
+            Thread.sleep(2000);
+        }
+        catch(Exception e){
+
+        }
+        intended(hasComponent(new ComponentName(getTargetContext(), InboxActivity.class)));
+    }
 
 
 
