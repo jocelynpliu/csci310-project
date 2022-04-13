@@ -1,6 +1,7 @@
 package csci310.team53.easyteamup;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -47,6 +48,19 @@ public class WhiteBoxTest {
     }
 
     /**
+     * Checks if all handlers were successfully initialized.
+     */
+    @Test
+    public void applicationHandlerSetup() {
+        assertNotNull(app);
+        assertNotNull(app.getMessageHandler());
+        assertNotNull(app.getDatabase());
+        assertNotNull(app.getEventHandler());
+        assertNotNull(app.getUserHandler());
+        assertNotNull(app.getVotingHandler());
+    }
+
+    /**
      * Test if realms login is successful and sets correct user.
      */
     @Test
@@ -86,5 +100,19 @@ public class WhiteBoxTest {
         assertEquals(e.getEnd(), retrievedEvent.getEnd());
         assertEquals(e.getInvitees(), retrievedEvent.getInvitees());
         assertEquals(e.getTimeSlots(), retrievedEvent.getTimeSlots());
+    }
+
+    @Test
+    public void sendNotification() {
+        // TODO: Test sending a notification
+        assertTrue(true);
+    }
+
+    @Test
+    public void realmsLogout() {
+        User user = app.getRealm().currentUser();
+        assertNotNull(user);
+        user.logOut();
+        assertFalse(user.isLoggedIn());
     }
 }
