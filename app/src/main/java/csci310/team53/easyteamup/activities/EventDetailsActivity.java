@@ -264,7 +264,7 @@ public class EventDetailsActivity extends AppCompatActivity {
         }
     }
 
-    private void setTimePicker(View view, int hourOfDay, int minute, EditText text) {
+    public void setTimePicker(View view, int hourOfDay, int minute, EditText text) {
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
         calendar.set(Calendar.MINUTE, minute);
         String format = "hh:mm a";

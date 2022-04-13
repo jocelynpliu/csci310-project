@@ -1,14 +1,21 @@
 package csci310.team53.easyteamup;
 
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import android.content.Context;
+import android.util.Log;
+import android.widget.EditText;
 
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.core.app.ApplicationProvider;
+import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
@@ -22,8 +29,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
+import java.util.List;
+
 
 import csci310.team53.easyteamup.activities.CreateEventActivity;
+import csci310.team53.easyteamup.activities.EventDetailsActivity;
 import csci310.team53.easyteamup.activities.LoginActivity;
 import csci310.team53.easyteamup.activities.MapsActivity;
 import csci310.team53.easyteamup.activities.RegistrationActivity;
@@ -163,7 +173,6 @@ public class WhiteBoxTest {
    @Test
     public void testMapLogicNull(){
 
-
        Context context = ApplicationProvider.getApplicationContext();
 
       try( ActivityScenario<MapsActivity> scenario = ActivityScenario.launch(MapsActivity.class)) {
@@ -176,21 +185,38 @@ public class WhiteBoxTest {
 
    }
 
+//    @Test
+//    public void testMapLogicSuccess(){
+//
+//        Context context = ApplicationProvider.getApplicationContext();
+//
+//        try( ActivityScenario<MapsActivity> scenario = ActivityScenario.launch(MapsActivity.class)) {
+//            scenario.onActivity( activity -> {
+//                LatLng ans = activity.getLocationFromAddress(context , "3607 Trousdale Pkwy, Los Angeles, CA 90089");
+//
+//                LatLng test = new LatLng(34.019963,-118.2861901);
+//                assertEquals(ans, test);
+//            });
+//        }
+//
+//    }
+
     @Test
-    public void testMapLogicSuccess(){
-        
+    public void testMapLogicFail(){
+
         Context context = ApplicationProvider.getApplicationContext();
 
         try( ActivityScenario<MapsActivity> scenario = ActivityScenario.launch(MapsActivity.class)) {
             scenario.onActivity( activity -> {
                 LatLng ans = activity.getLocationFromAddress(context , "3607 Trousdale Pkwy, Los Angeles, CA 90089 ");
 
-                LatLng test = new LatLng(34.019963,-118.2861901);
-                assertEquals(ans, test);
+                LatLng test = new LatLng(0,0);
+                assertNotEquals(ans, test);
             });
         }
 
     }
+
 
     @Test
     public void addSlot() {
@@ -201,6 +227,46 @@ public class WhiteBoxTest {
 
                 assertEquals(activity.getTimeSlots().get(0).getStart(), "11:00 AM");
                 assertEquals(activity.getTimeSlots().get(0).getEnd(), "12:00 PM");
+            });
+        }
+    }
+
+    @Test
+    public void addNullStartSlot() {
+        Context context = ApplicationProvider.getApplicationContext();
+        try (ActivityScenario<CreateEventActivity> scenario = ActivityScenario.launch(CreateEventActivity.class)) {
+            scenario.onActivity( activity-> {
+                activity.addSlot(null, "12:00 PM");
+
+                assertEquals(activity.getTimeSlots().get(0).getStart(), null);
+                assertEquals(activity.getTimeSlots().get(0).getEnd(), "12:00 PM");
+            });
+        }
+    }
+
+
+    @Test
+    public void addNullEndSlot() {
+        Context context = ApplicationProvider.getApplicationContext();
+        try (ActivityScenario<CreateEventActivity> scenario = ActivityScenario.launch(CreateEventActivity.class)) {
+            scenario.onActivity( activity-> {
+                activity.addSlot("11:00 AM", null);
+
+                assertEquals(activity.getTimeSlots().get(0).getStart(), "11:00 AM");
+                assertEquals(activity.getTimeSlots().get(0).getEnd(), null);
+            });
+        }
+    }
+
+    @Test
+    public void addNullNullSlot() {
+        Context context = ApplicationProvider.getApplicationContext();
+        try (ActivityScenario<CreateEventActivity> scenario = ActivityScenario.launch(CreateEventActivity.class)) {
+            scenario.onActivity( activity-> {
+                activity.addSlot(null, null);
+
+                assertEquals(activity.getTimeSlots().get(0).getStart(), null);
+                assertEquals(activity.getTimeSlots().get(0).getEnd(), null);
             });
         }
     }
@@ -220,6 +286,18 @@ public class WhiteBoxTest {
     }
 
     @Test
+    public void getSlotsNull() {
+        Context context = ApplicationProvider.getApplicationContext();
+        try (ActivityScenario<CreateEventActivity> scenario = ActivityScenario.launch(CreateEventActivity.class)) {
+            scenario.onActivity( activity-> {
+
+
+                assertEquals(activity.getTimeSlots().size(), 0);
+            });
+        }
+    }
+
+    @Test
     public void registerUser() {
         try (ActivityScenario<RegistrationActivity> scenario = ActivityScenario.launch(RegistrationActivity.class)) {
             scenario.onActivity( activity-> {
@@ -230,6 +308,43 @@ public class WhiteBoxTest {
             });
         }
     }
+
+
+//    @Test
+//    public void testSetTimePicker(){
+//
+//
+//        try (ActivityScenario<EventDetailsActivity> scenario = ActivityScenario.launch(EventDetailsActivity.class)) {
+//            scenario.onActivity( activity-> {
+//                EditText e = (EditText) activity.findViewById(R.id.startTimeText);
+//
+//                onView(withId(R.id.hostedEventsButton)).perform(click());
+//                onView(withId(R.id.myHostedEventsRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+//
+//                activity.setTimePicker(null, 3, 15,e);
+//
+//                assertEquals(e.getText(), "3:15");
+//            });
+//        }
+//
+//    }
+
+//    @Test
+//    public void testCheckSlot(){
+//        List<TimeSlot> test = new ArrayList<TimeSlot>();
+//        TimeSlot ts = new TimeSlot();
+//        test.add(ts);
+//        int checkIndex = 0;
+//
+//        try (ActivityScenario<EventDetailsActivity> scenario = ActivityScenario.launch(EventDetailsActivity.class)) {
+//            scenario.onActivity( activity-> {
+//                activity.checkedSlot();
+//
+//
+//            });
+//        }
+//
+//    }
 
 
 }
