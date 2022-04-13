@@ -1,8 +1,5 @@
 package csci310.team53.easyteamup;
 
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
@@ -10,12 +7,9 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import android.content.Context;
-import android.util.Log;
-import android.widget.EditText;
 
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.core.app.ApplicationProvider;
-import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
@@ -29,17 +23,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
-import java.util.List;
-
 
 import csci310.team53.easyteamup.activities.CreateEventActivity;
-import csci310.team53.easyteamup.activities.EventDetailsActivity;
 import csci310.team53.easyteamup.activities.LoginActivity;
 import csci310.team53.easyteamup.activities.MapsActivity;
 import csci310.team53.easyteamup.activities.RegistrationActivity;
 import csci310.team53.easyteamup.data.Event;
 import csci310.team53.easyteamup.data.Message;
-import csci310.team53.easyteamup.util.TimeSlot;
 import io.realm.mongodb.Credentials;
 import io.realm.mongodb.User;
 
@@ -53,9 +43,7 @@ public class WhiteBoxTest {
     @Rule
     public ActivityTestRule<LoginActivity> loginActivityRule = new ActivityTestRule<>(LoginActivity.class);
 
-
     private EasyTeamUp app;
-
 
     /**
      * Creates an instance of the application class on startup and
@@ -68,8 +56,6 @@ public class WhiteBoxTest {
         Credentials credentials = Credentials.emailPassword("tapeters", "mypassword");
         app.getRealm().login(credentials);
         app.initializeDatabase(app.getRealm().currentUser());
-
-
     }
 
     /**

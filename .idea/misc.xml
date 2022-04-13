@@ -6,7 +6,6 @@
         <entry key="../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="../../Library/Android/sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.15625" />
         <entry key="..\:/Users/jsnak/Desktop/cs310/Group Project/310Project/app/src/main/res/drawable/ic_add.xml" value="0.1" />
-        <entry key="..\:/Users/jsnak/Desktop/cs310/Group Project/310Project/app/src/main/res/layout/activity_attending_event.xml" value="0.278125" />
         <entry key="..\:/Users/jsnak/Desktop/cs310/Group Project/310Project/app/src/main/res/layout/activity_confirm.xml" value="0.29635416666666664" />
         <entry key="..\:/Users/jsnak/Desktop/cs310/Group Project/310Project/app/src/main/res/layout/activity_create_event.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/jsnak/Desktop/cs310/Group Project/310Project/app/src/main/res/layout/activity_createacct.xml" value="0.1" />
@@ -20,7 +19,6 @@
         <entry key="..\:/Users/jsnak/Desktop/cs310/Group Project/310Project/app/src/main/res/layout/activity_maps.xml" value="0.3759057971014493" />
         <entry key="..\:/Users/jsnak/Desktop/cs310/Group Project/310Project/app/src/main/res/layout/activity_my_events.xml" value="0.12386018237082067" />
         <entry key="..\:/Users/jsnak/Desktop/cs310/Group Project/310Project/app/src/main/res/layout/activity_my_hosted_events.xml" value="0.12386018237082067" />
-        <entry key="..\:/Users/jsnak/Desktop/cs310/Group Project/310Project/app/src/main/res/layout/activity_myeventdetails.xml" value="0.278125" />
         <entry key="..\:/Users/jsnak/Desktop/cs310/Group Project/310Project/app/src/main/res/layout/confirm.xml" value="0.29635416666666664" />
         <entry key="..\:/Users/jsnak/Desktop/cs310/Group Project/310Project/app/src/main/res/layout/fragment_user_info.xml" value="0.12386018237082067" />
         <entry key="..\:/Users/jsnak/Desktop/cs310/Group Project/310Project/app/src/main/res/layout/home_row.xml" value="0.5" />
@@ -32,19 +30,24 @@
         <entry key="app/src/main/res/drawable/ic_map.xml" value="0.1365" />
         <entry key="app/src/main/res/drawable/ic_place.xml" value="0.1365" />
         <entry key="app/src/main/res/layout/activity_attending_event.xml" value="0.15625" />
+        <entry key="app/src/main/res/layout/activity_confirm.xml" value="0.23125" />
         <entry key="app/src/main/res/layout/activity_createacct.xml" value="0.28249969482421877" />
         <entry key="app/src/main/res/layout/activity_createevent.xml" value="0.19313541898791423" />
         <entry key="app/src/main/res/layout/activity_event.xml" value="0.19640299479166667" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.12604166666666666" />
         <entry key="app/src/main/res/layout/activity_hosted_event.xml" value="0.15625" />
+        <entry key="app/src/main/res/layout/activity_inbox.xml" value="0.22509057971014493" />
         <entry key="app/src/main/res/layout/activity_invite.xml" value="0.21653594970703127" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.39243927001953127" />
+        <entry key="app/src/main/res/layout/activity_maps.xml" value="0.23125" />
         <entry key="app/src/main/res/layout/activity_menu.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_my_events.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_my_hosted_events.xml" value="0.15625" />
         <entry key="app/src/main/res/layout/activity_myeventdetails.xml" value="0.15625" />
+        <entry key="app/src/main/res/layout/event_row.xml" value="0.1272644927536232" />
         <entry key="app/src/main/res/layout/home_row.xml" value="0.12604166666666666" />
         <entry key="app/src/main/res/layout/layout_dialog.xml" value="0.3088851928710938" />
+        <entry key="app/src/main/res/layout/message_row.xml" value="0.1272644927536232" />
         <entry key="app/src/main/res/layout/popup_window.xml" value="0.28125" />
         <entry key="app/src/main/res/menu/menu.xml" value="0.22533111572265627" />
       </map>
