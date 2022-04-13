@@ -102,6 +102,11 @@ public class WhiteBoxTest {
         assertEquals(e.getTimeSlots(), retrievedEvent.getTimeSlots());
     }
 
+//    @Test
+//    public void removeEventFromDatabase(){
+//
+//    }
+
     @Test
     public void sendNotification() {
         // TODO: Test sending a notification

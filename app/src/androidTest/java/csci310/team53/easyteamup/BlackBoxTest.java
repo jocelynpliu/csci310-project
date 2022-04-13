@@ -479,7 +479,7 @@ public class BlackBoxTest {
         onView(withId(R.id.myHostedEventsRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         onView(withId(R.id.description)).check(matches( withText("changed") ) );
 
-        onView(withId(R.id.description)).perform(replaceText("unchanged"), closeSoftKeyboard());
+        onView(withId(R.id.description)).perform(replaceText("protest"), closeSoftKeyboard());
         onView(withId(R.id.confirmButton)).perform(click());
         onView(withId(R.id.hostedEventsButton)).perform(click());
 
@@ -490,7 +490,7 @@ public class BlackBoxTest {
         catch(Exception e){
 
         }
-        onView(withId(R.id.description)).check(matches( withText("unchanged") ) );
+        onView(withId(R.id.description)).check(matches( withText("protest") ) );
 
     }
 
