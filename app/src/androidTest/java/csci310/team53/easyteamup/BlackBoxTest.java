@@ -35,7 +35,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import csci310.team53.easyteamup.activities.EventsActivity;
 import csci310.team53.easyteamup.activities.HomeActivity;
+import csci310.team53.easyteamup.activities.HostedEventsActivity;
+import csci310.team53.easyteamup.activities.InboxActivity;
 import csci310.team53.easyteamup.activities.LoginActivity;
 
 @RunWith(AndroidJUnit4.class)
@@ -86,7 +89,65 @@ public class BlackBoxTest {
         }
 
         onView(withId(R.id.loginLayout)).check(matches(isDisplayed()));
- //       intended(hasComponent(new ComponentName(getTargetContext(), LoginActivity.class)));
+//        intended(hasComponent(new ComponentName(getTargetContext(), LoginActivity.class)));
 
     }
+
+
+    @Test
+    public void attendingFromHome(){
+        logIn();
+
+        onView(withId(R.id.myEventsButton)).perform(click());
+        try {
+            Thread.sleep(2000);
+        }
+        catch(Exception e){
+
+        }
+        intended(hasComponent(new ComponentName(getTargetContext(), EventsActivity.class)));
+    }
+
+    @Test
+    public void inboxFromHome(){
+        logIn();
+
+        onView(withId(R.id.inboxButton)).perform(click());
+        try {
+            Thread.sleep(2000);
+        }
+        catch(Exception e){
+
+        }
+        intended(hasComponent(new ComponentName(getTargetContext(), InboxActivity.class)));
+    }
+
+
+    @Test
+    public void hostedFromHome(){
+        logIn();
+
+        onView(withId(R.id.hostedEventsButton)).perform(click());
+        try {
+            Thread.sleep(2000);
+        }
+        catch(Exception e){
+
+        }
+        intended(hasComponent(new ComponentName(getTargetContext(), HostedEventsActivity.class)));
+    }
+
+
+    public void logIn(){
+        onView(withId(R.id.loginUsername)).perform(typeText("tapeters"));
+        onView(withId(R.id.password)).perform(typeText("mypassword"), closeSoftKeyboard());
+        onView(withId(R.id.login_button)).perform(click());
+        try {
+            Thread.sleep(1000);
+        }
+        catch(Exception e){
+
+        }
+    }
+
 }
