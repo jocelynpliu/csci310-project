@@ -1,6 +1,8 @@
 package csci310.team53.easyteamup;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 import csci310.team53.easyteamup.activities.LoginActivity;
 import csci310.team53.easyteamup.data.Event;
 import io.realm.mongodb.Credentials;
+import io.realm.mongodb.User;
 
 @RunWith(AndroidJUnit4.class)
 public class WhiteBoxTest {
@@ -33,6 +36,14 @@ public class WhiteBoxTest {
         Credentials credentials = Credentials.emailPassword("tapeters", "mypassword");
         app.getRealm().login(credentials);
         app.initializeDatabase(app.getRealm().currentUser());
+    }
+
+    @Test
+    public void realmsLogin() {
+        User user = app.getRealm().currentUser();
+        assertNotNull(user);
+        assertTrue(user.isLoggedIn());
+        assertEquals(user.getId(), "623d03730e82c57fefa52fb2");
     }
 
     @Test
