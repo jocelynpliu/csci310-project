@@ -93,10 +93,15 @@ public class HomeActivity extends AppCompatActivity implements RecyclerViewInter
         });
 
         // Signs out of app
-        Button signOut = (Button) findViewById(R.id.userProfileButton);
-        signOut.setOnClickListener(view -> {
-            app.getUserHandler().logout(HomeActivity.this);
-        });
+        Button profile = (Button) findViewById(R.id.userProfileButton);
+//        signOut.setOnClickListener(view -> {
+//            app.getUserHandler().logout(HomeActivity.this);
+//        });
+
+        // TODO: set profile button to lead to activity_profile.xml
+//        profile.setOnClickListener(view -> {
+//
+//        });
     }
 
     //this is listens to clicks on each row, (each public event displayed)
