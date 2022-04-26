@@ -84,6 +84,8 @@ public class EventDetailsActivity extends AppCompatActivity {
                 ((EditText) findViewById(R.id.eventAddress)).setText(event.getLocation());
                 ((EditText) findViewById(R.id.description)).setText(event.getDescription());
                 ((EditText) findViewById(R.id.dateText)).setText(event.getDate());
+                ((EditText) findViewById(R.id.startTimeText)).setText(event.getStart());
+                ((EditText) findViewById(R.id.endTimeText)).setText(event.getEnd());
 
                 if (!cameFrom.equals("hosted")) {
                     if (timeSlots == null) {
