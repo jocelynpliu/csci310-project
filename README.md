@@ -19,13 +19,13 @@ You can email Justin Nakama at jnakama@usc.edu.
 ## Improved capabilities since Project 2.4: 
 
 Can now:
-Create User profile page
-Edit user profile with new image and name
-Add time picker button to the Hosted Events page
-Change the ordering of notifications, so most recent are at top
-Fix notification’s data, so it displays more detailed information
-Display missing data on Hosted Events page
-Fix constraints to work on more phone sizes
+1. Create User profile page
+2. Edit user profile with new image and name
+3. Add time picker button to the Hosted Events page
+4. Change the ordering of notifications, so most recent are at top
+5. Fix notification’s data, so it displays more detailed information
+6. Display missing data on Hosted Events page
+7. Fix constraints to work on more phone sizes
 
 
 ## 3 main features
