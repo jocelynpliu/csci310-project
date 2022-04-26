@@ -206,6 +206,51 @@
                 app:layout_constraintTop_toBottomOf="@+id/endTimeText"
                 app:layout_constraintVertical_bias="0.458" />
 
+
+            <Button
+                android:id="@+id/date"
+                android:layout_width="52dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
+                android:onClick="datePickerClick"
+                app:icon="@drawable/ic_date"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.489"
+                app:layout_constraintStart_toEndOf="@+id/dateText"
+                app:layout_constraintTop_toBottomOf="@+id/description" />
+
+
+            <Button
+                android:id="@+id/sTime"
+                android:layout_width="52dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="396dp"
+                android:onClick="sTimePickerClick"
+                app:icon="@drawable/ic_clock"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/eTime"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.489"
+                app:layout_constraintStart_toEndOf="@+id/startTimeText"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/eTime"
+                android:layout_width="52dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="12dp"
+                android:onClick="eTimePickerClick"
+                app:icon="@drawable/ic_clock"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.51"
+                app:layout_constraintStart_toEndOf="@+id/endTimeText"
+                app:layout_constraintTop_toBottomOf="@+id/startTimeText" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

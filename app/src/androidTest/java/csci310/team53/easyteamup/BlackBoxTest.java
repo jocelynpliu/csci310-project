@@ -16,6 +16,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import android.content.ComponentName;
 import android.util.Log;
@@ -384,6 +385,7 @@ public class BlackBoxTest {
         onView(withId(R.id.eventName)).check(matches( withText(title) ) );
         onView(withId(R.id.eventAddress)).check(matches( withText(adr) ) );
         onView(withId(R.id.description)).check(matches( withText(desc) ) );
+
 
     }
 
