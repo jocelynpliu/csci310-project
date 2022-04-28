@@ -43,6 +43,9 @@
             android:name=".activities.HomeActivity"
             android:exported="false" />
         <activity
+            android:name=".activities.ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.InviteResultActivity"
             android:exported="false" />
         <activity
