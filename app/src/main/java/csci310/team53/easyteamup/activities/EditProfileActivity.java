@@ -49,7 +49,11 @@ public class EditProfileActivity extends AppCompatActivity {
                     }
                 });
             }
+
+            Intent intent = new Intent(EditProfileActivity.this, HomeActivity.class);
+            startActivity(intent);
         });
+
 
         // Navigate to My Events
         myEventsButton = (Button) findViewById(R.id.myEventsButton);
