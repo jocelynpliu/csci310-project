@@ -49,6 +49,10 @@
             android:name=".activities.InviteResultActivity"
             android:exported="false" />
         <activity
+            android:name=".activities.EditProfileActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".activities.MapsActivity"
             android:exported="false" />
         <activity android:name=".activities.MenuActivity" />

@@ -92,7 +92,7 @@ public class HomeActivity extends AppCompatActivity implements RecyclerViewInter
             startActivity(intent);
         });
 
-        // Signs out of app
+        // Go to profile
         Button profile = (Button) findViewById(R.id.userProfileButton);
         profile.setOnClickListener(view -> {
             Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);

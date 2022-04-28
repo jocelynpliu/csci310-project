@@ -10,66 +10,52 @@ import androidx.appcompat.app.AppCompatActivity;
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
 
-public class ProfileActivity extends AppCompatActivity {
+public class EditProfileActivity extends AppCompatActivity {
 
     private EasyTeamUp app;
-
     private Button homeButton;
     private Button inboxButton;
     private Button myEventsButton;
     private Button myHostButton;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+
+        setContentView(R.layout.activity_edit_profile);
+
         app = ((EasyTeamUp) this.getApplication());
 
-        TextView usernameDisplay = (TextView) findViewById(R.id.username);
-        usernameDisplay.setText("Tapeters");
-
-        Button editProfileButton = (Button) findViewById(R.id.edit_button);
-        editProfileButton.setOnClickListener(view -> {
-            Intent intent = new Intent(ProfileActivity.this, EditProfileActivity.class);
-            startActivity(intent);
-        });
-
-        Button logoutButton = (Button) findViewById(R.id.logout_button);
-        logoutButton.setOnClickListener(view -> {
-            app.getUserHandler().logout(ProfileActivity.this);
-        });
 
 
 
         // Navigate to My Events
         myEventsButton = (Button) findViewById(R.id.myEventsButton);
         myEventsButton.setOnClickListener(v -> {
-            Intent intent = new Intent(ProfileActivity.this, EventsActivity.class);
+            Intent intent = new Intent(EditProfileActivity.this, EventsActivity.class);
             startActivity(intent);
         });
 
         // Navigate to My Hosted Events
         myHostButton= (Button) findViewById(R.id.hostedEventsButton);
         myHostButton.setOnClickListener(v -> {
-            Intent intent = new Intent(ProfileActivity.this, HostedEventsActivity.class);
+            Intent intent = new Intent(EditProfileActivity.this, HostedEventsActivity.class);
             startActivity(intent);
         });
 
         // Navigate to inbox
         inboxButton = (Button) findViewById(R.id.inboxButton);
         inboxButton.setOnClickListener(v -> {
-            Intent intent = new Intent(ProfileActivity.this, InboxActivity.class);
+            Intent intent = new Intent(EditProfileActivity.this, InboxActivity.class);
             startActivity(intent);
         });
 
         // Navigate to Home
         homeButton = (Button) findViewById(R.id.homeButton);
         homeButton.setOnClickListener(v -> {
-            Intent intent = new Intent(ProfileActivity.this, EventsActivity.class);
+            Intent intent = new Intent(EditProfileActivity.this, EventsActivity.class);
             startActivity(intent);
         });
-
 
 
 
