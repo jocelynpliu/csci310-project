@@ -7,8 +7,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.bson.Document;
+import org.bson.types.ObjectId;
+
 import csci310.team53.easyteamup.EasyTeamUp;
 import csci310.team53.easyteamup.R;
+import csci310.team53.easyteamup.data.User;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -26,8 +30,14 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         app = ((EasyTeamUp) this.getApplication());
 
-        TextView usernameDisplay = (TextView) findViewById(R.id.username);
-        usernameDisplay.setText("Tapeters");
+        Document userQuery = new Document("_id", new ObjectId(app.getRealm().currentUser().getId()));
+        app.getDatabase().users.find(userQuery).iterator().getAsync(task -> {
+            if (task.isSuccess()) {
+                User user = task.get().next();
+                TextView usernameDisplay = (TextView) findViewById(R.id.username);
+                usernameDisplay.setText(user.getUsername());
+            }
+        });
 
         Button editProfileButton = (Button) findViewById(R.id.edit_button);
         editProfileButton.setOnClickListener(view -> {
