@@ -23,7 +23,6 @@ public class ProfileActivity extends AppCompatActivity {
     private Button myEventsButton;
     private Button myHostButton;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +49,6 @@ public class ProfileActivity extends AppCompatActivity {
             app.getUserHandler().logout(ProfileActivity.this);
         });
 
-
-
         // Navigate to My Events
         myEventsButton = (Button) findViewById(R.id.myEventsButton);
         myEventsButton.setOnClickListener(v -> {
@@ -76,12 +73,8 @@ public class ProfileActivity extends AppCompatActivity {
         // Navigate to Home
         homeButton = (Button) findViewById(R.id.homeButton);
         homeButton.setOnClickListener(v -> {
-            Intent intent = new Intent(ProfileActivity.this, EventsActivity.class);
+            Intent intent = new Intent(ProfileActivity.this, HomeActivity.class);
             startActivity(intent);
         });
-
-
-
-
     }
 }

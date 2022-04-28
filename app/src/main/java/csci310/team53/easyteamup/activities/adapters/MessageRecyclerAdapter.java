@@ -89,14 +89,12 @@ public class MessageRecyclerAdapter extends RecyclerView.Adapter<MessageRecycler
         private final CardView myCardView;
         private final TextView author;
         private final TextView content;
-        private final TextView date;
 
         public MyViewHolder(@NonNull View view, RecyclerViewInterface recyclerViewInterface) {
             super(view);
             myCardView = (CardView) view.findViewById(R.id.cardView);
             author = (TextView) view.findViewById(R.id.author);
             content = (TextView) view.findViewById(R.id.content);
-            date = (TextView) view.findViewById(R.id.date);
 
             Log.d("----- SETTING ON CLICK ", myCardView+ "   -----------------------------------");
             myCardView.setOnClickListener(view1 -> {

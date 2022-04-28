@@ -53,16 +53,12 @@ public class InboxActivity extends AppCompatActivity implements RecyclerViewInte
 
         // Retrieve messages from database and display from adapter.
         Document userQuery = new Document("_id", new ObjectId(app.getRealm().currentUser().getId()));
-        Log.d("Test", "1");
         app.getDatabase().users.find(userQuery).iterator().getAsync(task -> {
-            Log.d("Test", "2");
             Document query = new Document("_id", new Document("$in", task.get().next().getMessages()));
             app.getDatabase().messages.find(query).iterator().getAsync(task2 -> {
-                Log.d("Test", "3");
                 myAdapter = new MessageRecyclerAdapter(app, this, task2.get(), this);
                 inboxRecyclerView.setAdapter(myAdapter);
                 inboxRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-                Log.d("Test", "4");
             });
         });
 

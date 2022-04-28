@@ -78,13 +78,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="84dp"
                 android:text="Upload Profile Picture"
-                app:layout_constraintBottom_toTopOf="@+id/upload_button2"
+                app:layout_constraintBottom_toTopOf="@+id/confirm_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/preview_image" />
 
             <Button
-                android:id="@+id/upload_button2"
+                android:id="@+id/confirm_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="160dp"
